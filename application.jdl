@@ -1,0 +1,25 @@
+entity Product {
+  stock Long
+  name String
+  image String
+  ean String
+  description String maxlength(4096)
+}
+
+entity Category {
+  name String
+}
+
+entity Brand {
+  name String
+}
+
+entity Color {
+  name String
+}
+
+relationship OneToOne {
+  Product to Category
+  Product to Brand
+  Product to Color
+}
