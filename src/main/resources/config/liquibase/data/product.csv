@@ -1,0 +1,126 @@
+id;stock;name;image;ean;description;category;brand;color
+1;245;Classic Fit T-Shirt;https://picsum.photos/seed/picsum/100/100;4011200296714;Hochwertiges Basic T-Shirt aus 100% Bio-Baumwolle;1;1;1
+2;156;Slim Fit Jeans;https://picsum.photos/seed/picsum/100/100;4057289855648;Moderne Slim Fit Jeans mit mittlerer Bundhöhe;8;2;3
+3;89;Winterparka;https://picsum.photos/seed/picsum/100/100;4029105739012;Warmer Winterparka mit abnehmbarer Kapuze;3;3;2
+4;178;Merino Pullover;https://picsum.photos/seed/picsum/100/100;4008118741235;Hochwertiger Pullover aus Merino-Wolle;4;4;4
+5;122;Sommerkleid;https://picsum.photos/seed/picsum/100/100;4053859746123;Luftiges Sommerkleid mit Blumenmuster;5;5;5
+6;167;Business Bluse;https://picsum.photos/seed/picsum/100/100;4049254861237;Bürotaugliche Bluse aus Baumwoll-Mix;6;6;1
+7;98;Plisseerock;https://picsum.photos/seed/picsum/100/100;4011200374962;Eleganter Plisseerock in Midi-Länge;7;7;2
+8;234;Regular Fit Jeans;https://picsum.photos/seed/picsum/100/100;4057289123456;Klassische Regular Fit Jeans;8;8;6
+9;67;Wollmantel;https://picsum.photos/seed/picsum/100/100;4029105987456;Eleganter Wollmantel mit Reverskragen;9;9;7
+10;189;Business Schnürer;https://picsum.photos/seed/picsum/100/100;4053981234567;Klassischer Business Schuh aus Leder;10;10;2
+11;456;Sneakersocken 3er Pack;https://picsum.photos/seed/picsum/100/100;4011200987654;Bequeme Sneakersocken aus Baumwolle;11;11;2
+12;145;Schirmmütze;https://picsum.photos/seed/picsum/100/100;4057289456789;Baseball Cap mit verstellbarem Verschluss;12;12;8
+13;167;Wollschal;https://picsum.photos/seed/picsum/100/100;4029105654321;Warmer Schal aus reiner Wolle;13;13;4
+14;89;Lederhandschuhe;https://picsum.photos/seed/picsum/100/100;4053981111111;Klassische Handschuhe aus Leder;14;14;9
+15;234;Ledergürtel;https://picsum.photos/seed/picsum/100/100;4011200222222;Hochwertiger Gürtel aus Rindsleder;15;15;2
+16;345;Boxershorts 2er Pack;https://picsum.photos/seed/picsum/100/100;4057289333333;Bequeme Boxershorts aus Baumwolle;16;16;3
+17;123;Badeshorts;https://picsum.photos/seed/picsum/100/100;4029105444444;Schnelltrocknende Badeshorts;17;17;5
+18;78;Business Anzug;https://picsum.photos/seed/picsum/100/100;4053981555555;Klassischer Anzug aus Schurwolle;18;18;6
+19;156;Seidenkrawatte;https://picsum.photos/seed/picsum/100/100;4011200666666;Elegante Krawatte aus reiner Seide;19;19;10
+20;234;Laufschuhe;https://picsum.photos/seed/picsum/100/100;4057289777777;Professionelle Laufschuhe;20;20;4
+21;345;Lifestyle Sneaker;https://picsum.photos/seed/picsum/100/100;4029105888888;Trendige Sneaker aus Textil;21;21;1
+22;167;Chelsea Boots;https://picsum.photos/seed/picsum/100/100;4053981999999;Klassische Chelsea Boots aus Leder;22;22;2
+23;189;Ledersandalen;https://picsum.photos/seed/picsum/100/100;4011200123456;Bequeme Sandalen aus Leder;23;23;9
+24;278;Cargo Shorts;https://picsum.photos/seed/picsum/100/100;4057289234567;Praktische Cargo Shorts mit vielen Taschen;24;24;15
+25;345;Kapuzenpullover;https://picsum.photos/seed/picsum/100/100;4029105345678;Lässiger Hoodie aus Baumwolle;25;25;4
+26;156;V-Neck T-Shirt;https://picsum.photos/seed/picsum/100/100;4053981456789;Basic T-Shirt mit V-Ausschnitt;1;26;2
+27;234;Chino Hose;https://picsum.photos/seed/picsum/100/100;4011200567890;Elegante Chino Hose aus Baumwolle;2;27;15
+28;167;Bomberjacke;https://picsum.photos/seed/picsum/100/100;4057289678901;Trendige Bomberjacke;3;28;11
+29;289;Strickpullover;https://picsum.photos/seed/picsum/100/100;4029105789012;Warmer Strickpullover mit Zopfmuster;4;29;12
+30;178;Cocktailkleid;https://picsum.photos/seed/picsum/100/100;4053981890123;Elegantes Cocktailkleid;5;30;2
+31;234;Satinbluse;https://picsum.photos/seed/picsum/100/100;4011200901234;Elegante Bluse aus Satin;6;31;13
+32;145;Jeansrock;https://picsum.photos/seed/picsum/100/100;4057289012345;Klassischer Jeansrock;7;32;14
+33;267;Skinny Jeans;https://picsum.photos/seed/picsum/100/100;4029105123456;Eng anliegende Skinny Jeans;8;33;2
+34;189;Trenchcoat;https://picsum.photos/seed/picsum/100/100;4053981234567;Klassischer Trenchcoat;9;34;15
+35;245;Ballerinas;https://picsum.photos/seed/picsum/100/100;4011200345678;Elegante Ballerinas aus Leder;10;35;2
+36;456;Businesssocken 5er Pack;https://picsum.photos/seed/picsum/100/100;4057289456789;Klassische Business Socken;11;36;2
+37;178;Baskenmütze;https://picsum.photos/seed/picsum/100/100;4029105567890;Stilvolle Baskenmütze aus Wolle;12;37;5
+38;234;Kaschmirschal;https://picsum.photos/seed/picsum/100/100;4053981678901;Luxuriöser Schal aus Kaschmir;13;38;4
+39;156;Handschuhe aus Wolle;https://picsum.photos/seed/picsum/100/100;4011200789012;Warme Handschuhe aus Wolle;14;14;2
+40;289;Flechtgürtel;https://picsum.photos/seed/picsum/100/100;4057289890123;Geflochtener Gürtel aus Leder;15;10;16
+41;345;Slip 3er Pack;https://picsum.photos/seed/picsum/100/100;4029105901234;Basic Slips aus Baumwolle;16;39;1
+42;167;Bikini;https://picsum.photos/seed/picsum/100/100;4053981012345;Zweiteiliger Bikini;17;40;3
+43;145;Smoking;https://picsum.photos/seed/picsum/100/100;4011200123456;Eleganter Smoking aus Wolle;18;41;2
+44;234;Fliege;https://picsum.photos/seed/picsum/100/100;4057289234567;Klassische Fliege aus Seide;19;42;2
+45;278;Trail Running Schuhe;https://picsum.photos/seed/picsum/100/100;4029105345678;Robuste Trail Running Schuhe;20;43;17
+46;189;Canvas Sneaker;https://picsum.photos/seed/picsum/100/100;4053981456789;Klassische Canvas Sneaker;21;44;1
+47;245;Winterstiefel;https://picsum.photos/seed/picsum/100/100;4011200567890;Warme Winterstiefel mit Futter;22;45;9
+48;156;Trekkingsandalen;https://picsum.photos/seed/picsum/100/100;4057289678901;Outdoor Sandalen;23;46;4
+49;234;Bermuda Shorts;https://picsum.photos/seed/picsum/100/100;4029105789012;Klassische Bermuda Shorts;24;47;8
+50;167;College Sweatshirt;https://picsum.photos/seed/picsum/100/100;4053981890123;Klassisches College Sweatshirt;25;48;4
+51;289;Polo T-Shirt;https://picsum.photos/seed/picsum/100/100;4011200901234;Klassisches Polo Shirt;1;49;1
+52;178;Stoffhose;https://picsum.photos/seed/picsum/100/100;4057289012345;Elegante Stoffhose;2;50;2
+53;234;Daunenjacke;https://picsum.photos/seed/picsum/100/100;4029105123456;Warme Daunenjacke;3;51;3
+54;145;Rollkragenpullover;https://picsum.photos/seed/picsum/100/100;4053981234567;Klassischer Rollkragenpullover;4;52;2
+55;267;Maxikleid;https://picsum.photos/seed/picsum/100/100;4011200345678;Langes Sommerkleid;5;53;17
+56;189;Hemdbluse;https://picsum.photos/seed/picsum/100/100;4057289456789;Klassische Hemdbluse;6;54;14
+57;245;Faltenrock;https://picsum.photos/seed/picsum/100/100;4029105567890;Eleganter Faltenrock;7;4;2
+58;456;Bootcut Jeans;https://picsum.photos/seed/picsum/100/100;4053981678901;Klassische Bootcut Jeans;8;8;3
+59;178;Dufflecoat;https://picsum.photos/seed/picsum/100/100;4011200789012;Klassischer Dufflecoat;9;55;8
+60;234;Pumps;https://picsum.photos/seed/picsum/100/100;4057289890123;Elegante Pumps aus Leder;10;56;5
+61;156;Wollsocken;https://picsum.photos/seed/picsum/100/100;4029105901234;Warme Wollsocken;11;57;4
+62;289;Fedora Hut;https://picsum.photos/seed/picsum/100/100;4053981012345;Klassischer Fedora Hut;12;58;9
+63;345;Loopschal;https://picsum.photos/seed/picsum/100/100;4011200123456;Warmer Loop-Schal;13;59;10
+64;167;Fingerlose Handschuhe;https://picsum.photos/seed/picsum/100/100;4057289234567;Praktische fingerlose Handschuhe;14;51;2
+65;145;Reversibel Gürtel;https://picsum.photos/seed/picsum/100/100;4029105345678;Wendegürtel aus Leder;15;25;2
+66;234;Sport BH;https://picsum.photos/seed/picsum/100/100;4053981456789;Sport BH mit hohem Halt;16;20;2
+67;278;Badeanzug;https://picsum.photos/seed/picsum/100/100;4011200567890;Klassischer Badeanzug;17;60;2
+68;189;Hochzeitsanzug;https://picsum.photos/seed/picsum/100/100;4057289678901;Eleganter Hochzeitsanzug;18;61;18
+69;245;Strickkrawatte;https://picsum.photos/seed/picsum/100/100;4029105789012;Moderne Strickkrawatte;19;19;3
+70;156;Indoor Sportschuhe;https://picsum.photos/seed/picsum/100/100;4053981890123;Hallensportschuhe;20;62;1
+71;234;Retro Sneaker;https://picsum.photos/seed/picsum/100/100;4011200901234;Retro Style Sneaker;21;63;4
+72;167;Reitstiefel;https://picsum.photos/seed/picsum/100/100;4057289012345;Klassische Reitstiefel;22;64;2
+73;289;Zehenstegsandalen;https://picsum.photos/seed/picsum/100/100;4029105123456;Bequeme Zehenstegsandalen;23;65;3
+74;178;Sporthose kurz;https://picsum.photos/seed/picsum/100/100;4053981234567;Funktionale Sporthose;24;66;2
+75;stock;name;image;ean;description;category;brand;color
+76;167;Longsleeve T-Shirt;https://picsum.photos/seed/picsum/100/100;4011200345679;Langärmliges Basic Shirt aus Baumwolle;1;5;4
+77;234;Stoffhose mit Bundfalte;https://picsum.photos/seed/picsum/100/100;4057289345680;Elegante Stoffhose mit Bügelfalte;2;9;2
+78;189;Steppjacke;https://picsum.photos/seed/picsum/100/100;4029105345681;Leichte Steppjacke für Übergang;3;13;8
+79;245;Cardigan;https://picsum.photos/seed/picsum/100/100;4053981345682;Klassischer Strickcardigan;4;4;3
+80;312;Wickelkleid Jersey;https://picsum.photos/seed/picsum/100/100;4011200345683;Bequemes Jerseykleid mit Wickeloptik;5;30;5
+81;178;Rüschenbluse;https://picsum.photos/seed/picsum/100/100;4057289345684;Feminine Bluse mit Rüschendetails;6;31;1
+82;267;Minirock;https://picsum.photos/seed/picsum/100/100;4029105345685;Kurzer Rock in A-Linie;7;32;2
+83;156;Boyfriend Jeans;https://picsum.photos/seed/picsum/100/100;4053981345686;Lässige Jeans im Boyfriend-Stil;8;33;3
+84;289;Strickmantel;https://picsum.photos/seed/picsum/100/100;4011200345687;Langer Mantel aus Strick;9;13;4
+85;345;Mokassins;https://picsum.photos/seed/picsum/100/100;4057289345688;Klassische Mokassins aus Veloursleder;10;15;9
+86;198;Füßlinge 5er Pack;https://picsum.photos/seed/picsum/100/100;4029105345689;Unsichtbare Füßlinge;11;11;2
+87;234;Bucket Hat;https://picsum.photos/seed/picsum/100/100;4053981345690;Trendiger Bucket Hat;12;24;1
+88;167;XL Schal;https://picsum.photos/seed/picsum/100/100;4011200345691;Extrabreiter Schal;13;38;4
+89;278;Touchscreen Handschuhe;https://picsum.photos/seed/picsum/100/100;4057289345692;Handschuhe mit Touchscreen-Funktion;14;51;2
+90;189;Flechtgürtel schmal;https://picsum.photos/seed/picsum/100/100;4029105345693;Schmaler geflochtener Ledergürtel;15;10;9
+91;245;Sportslip 3er Pack;https://picsum.photos/seed/picsum/100/100;4053981345694;Funktionale Sportunterwäsche;16;17;2
+92;156;Tankini;https://picsum.photos/seed/picsum/100/100;4011200345695;Zweiteiler mit längerem Top;17;40;8
+93;234;Business Anzug slim;https://picsum.photos/seed/picsum/100/100;4057289345696;Schmaler Business-Anzug;18;9;6
+94;312;Seidenkrawatte gestreift;https://picsum.photos/seed/picsum/100/100;4029105345697;Gestreifte Krawatte aus Seide;19;19;3
+95;178;Tennisschuhe;https://picsum.photos/seed/picsum/100/100;4053981345698;Professionelle Tennisschuhe;20;17;1
+96;267;High Top Sneaker;https://picsum.photos/seed/picsum/100/100;4011200345699;Knöchelhohe Sneaker;21;44;2
+97;156;Cowboystiefel;https://picsum.photos/seed/picsum/100/100;4057289345700;Klassische Cowboystiefel;22;45;9
+98;289;Wandersandalen;https://picsum.photos/seed/picsum/100/100;4029105345701;Robuste Outdoorsandalen;23;46;4
+99;345;Radlerhose;https://picsum.photos/seed/picsum/100/100;4053981345702;Eng anliegende Radlerhose;24;66;2
+100;198;Trainingsjacke;https://picsum.photos/seed/picsum/100/100;4011200345703;Sportliche Trainingsjacke;25;17;3
+101;234;Ringel T-Shirt;https://picsum.photos/seed/picsum/100/100;4057289345704;Gestreiftes T-Shirt;1;1;1
+102;167;Paperbag Hose;https://picsum.photos/seed/picsum/100/100;4029105345705;Hose mit Paperbag-Bund;2;53;15
+103;278;Regenjacke;https://picsum.photos/seed/picsum/100/100;4053981345706;Wasserdichte Regenjacke;3;51;17
+104;189;Pullunder;https://picsum.photos/seed/picsum/100/100;4011200345707;Klassischer Pullunder;4;4;8
+105;245;Sommerkleid kurz;https://picsum.photos/seed/picsum/100/100;4057289345708;Kurzes Kleid für den Sommer;5;5;13
+106;156;Crash Bluse;https://picsum.photos/seed/picsum/100/100;4029105345709;Bluse aus Crash-Material;6;31;1
+107;234;Wickelrock;https://picsum.photos/seed/picsum/100/100;4053981345710;Rock in Wickeloptik;7;7;2
+108;312;Slim Fit Jeans;https://picsum.photos/seed/picsum/100/100;4011200345711;Eng geschnittene Jeans;8;8;3
+109;178;Blazermantel;https://picsum.photos/seed/picsum/100/100;4057289345712;Mantel im Blazer-Stil;9;9;2
+110;267;Plateauschuhe;https://picsum.photos/seed/picsum/100/100;4029105345713;Schuhe mit Plateausohle;10;35;2
+111;156;Sportkniestrümpfe;https://picsum.photos/seed/picsum/100/100;4053981345714;Kniehohe Sportsocken;11;11;1
+112;289;Schirmkappe;https://picsum.photos/seed/picsum/100/100;4011200345715;Klassische Schirmkappe;12;12;8
+113;345;Strickschal;https://picsum.photos/seed/picsum/100/100;4057289345716;Schal aus Grobstrick;13;13;4
+114;198;Lederhandschuhe gefüttert;https://picsum.photos/seed/picsum/100/100;4029105345717;Gefütterte Handschuhe aus Leder;14;14;9
+115;234;Ledergürtel breit;https://picsum.photos/seed/picsum/100/100;4053981345718;Breiter Gürtel aus Leder;15;15;2
+116;167;Bustier;https://picsum.photos/seed/picsum/100/100;4011200345719;Sportliches Bustier;16;39;1
+117;278;Surfshorts;https://picsum.photos/seed/picsum/100/100;4057289345720;Schnelltrocknende Surfshorts;17;17;3
+118;189;Smokinganzug;https://picsum.photos/seed/picsum/100/100;4029105345721;Klassischer Smokinganzug;18;41;2
+119;245;Schleife;https://picsum.photos/seed/picsum/100/100;4053981345722;Fliege zum Selberbinden;19;42;2
+120;156;Golfschuhe;https://picsum.photos/seed/picsum/100/100;4011200345723;Professionelle Golfschuhe;20;20;1
+121;234;Plateausneaker;https://picsum.photos/seed/picsum/100/100;4057289345724;Sneaker mit Plateausohle;21;21;1
+122;312;Motorradstiefel;https://picsum.photos/seed/picsum/100/100;4029105345725;Robuste Motorradstiefel;22;22;2
+123;178;Riemchensandalen;https://picsum.photos/seed/picsum/100/100;4053981345726;Sandalen mit feinen Riemchen;23;23;15
+124;267;Badeshorts kurz;https://picsum.photos/seed/picsum/100/100;4011200345727;Kurze Badeshorts;24;17;3
+125;156;Hoodie oversized;https://picsum.photos/seed/picsum/100/100;4057289345728;Übergroßer Hoodie;25;25;4

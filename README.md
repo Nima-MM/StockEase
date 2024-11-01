@@ -149,7 +149,7 @@ Sonar is used to analyse code quality. You can start a local Sonar server (acces
 docker compose -f src/main/docker/sonar.yml up -d
 ```
 
-Note: we have turned off forced authentication redirect for UI in [src/main/docker/sonar.yml](src/main/docker/sonar.yml) for out of the box experience while trying out SonarQube, for real use cases turn it back on.
+Note: we have turned off forced authentication redirect for UI in [src/main/docker/sonar.yml](src/main/sm-docker/sonar.yml) for out of the box experience while trying out SonarQube, for real use cases turn it back on.
 
 You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
 
@@ -176,7 +176,7 @@ For more information, refer to the [Code quality page][].
 
 ### Using Docker to simplify development (optional)
 
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/sm-docker) folder to launch required third party services.
 
 For example, to start a postgresql database in a docker container, run:
 

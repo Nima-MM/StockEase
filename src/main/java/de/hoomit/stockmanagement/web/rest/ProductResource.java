@@ -1,190 +1,115 @@
 package de.hoomit.stockmanagement.web.rest;
 
 import de.hoomit.stockmanagement.domain.Product;
-import de.hoomit.stockmanagement.repository.ProductRepository;
-import de.hoomit.stockmanagement.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import de.hoomit.stockmanagement.exception.ProductNotFoundException;
+import de.hoomit.stockmanagement.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link de.hoomit.stockmanagement.domain.Product}.
+ * Product Rest Controller
+ *
+ * @author Hooman Behmanesh
  */
+
 @RestController
-@RequestMapping("/api/products")
-@Transactional
+@RequestMapping(value = "/api/products")
+@CrossOrigin
 public class ProductResource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ProductResource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductResource.class);
 
-    private static final String ENTITY_NAME = "product";
+    @Resource
+    private ProductService productService;
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
+    /**
+     * returns the product for given Id.
+     *
+     * @param id Product Id which will be searched for.
+     * @return found product
+     */
+    @GetMapping(value = "/{id}")
+    @Operation(description = "Returns the product for given Id.")
+    public Product getProduct(@PathVariable("id") final Long id) {
+        return productService.getProduct(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+    }
 
-    private final ProductRepository productRepository;
-
-    public ProductResource(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    @GetMapping
+    @Operation(description = "Lists all products.")
+    public Iterable<Product> getProducts() {
+        return productService.getProducts();
     }
 
     /**
-     * {@code POST  /products} : Create a new product.
+     * returns the product stock for given Id.
      *
-     * @param product the product to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new product, or with status {@code 400 (Bad Request)} if the product has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     * @param id Product Id which the stock will be searched for.
+     * @return current product stock
      */
-    @PostMapping("")
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
-        LOG.debug("REST request to save Product : {}", product);
+    @GetMapping(value = "/{id}/stock")
+    @Operation(description = "returns the product stock for given Id.")
+    public long getProductStock(@PathVariable("id") final Long id) {
+        return productService.getProduct(id)
+                .map(Product::getStock)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+    }
+
+    /**
+     * refills (increase) the product stock for given Id.
+     *
+     * @param id     Product Id which the stock will be increased.
+     * @param amount number of products that must be added
+     * @return changed product stock
+     */
+    @PutMapping(value = "/{id}/refill")
+    @Operation(description = "refills (increase) the product stock for given Id.")
+    public Product refillProductStock(@PathVariable("id") final Long id, @RequestParam(value = "amount") final long amount) {
+        return productService.refillProductStock(id, amount)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+    }
+
+    /**
+     * decreases the product stock for given Id.
+     * If there are less products than available stocks, this method
+     * returns an Error.
+     *
+     * @param id     Product Id which the stock will be increased. Default value is "1"
+     * @param amount number of products that a customer buys
+     * @return changed product stock
+     */
+    @PutMapping(value = "/{id}/buy")
+    @Operation(description = "decreases the product stock for given Id.\n" +
+            "If there are less products than available stocks, this method\n" +
+            "returns an Error.")
+    public Product buyProduct(@PathVariable("id") final Long id, @RequestParam(value = "amount", defaultValue = "1") final long amount) {
+        return productService.buyProduct(id, amount)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+    }
+
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(description = "updates a product with new data")
+    public Product updateProduct(@RequestBody final Product product) throws Exception {
+        return productService.updateProduct(product);
+    }
+
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(description = "adds a product with new data")
+    public Product addProduct(@RequestBody final Product product) throws Exception {
         if (product.getId() != null) {
-            throw new BadRequestAlertException("A new product cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new RuntimeException("A new product cannot already have an ID");
         }
-        product = productRepository.save(product);
-        return ResponseEntity.created(new URI("/api/products/" + product.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, product.getId().toString()))
-            .body(product);
+
+        return productService.createProduct(product);
     }
 
-    /**
-     * {@code PUT  /products/:id} : Updates an existing product.
-     *
-     * @param id the id of the product to save.
-     * @param product the product to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated product,
-     * or with status {@code 400 (Bad Request)} if the product is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the product couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Product product
-    ) throws URISyntaxException {
-        LOG.debug("REST request to update Product : {}, {}", id, product);
-        if (product.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, product.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!productRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        product = productRepository.save(product);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, product.getId().toString()))
-            .body(product);
-    }
-
-    /**
-     * {@code PATCH  /products/:id} : Partial updates given fields of an existing product, field will ignore if it is null
-     *
-     * @param id the id of the product to save.
-     * @param product the product to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated product,
-     * or with status {@code 400 (Bad Request)} if the product is not valid,
-     * or with status {@code 404 (Not Found)} if the product is not found,
-     * or with status {@code 500 (Internal Server Error)} if the product couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Product> partialUpdateProduct(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Product product
-    ) throws URISyntaxException {
-        LOG.debug("REST request to partial update Product partially : {}, {}", id, product);
-        if (product.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, product.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!productRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<Product> result = productRepository
-            .findById(product.getId())
-            .map(existingProduct -> {
-                if (product.getStock() != null) {
-                    existingProduct.setStock(product.getStock());
-                }
-                if (product.getName() != null) {
-                    existingProduct.setName(product.getName());
-                }
-                if (product.getImage() != null) {
-                    existingProduct.setImage(product.getImage());
-                }
-                if (product.getEan() != null) {
-                    existingProduct.setEan(product.getEan());
-                }
-                if (product.getDescription() != null) {
-                    existingProduct.setDescription(product.getDescription());
-                }
-
-                return existingProduct;
-            })
-            .map(productRepository::save);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, product.getId().toString())
-        );
-    }
-
-    /**
-     * {@code GET  /products} : get all the products.
-     *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of products in body.
-     */
-    @GetMapping("")
-    public List<Product> getAllProducts() {
-        LOG.debug("REST request to get all Products");
-        return productRepository.findAll();
-    }
-
-    /**
-     * {@code GET  /products/:id} : get the "id" product.
-     *
-     * @param id the id of the product to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the product, or with status {@code 404 (Not Found)}.
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("id") Long id) {
-        LOG.debug("REST request to get Product : {}", id);
-        Optional<Product> product = productRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(product);
-    }
-
-    /**
-     * {@code DELETE  /products/:id} : delete the "id" product.
-     *
-     * @param id the id of the product to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
-        LOG.debug("REST request to delete Product : {}", id);
-        productRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-            .build();
+    @DeleteMapping(value = "/{id}")
+    @Operation(description = "deletes a product with given Id")
+    public void deleteProduct(@PathVariable("id") final Long id) throws Exception {
+        productService.deleteProduct(id);
     }
 }

@@ -54,7 +54,7 @@
     -->
     <changeSet id="20241023154733-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/product.csv"
+                  file="config/liquibase/data/product.csv"
                   separator=";"
                   tableName="product"
                   usePreparedStatements="true">
@@ -64,6 +64,9 @@
             <column name="image" type="string"/>
             <column name="ean" type="string"/>
             <column name="description" type="string"/>
+            <column name="category" type="numeric"/>
+            <column name="brand" type="numeric"/>
+            <column name="color" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
