@@ -27,6 +27,11 @@ spring:
       additional-exclude: static/**
     livereload:
       enabled: false # we use Webpack dev server + BrowserSync for livereload
+  docker:
+    compose:
+      enabled: true
+      lifecycle-management: start-only
+      file: src/main/sm-docker/services.yml
   jackson:
     serialization:
       indent-output: true
