@@ -48,7 +48,7 @@ pipeline {
     stage('backend tests') {
       steps {
           sh './mvnw -ntp verify -P-webapp'
-          junit '**/target/test-results/**/TEST-*.xml'
+          //junit '**/target/test-results/**/TEST-*.xml'
       }
     }
 
