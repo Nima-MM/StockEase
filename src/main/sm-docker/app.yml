@@ -10,7 +10,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/StockManagement
       - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/StockManagement
     ports:
-      - 127.0.0.1:8080:8080
+      - 127.0.0.1:9026:8080
     healthcheck:
       test:
         - CMD
