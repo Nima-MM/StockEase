@@ -54,7 +54,7 @@ pipeline {
 
     stage('packaging') {
       steps {
-        sh './mvnw -ntp verify -P-webapp -Ppre -DskipTests'
+        sh './mvnw -ntp verify -P-webapp -Pprod -DskipTests'
         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
       }
     }
@@ -68,10 +68,10 @@ pipeline {
     stage('run application') {
       steps {
         sh """
-         docker-compose -f ${WORKSPACE}/target/classes/sm-docker/app.yml rm -sfv stockmanagement-app || true
+         docker compose -f "${WORKSPACE}/target/classes/sm-docker/app.yml" rm -sfv stockmanagement-app || true
          docker rmi stockmanagement || true
-         docker load --input ${WORKSPACE}/target/jib-image.tar
-         docker-compose -f ${WORKSPACE}/target/classes/sm-docker/app.yml up -d
+         docker load --input "${WORKSPACE}/target/jib-image.tar"
+         docker compose -f "${WORKSPACE}/target/classes/sm-docker/app.yml" up -d
         """
       }
     }
