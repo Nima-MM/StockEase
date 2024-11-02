@@ -1,4 +1,4 @@
-id;stock;name;image;ean;description;category;brand;color
+id;stock;name;image;ean;description;category_id;brand_id;color_id
 1;245;Classic Fit T-Shirt;https://picsum.photos/seed/picsum/100/100;4011200296714;Hochwertiges Basic T-Shirt aus 100% Bio-Baumwolle;1;1;1
 2;156;Slim Fit Jeans;https://picsum.photos/seed/picsum/100/100;4057289855648;Moderne Slim Fit Jeans mit mittlerer Bundhöhe;8;2;3
 3;89;Winterparka;https://picsum.photos/seed/picsum/100/100;4029105739012;Warmer Winterparka mit abnehmbarer Kapuze;3;3;2
