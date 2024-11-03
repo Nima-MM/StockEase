@@ -34,21 +34,21 @@
       "otherEntityRelationshipName": "product",
       "relationshipName": "category",
       "relationshipSide": "left",
-      "relationshipType": "one-to-one"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "brand",
       "otherEntityRelationshipName": "product",
       "relationshipName": "brand",
       "relationshipSide": "left",
-      "relationshipType": "one-to-one"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "color",
       "otherEntityRelationshipName": "product",
       "relationshipName": "color",
       "relationshipSide": "left",
-      "relationshipType": "one-to-one"
+      "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no"

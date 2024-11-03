@@ -3,6 +3,8 @@ package de.hoomit.stockmanagement.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -26,9 +28,10 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "category", "brand", "color" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "category")
-    private Product product;
+    private Set<Product> products = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -58,22 +61,34 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Product getProduct() {
-        return this.product;
+    public Set<Product> getProducts() {
+        return this.products;
     }
 
-    public void setProduct(Product product) {
-        if (this.product != null) {
-            this.product.setCategory(null);
+    public void setProducts(Set<Product> products) {
+        if (this.products != null) {
+            this.products.forEach(i -> i.setCategory(null));
         }
-        if (product != null) {
-            product.setCategory(this);
+        if (products != null) {
+            products.forEach(i -> i.setCategory(this));
         }
-        this.product = product;
+        this.products = products;
     }
 
-    public Category product(Product product) {
-        this.setProduct(product);
+    public Category products(Set<Product> products) {
+        this.setProducts(products);
+        return this;
+    }
+
+    public Category addProduct(Product product) {
+        this.products.add(product);
+        product.setCategory(this);
+        return this;
+    }
+
+    public Category removeProduct(Product product) {
+        this.products.remove(product);
+        product.setCategory(null);
         return this;
     }
 

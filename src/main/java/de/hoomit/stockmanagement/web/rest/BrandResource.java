@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -135,17 +134,10 @@ public class BrandResource {
     /**
      * {@code GET  /brands} : get all the brands.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of brands in body.
      */
     @GetMapping("")
-    public List<Brand> getAllBrands(@RequestParam(name = "filter", required = false) String filter) {
-        if ("product-is-null".equals(filter)) {
-            LOG.debug("REST request to get all Brands where product is null");
-            return StreamSupport.stream(brandRepository.findAll().spliterator(), false)
-                .filter(brand -> brand.getProduct() == null)
-                .toList();
-        }
+    public List<Brand> getAllBrands() {
         LOG.debug("REST request to get all Brands");
         return brandRepository.findAll();
     }

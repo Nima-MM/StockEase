@@ -54,6 +54,9 @@ public class CacheConfiguration {
             createCache(cm, de.hoomit.stockmanagement.domain.Category.class.getName());
             createCache(cm, de.hoomit.stockmanagement.domain.Brand.class.getName());
             createCache(cm, de.hoomit.stockmanagement.domain.Color.class.getName());
+            createCache(cm, de.hoomit.stockmanagement.domain.Category.class.getName() + ".products");
+            createCache(cm, de.hoomit.stockmanagement.domain.Brand.class.getName() + ".products");
+            createCache(cm, de.hoomit.stockmanagement.domain.Color.class.getName() + ".products");
             // jhipster-needle-ehcache-add-entry
         };
     }

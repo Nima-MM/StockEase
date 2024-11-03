@@ -3,6 +3,8 @@ package de.hoomit.stockmanagement.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -26,9 +28,10 @@ public class Brand implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "category", "brand", "color" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "brand")
-    private Product product;
+    private Set<Product> products = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -58,22 +61,34 @@ public class Brand implements Serializable {
         this.name = name;
     }
 
-    public Product getProduct() {
-        return this.product;
+    public Set<Product> getProducts() {
+        return this.products;
     }
 
-    public void setProduct(Product product) {
-        if (this.product != null) {
-            this.product.setBrand(null);
+    public void setProducts(Set<Product> products) {
+        if (this.products != null) {
+            this.products.forEach(i -> i.setBrand(null));
         }
-        if (product != null) {
-            product.setBrand(this);
+        if (products != null) {
+            products.forEach(i -> i.setBrand(this));
         }
-        this.product = product;
+        this.products = products;
     }
 
-    public Brand product(Product product) {
-        this.setProduct(product);
+    public Brand products(Set<Product> products) {
+        this.setProducts(products);
+        return this;
+    }
+
+    public Brand addProduct(Product product) {
+        this.products.add(product);
+        product.setBrand(this);
+        return this;
+    }
+
+    public Brand removeProduct(Product product) {
+        this.products.remove(product);
+        product.setBrand(null);
         return this;
     }
 

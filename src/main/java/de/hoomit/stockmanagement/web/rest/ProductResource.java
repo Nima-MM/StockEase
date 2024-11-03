@@ -8,16 +8,15 @@ import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Product Rest Controller
- *
- * @author Hooman Behmanesh
+ * REST controller for managing {@link de.hoomit.stockmanagement.domain.Product}.
  */
-
 @RestController
-@RequestMapping(value = "/api/products")
+@RequestMapping("/api/products")
+@Transactional
 @CrossOrigin
 public class ProductResource {
 
@@ -35,8 +34,7 @@ public class ProductResource {
     @GetMapping(value = "/{id}")
     @Operation(description = "Returns the product for given Id.")
     public Product getProduct(@PathVariable("id") final Long id) {
-        return productService.getProduct(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+        return productService.getProduct(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @GetMapping
@@ -54,9 +52,7 @@ public class ProductResource {
     @GetMapping(value = "/{id}/stock")
     @Operation(description = "returns the product stock for given Id.")
     public long getProductStock(@PathVariable("id") final Long id) {
-        return productService.getProduct(id)
-                .map(Product::getStock)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+        return productService.getProduct(id).map(Product::getStock).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     /**
@@ -68,9 +64,8 @@ public class ProductResource {
      */
     @PutMapping(value = "/{id}/refill")
     @Operation(description = "refills (increase) the product stock for given Id.")
-    public Product refillProductStock(@PathVariable("id") final Long id, @RequestParam(value = "amount") final long amount) {
-        return productService.refillProductStock(id, amount)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+    public Product refillProductStock(@PathVariable("id") final Long id, @RequestParam(value = "amount") final int amount) {
+        return productService.refillProductStock(id, amount).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     /**
@@ -83,12 +78,13 @@ public class ProductResource {
      * @return changed product stock
      */
     @PutMapping(value = "/{id}/buy")
-    @Operation(description = "decreases the product stock for given Id.\n" +
-            "If there are less products than available stocks, this method\n" +
-            "returns an Error.")
-    public Product buyProduct(@PathVariable("id") final Long id, @RequestParam(value = "amount", defaultValue = "1") final long amount) {
-        return productService.buyProduct(id, amount)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+    @Operation(
+        description = "decreases the product stock for given Id.\n" +
+        "If there are less products than available stocks, this method\n" +
+        "returns an Error."
+    )
+    public Product buyProduct(@PathVariable("id") final Long id, @RequestParam(value = "amount", defaultValue = "1") final int amount) {
+        return productService.buyProduct(id, amount).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)

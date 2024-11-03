@@ -5,6 +5,8 @@ import static de.hoomit.stockmanagement.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import de.hoomit.stockmanagement.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class CategoryTest {
@@ -28,12 +30,20 @@ class CategoryTest {
         Category category = getCategoryRandomSampleGenerator();
         Product productBack = getProductRandomSampleGenerator();
 
-        category.setProduct(productBack);
-        assertThat(category.getProduct()).isEqualTo(productBack);
+        category.addProduct(productBack);
+        assertThat(category.getProducts()).containsOnly(productBack);
         assertThat(productBack.getCategory()).isEqualTo(category);
 
-        category.product(null);
-        assertThat(category.getProduct()).isNull();
+        category.removeProduct(productBack);
+        assertThat(category.getProducts()).doesNotContain(productBack);
+        assertThat(productBack.getCategory()).isNull();
+
+        category.products(new HashSet<>(Set.of(productBack)));
+        assertThat(category.getProducts()).containsOnly(productBack);
+        assertThat(productBack.getCategory()).isEqualTo(category);
+
+        category.setProducts(new HashSet<>());
+        assertThat(category.getProducts()).doesNotContain(productBack);
         assertThat(productBack.getCategory()).isNull();
     }
 }

@@ -5,6 +5,8 @@ import static de.hoomit.stockmanagement.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import de.hoomit.stockmanagement.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class ColorTest {
@@ -28,12 +30,20 @@ class ColorTest {
         Color color = getColorRandomSampleGenerator();
         Product productBack = getProductRandomSampleGenerator();
 
-        color.setProduct(productBack);
-        assertThat(color.getProduct()).isEqualTo(productBack);
+        color.addProduct(productBack);
+        assertThat(color.getProducts()).containsOnly(productBack);
         assertThat(productBack.getColor()).isEqualTo(color);
 
-        color.product(null);
-        assertThat(color.getProduct()).isNull();
+        color.removeProduct(productBack);
+        assertThat(color.getProducts()).doesNotContain(productBack);
+        assertThat(productBack.getColor()).isNull();
+
+        color.products(new HashSet<>(Set.of(productBack)));
+        assertThat(color.getProducts()).containsOnly(productBack);
+        assertThat(productBack.getColor()).isEqualTo(color);
+
+        color.setProducts(new HashSet<>());
+        assertThat(color.getProducts()).doesNotContain(productBack);
         assertThat(productBack.getColor()).isNull();
     }
 }

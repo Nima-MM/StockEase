@@ -2,7 +2,7 @@ package de.hoomit.stockmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -25,7 +25,7 @@ public class Product implements Serializable {
     private Long id;
 
     @Column(name = "stock")
-    private Long stock;
+    private Integer stock;
 
     @Column(name = "name")
     private String name;
@@ -40,19 +40,16 @@ public class Product implements Serializable {
     @Column(name = "description", length = 4096)
     private String description;
 
-    @JsonIgnoreProperties(value = { "product" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private Category category;
 
-    @JsonIgnoreProperties(value = { "product" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private Brand brand;
 
-    @JsonIgnoreProperties(value = { "product" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private Color color;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -70,16 +67,16 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public Long getStock() {
+    public Integer getStock() {
         return this.stock;
     }
 
-    public Product stock(Long stock) {
+    public Product stock(Integer stock) {
         this.setStock(stock);
         return this;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 

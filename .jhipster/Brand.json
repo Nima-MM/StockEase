@@ -16,7 +16,7 @@
       "otherEntityRelationshipName": "brand",
       "relationshipName": "product",
       "relationshipSide": "right",
-      "relationshipType": "one-to-one"
+      "relationshipType": "one-to-many"
     }
   ],
   "searchEngine": "no"
