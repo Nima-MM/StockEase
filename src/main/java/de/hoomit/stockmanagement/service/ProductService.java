@@ -1,17 +1,11 @@
 package de.hoomit.stockmanagement.service;
 
 import de.hoomit.stockmanagement.domain.Product;
-import de.hoomit.stockmanagement.exception.ProductChangedException;
 import de.hoomit.stockmanagement.repository.ProductRepository;
 import jakarta.annotation.Resource;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -107,20 +101,7 @@ public class ProductService {
     public Product updateProduct(final Product product) {
         LOGGER.info("Updating Product: " + product);
 
-        productRepository
-            .findById(product.getId())
-            .map(savedProduct -> {
-                savedProduct.setName(product.getName());
-                savedProduct.setStock(product.getStock());
-
-                try {
-                    return productRepository.save(savedProduct);
-                } catch (ObjectOptimisticLockingFailureException e) {
-                    throw new ProductChangedException(savedProduct.getId());
-                }
-            });
-
-        return product;
+        return productRepository.save(product);
     }
 
     public Product createProduct(final Product product) {
