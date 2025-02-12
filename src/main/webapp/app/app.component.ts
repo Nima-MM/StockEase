@@ -1,4 +1,4 @@
-import { computed, defineComponent, provide, ref } from 'vue';
+import { computed, defineComponent, provide, ref, onMounted } from 'vue';
 import Ribbon from '@/core/ribbon/ribbon.vue';
 import JhiFooter from '@/core/jhi-footer/jhi-footer.vue';
 import JhiNavbar from '@/core/jhi-navbar/jhi-navbar.vue';
@@ -53,6 +53,32 @@ export default defineComponent({
 
     // methods
     const { changeTheme } = useThemeHandler(theme);
-    return { lightModeColor, darkModeColor, theme, navTitleStyle, navStyle, drawer, rail, toggleDrawerState, toggleRailState, changeTheme };
+
+    // Neue reaktive Variable für die App-Höhe
+    const appMinHeight = ref('100vh');
+
+    // Funktion, um die Fensterhöhe zu aktualisieren
+    const updateAppMinHeight = () => {
+      appMinHeight.value = window.innerHeight + 'px';
+    };
+
+    onMounted(() => {
+      updateAppMinHeight();
+      window.addEventListener('resize', updateAppMinHeight);
+    });
+
+    return {
+      lightModeColor,
+      darkModeColor,
+      theme,
+      navTitleStyle,
+      navStyle,
+      drawer,
+      rail,
+      toggleDrawerState,
+      toggleRailState,
+      changeTheme,
+      appMinHeight,
+    };
   },
 });

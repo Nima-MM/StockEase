@@ -1,7 +1,8 @@
 <template>
-  <v-app :theme="theme">
-    <v-layout class="border rounded">
-      <v-app-bar class="px-3" style="position: fixed" :style="navStyle">
+  <v-app :style="{ height: appMinHeight }" class="layout" :theme="theme">
+    <!-- Flex-Container als Spalte, der 100% Höhe nutzt -->
+    <v-layout class="border rounded" style="display: flex; flex-direction: column; height: 100%">
+      <v-app-bar app class="px-3" :style="navStyle" :elevation="24">
         <v-btn icon="mdi-menu" variant="text" @click="toggleDrawerState"></v-btn>
         <v-spacer></v-spacer>
         <RouterLink to="/" class="text-decoration-none">
@@ -19,12 +20,14 @@
       </v-app-bar>
 
       <v-navigation-drawer
+        app
         v-model="drawer"
         :rail="rail"
         close-delay="100"
         @click="toggleRailState"
         :style="navStyle"
-        style="height: 95.5vh; position: fixed"
+        :mobile="null"
+        :elevation="24"
       >
         <v-list-item prepend-icon="mdi-account-supervisor-circle" :style="navTitleStyle" title="Filialleitung">
           <template v-slot:append>
@@ -128,13 +131,19 @@
         </template>
       </v-navigation-drawer>
 
-      <v-main>
-        <router-view />
+      <!-- v-main als flexibles, scrollbares Element -->
+      <v-main style="flex: 1; overflow-y: auto">
+        <router-view class="px-16" />
       </v-main>
     </v-layout>
   </v-app>
 </template>
-
+<style scoped>
+.layout {
+  max-width: 1768px;
+  margin: 0 auto;
+}
+</style>
 <script lang="ts" src="./app.component.ts"></script>
 
 <!-- <template>
