@@ -1,60 +1,45 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.common with an alias.
-import Vue, { computed, createApp, provide } from 'vue';
+import { computed, createApp, provide } from 'vue';
 import { createPinia, storeToRefs } from 'pinia';
 
 import App from './app.vue';
 import router from './router';
-import { initFortAwesome } from './shared/config/config';
-import { initBootstrapVue } from './shared/config/config-bootstrap-vue';
-import JhiItemCountComponent from './shared/jhi-item-count.vue';
-import JhiSortIndicatorComponent from './shared/sort/jhi-sort-indicator.vue';
 import LoginService from './account/login.service';
 import AccountService from './account/account.service';
 import { setupAxiosInterceptors } from '@/shared/config/axios-interceptor';
 import { useStore } from '@/store';
+// Vuetify
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+import { aliases, mdi } from 'vuetify/iconsets/mdi';
+// Styles
+import '@mdi/font/css/materialdesignicons.css';
+import 'vuetify/styles';
 
 import '../content/scss/global.scss';
 import '../content/scss/vendor.scss';
 
 const pinia = createPinia();
-
+const vuetify = createVuetify({
+  components,
+  directives,
+  theme: {
+    defaultTheme: 'dark',
+  },
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
+});
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
-initBootstrapVue(Vue);
-
-Vue.configureCompat({
-  MODE: 2,
-  ATTR_FALSE_VALUE: 'suppress-warning',
-  COMPONENT_FUNCTIONAL: 'suppress-warning',
-  COMPONENT_V_MODEL: 'suppress-warning',
-  CONFIG_OPTION_MERGE_STRATS: 'suppress-warning',
-  CONFIG_WHITESPACE: 'suppress-warning',
-  CUSTOM_DIR: 'suppress-warning',
-  GLOBAL_EXTEND: 'suppress-warning',
-  GLOBAL_MOUNT: 'suppress-warning',
-  GLOBAL_PRIVATE_UTIL: 'suppress-warning',
-  GLOBAL_PROTOTYPE: 'suppress-warning',
-  GLOBAL_SET: 'suppress-warning',
-  INSTANCE_ATTRS_CLASS_STYLE: 'suppress-warning',
-  INSTANCE_CHILDREN: 'suppress-warning',
-  INSTANCE_DELETE: 'suppress-warning',
-  INSTANCE_DESTROY: 'suppress-warning',
-  INSTANCE_EVENT_EMITTER: 'suppress-warning',
-  INSTANCE_EVENT_HOOKS: 'suppress-warning',
-  INSTANCE_LISTENERS: 'suppress-warning',
-  INSTANCE_SCOPED_SLOTS: 'suppress-warning',
-  INSTANCE_SET: 'suppress-warning',
-  OPTIONS_BEFORE_DESTROY: 'suppress-warning',
-  OPTIONS_DATA_MERGE: 'suppress-warning',
-  OPTIONS_DESTROYED: 'suppress-warning',
-  RENDER_FUNCTION: 'suppress-warning',
-  WATCH_ARRAY: 'suppress-warning',
-  PRIVATE_APIS: 'suppress-warning',
-});
-
 const app = createApp({
-  compatConfig: { MODE: 3 },
   components: { App },
   template: '<App/>',
   setup(_props, { emit }) {
@@ -118,11 +103,4 @@ const app = createApp({
   },
 });
 
-initFortAwesome(app);
-
-app
-  .component('jhi-item-count', JhiItemCountComponent)
-  .component('jhi-sort-indicator', JhiSortIndicatorComponent)
-  .use(router)
-  .use(pinia)
-  .mount('#app');
+app.use(vuetify).use(router).use(pinia).mount('#app');

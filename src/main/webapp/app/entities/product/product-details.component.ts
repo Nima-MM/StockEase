@@ -6,7 +6,6 @@ import { type IProduct } from '@/shared/model/product.model';
 import { useAlertService } from '@/shared/alert/alert.service';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ProductDetails',
   setup() {
     const productService = inject('productService', () => new ProductService());

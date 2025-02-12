@@ -9,7 +9,6 @@ import { useAlertService } from '@/shared/alert/alert.service';
 import { Color, type IColor } from '@/shared/model/color.model';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ColorUpdate',
   setup() {
     const colorService = inject('colorService', () => new ColorService());

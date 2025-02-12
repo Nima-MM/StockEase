@@ -7,7 +7,6 @@ import EntitiesMenu from '@/entities/entities-menu.vue';
 import { useStore } from '@/store';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'JhiNavbar',
   components: {
     'entities-menu': EntitiesMenu,

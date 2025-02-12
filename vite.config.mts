@@ -1,6 +1,8 @@
 import { URL, fileURLToPath } from 'node:url';
 import { existsSync } from 'node:fs';
 import { defineConfig, normalizePath } from 'vite';
+import Layouts from 'vite-plugin-vue-layouts';
+import VueRouter from 'unplugin-vue-router/vite';
 
 import vue from '@vitejs/plugin-vue';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
@@ -17,6 +19,7 @@ const swaggerUiPath = getAbsoluteFSPath();
 const config = defineConfig({
   plugins: [
     vue(),
+    Layouts(),
     viteStaticCopy({
       targets: [
         {
@@ -45,7 +48,7 @@ const config = defineConfig({
   },
   resolve: {
     alias: {
-      vue: '@vue/compat/dist/vue.esm-bundler.js',
+      vue: 'vue/dist/vue.esm-bundler.js',
       '@': fileURLToPath(new URL('./src/main/webapp/app/', import.meta.url)),
     },
   },

@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> shared/data/data-utils.service.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Lagerkontroll-Webapplikation Entwickler Dokumentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="AccountService_AccountService.html">AccountService</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#abbreviate">abbreviate</a></li><li><a href="global.html#byteSize">byteSize</a></li><li><a href="global.html#clearInputImage">clearInputImage</a></li><li><a href="global.html#downloadFile">downloadFile</a></li><li><a href="global.html#hasAnyAuthorityAndCheckAuth">hasAnyAuthorityAndCheckAuth</a></li><li><a href="global.html#loadAccount">loadAccount</a></li><li><a href="global.html#openFile">openFile</a></li><li><a href="global.html#parseLinks">parseLinks</a></li><li><a href="global.html#retrieveAccount">retrieveAccount</a></li><li><a href="global.html#retrieveProfiles">retrieveProfiles</a></li><li><a href="global.html#setupAxiosInterceptors-SetsupAxiosinterceptorsforhandlingHTTPrequestsandresponses.">setupAxiosInterceptors - Sets up Axios interceptors for handling HTTP requests and responses.</a></li><li><a href="global.html#toBase64">toBase64</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#useDataUtils">useDataUtils</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>shared/data/data-utils.service.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * An composable utility for data.
+ */
+const useDataUtils = () => ({
+  /**
+   * Method to abbreviate the text given
+   */
+  abbreviate(text, append = '...') {
+    if (text.length &lt; 30) {
+      return text;
+    }
+    return text ? text.substring(0, 15) + append + text.slice(-10) : '';
+  },
+
+  /**
+   * Method to find the byte size of the string provides
+   */
+  byteSize(base64String) {
+    return this.formatAsBytes(this.size(base64String));
+  },
+
+  /**
+   * Method to open file
+   */
+  openFile(contentType, data) {
+    const byteCharacters = atob(data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i &lt; byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], {
+      type: contentType,
+    });
+    const objectURL = URL.createObjectURL(blob);
+    const win = window.open(objectURL);
+    if (win) {
+      win.onload = () => URL.revokeObjectURL(objectURL);
+    }
+  },
+
+  /**
+   * Method to convert the file to base64
+   */
+  toBase64(file, cb) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = (e: any) => {
+      const base64Data = e.target.result.substring(e.target.result.indexOf('base64,') + 'base64,'.length);
+      cb(base64Data);
+    };
+  },
+
+  /**
+   * Method to clear the input
+   */
+  clearInputImage(entity, elementRef, field, fieldContentType, idInput) {
+    if (entity &amp;&amp; field &amp;&amp; fieldContentType) {
+      if (Object.hasOwn(entity, field)) {
+        entity[field] = null;
+      }
+      if (Object.hasOwn(entity, fieldContentType)) {
+        entity[fieldContentType] = null;
+      }
+      if (elementRef &amp;&amp; idInput &amp;&amp; elementRef.nativeElement.querySelector(`#${idInput}`)) {
+        elementRef.nativeElement.querySelector(`#${idInput}`).value = null;
+      }
+    }
+  },
+
+  endsWith(suffix, str) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+  },
+
+  paddingSize(value) {
+    if (this.endsWith('==', value)) {
+      return 2;
+    }
+    if (this.endsWith('=', value)) {
+      return 1;
+    }
+    return 0;
+  },
+
+  size(value) {
+    return (value.length / 4) * 3 - this.paddingSize(value);
+  },
+
+  formatAsBytes(size) {
+    return `${size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} bytes`;
+  },
+
+  setFileData(event, entity, field, isImage) {
+    if (event &amp;&amp; event.target.files &amp;&amp; event.target.files[0]) {
+      const file = event.target.files[0];
+      if (isImage &amp;&amp; !/^image\//.test(file.type)) {
+        return;
+      }
+      this.toBase64(file, base64Data => {
+        entity[field] = base64Data;
+        entity[`${field}ContentType`] = file.type;
+      });
+    }
+  },
+
+  /**
+   * Method to download file
+   */
+  downloadFile(contentType, data, fileName) {
+    const byteCharacters = atob(data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i &lt; byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], {
+      type: contentType,
+    });
+    const tempLink = document.createElement('a');
+    tempLink.href = window.URL.createObjectURL(blob);
+    tempLink.download = fileName;
+    tempLink.target = '_blank';
+    tempLink.click();
+  },
+
+  /**
+   * Method to parse header links
+   */
+  parseLinks(header) {
+    const links = {};
+
+    if ((header?.indexOf(',') ?? -1) === -1) {
+      return links;
+    }
+    // Split parts by comma
+    const parts = header.split(',');
+
+    // Parse each part into a named link
+    parts.forEach(p => {
+      if (p.indexOf('>;') === -1) {
+        return;
+      }
+      const section = p.split('>;');
+      const url = section[0].replace(/&lt;(.*)/, '$1').trim();
+      const queryString = { page: null };
+      url.replace(new RegExp(/([^?=&amp;]+)(=([^&amp;]*))?/g), ($0, $1, $2, $3) => {
+        queryString[$1] = $3;
+      });
+      let page = queryString.page;
+      if (typeof page === 'string') {
+        page = parseInt(page, 10);
+      }
+      const name = section[1].replace(/rel="(.*)"/, '$1').trim();
+      links[name] = page;
+    });
+    return links;
+  },
+});
+
+export default useDataUtils;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> account/account.service.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Lagerkontroll-Webapplikation Entwickler Dokumentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="AccountService_AccountService.html">AccountService</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#abbreviate">abbreviate</a></li><li><a href="global.html#byteSize">byteSize</a></li><li><a href="global.html#clearInputImage">clearInputImage</a></li><li><a href="global.html#downloadFile">downloadFile</a></li><li><a href="global.html#hasAnyAuthorityAndCheckAuth">hasAnyAuthorityAndCheckAuth</a></li><li><a href="global.html#loadAccount">loadAccount</a></li><li><a href="global.html#openFile">openFile</a></li><li><a href="global.html#parseLinks">parseLinks</a></li><li><a href="global.html#retrieveAccount">retrieveAccount</a></li><li><a href="global.html#retrieveProfiles">retrieveProfiles</a></li><li><a href="global.html#setupAxiosInterceptors-SetsupAxiosinterceptorsforhandlingHTTPrequestsandresponses.">setupAxiosInterceptors - Sets up Axios interceptors for handling HTTP requests and responses.</a></li><li><a href="global.html#toBase64">toBase64</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#useDataUtils">useDataUtils</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>account/account.service.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Service for managing account-related operations.
+ */
+export default class AccountService {
+  /**
+   * Creates an instance of AccountService.
+   * @param store - The account store.
+   */
+  constructor(private store: AccountStore) {}
+
+  /**
+   * Updates the account information by retrieving profiles and loading the account.
+   */
+  public async update(): Promise&lt;void> {}
+
+  /**
+   * Retrieves the profiles from the server.
+   * @returns A promise that resolves to true if profiles are successfully retrieved, otherwise false.
+   */
+  public async retrieveProfiles(): Promise&lt;boolean> {}
+
+  /**
+   * Retrieves the account information from the server.
+   * @returns A promise that resolves to true if the account is successfully retrieved, otherwise false.
+   */
+  public async retrieveAccount(): Promise&lt;boolean> {}
+
+  /**
+   * Loads the account information if not already loaded.
+   */
+  public async loadAccount(): Promise&lt;void> {}
+
+  /**
+   * Checks if the user has any of the specified authorities and verifies authentication.
+   * @param authorities - The authorities to check.
+   * @returns A promise that resolves to true if the user has any of the specified authorities, otherwise false.
+   */
+  public async hasAnyAuthorityAndCheckAuth(authorities: any): Promise&lt;boolean> {}
+
+  public async retrieveAccount(): Promise&lt;boolean> {
+    try {
+      const response = await axios.get&lt;any>('api/account');
+      if (response.status === 200 &amp;&amp; response.data?.login) {
+        const account = response.data;
+        this.store.setAuthentication(account);
+        return true;
+      }
+    } catch (error) {
+      // Ignore error
+    }
+
+    this.store.logout();
+    return false;
+  }
+
+  public async loadAccount() {
+    if (this.store.logon) {
+      return this.store.logon;
+    }
+    const token = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
+    if (this.authenticated &amp;&amp; this.userAuthorities &amp;&amp; token) {
+      return;
+    }
+
+    const promise = this.retrieveAccount();
+    this.store.authenticate(promise);
+    promise.then(() => this.store.authenticate(null));
+    await promise;
+  }
+
+  public async hasAnyAuthorityAndCheckAuth(authorities: any): Promise&lt;boolean> {
+    if (typeof authorities === 'string') {
+      authorities = [authorities];
+    }
+
+    return this.checkAuthorities(authorities);
+  }
+
+  public get authenticated(): boolean {
+    return this.store.authenticated;
+  }
+
+  public get userAuthorities(): string[] {
+    return this.store.account?.authorities;
+  }
+
+  private checkAuthorities(authorities: string[]): boolean {
+    if (this.userAuthorities) {
+      for (const authority of authorities) {
+        if (this.userAuthorities.includes(authority)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

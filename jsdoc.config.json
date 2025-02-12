@@ -1,0 +1,22 @@
+{
+    "tags": {
+      "allowUnknownTags": true
+    },
+    "source": {
+      "include": ["./src/main/webapp"],
+      "includePattern": ".+\\.(ts|js)$",
+      "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": ["node_modules/better-docs/typescript"],
+    "opts": {
+      "destination": "./docs",
+      "recurse": true,
+      "template": "node_modules/better-docs"
+    },
+    "templates": {
+      "better-docs": {
+        "name": "Lagerkontroll-Webapplikation Entwickler Dokumentation"
+      }
+    }
+  }
+  

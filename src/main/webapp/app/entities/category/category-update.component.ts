@@ -9,7 +9,6 @@ import { useAlertService } from '@/shared/alert/alert.service';
 import { Category, type ICategory } from '@/shared/model/category.model';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'CategoryUpdate',
   setup() {
     const categoryService = inject('categoryService', () => new CategoryService());

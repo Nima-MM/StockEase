@@ -6,7 +6,6 @@ import { type ICategory } from '@/shared/model/category.model';
 import { useAlertService } from '@/shared/alert/alert.service';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'CategoryDetails',
   setup() {
     const categoryService = inject('categoryService', () => new CategoryService());

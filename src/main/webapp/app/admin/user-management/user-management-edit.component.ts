@@ -36,7 +36,6 @@ const validations: any = {
 };
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'JhiUserManagementEdit',
   validations,
   setup() {

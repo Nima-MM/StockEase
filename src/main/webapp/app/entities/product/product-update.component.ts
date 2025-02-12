@@ -15,7 +15,6 @@ import { type IColor } from '@/shared/model/color.model';
 import { type IProduct, Product } from '@/shared/model/product.model';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ProductUpdate',
   setup() {
     const productService = inject('productService', () => new ProductService());

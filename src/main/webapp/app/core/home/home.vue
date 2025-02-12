@@ -4,9 +4,9 @@
       <span class="hipster img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-      <h1 class="display-4">Willkommen, Java Hipster!</h1>
+      <h1 class="display-4">HELLO WORLD!</h1>
       <p class="lead">Dies ist Ihre Hauptseite</p>
-
+      <v-btn rounded="xl">HELLO BUTTON</v-btn>
       <div>
         <div class="alert alert-success" v-if="authenticated">
           <span v-if="username">Sie sind als Benutzer "{{ username }}" angemeldet.</span>

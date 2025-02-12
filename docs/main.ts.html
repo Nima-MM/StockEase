@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>main.ts</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css" />
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css" />
+    <link type="text/css" rel="stylesheet" href="" />
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+
+  <body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+
+    <div class="top-nav">
+      <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+          <a href="index.html">
+            <h1 class="navbar-item">Lagerkontroll-Webapplikation Entwickler Dokumentation</h1>
+          </a>
+        </div>
+        <div class="menu">
+          <div class="navigation">
+            <a href="index.html" class="link"> Documentation </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="main">
+      <div class="sidebar" id="sidebarNav">
+        <nav>
+          <h2><a href="index.html">Documentation</a></h2>
+          <div class="category">
+            <h3>Classes</h3>
+            <ul>
+              <li><a href="AccountService_AccountService.html">AccountService</a></li>
+              <li><a href="module.exports.html">exports</a></li>
+            </ul>
+            <h3>Global</h3>
+            <ul>
+              <li><a href="global.html#App">App</a></li>
+              <li><a href="global.html#abbreviate">abbreviate</a></li>
+              <li><a href="global.html#byteSize">byteSize</a></li>
+              <li><a href="global.html#clearInputImage">clearInputImage</a></li>
+              <li><a href="global.html#downloadFile">downloadFile</a></li>
+              <li><a href="global.html#hasAnyAuthorityAndCheckAuth">hasAnyAuthorityAndCheckAuth</a></li>
+              <li><a href="global.html#loadAccount">loadAccount</a></li>
+              <li><a href="global.html#openFile">openFile</a></li>
+              <li><a href="global.html#parseLinks">parseLinks</a></li>
+              <li><a href="global.html#retrieveAccount">retrieveAccount</a></li>
+              <li><a href="global.html#retrieveProfiles">retrieveProfiles</a></li>
+              <li>
+                <a href="global.html#setupAxiosInterceptors-SetsupAxiosinterceptorsforhandlingHTTPrequestsandresponses."
+                  >setupAxiosInterceptors - Sets up Axios interceptors for handling HTTP requests and responses.</a
+                >
+              </li>
+              <li><a href="global.html#toBase64">toBase64</a></li>
+              <li><a href="global.html#update">update</a></li>
+              <li><a href="global.html#useDataUtils">useDataUtils</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="core" id="main-content-wrapper">
+        <div class="content">
+          <header class="page-title">
+            <p>Source</p>
+            <h1>main.ts</h1>
+          </header>
+
+          <section>
+            <article>
+              <pre class="prettyprint source linenums"><code>/**
+ * Main entry point for the Vue application.
+ * 
+ * This file sets up the Vue application with necessary configurations, plugins, and services.
+ * It initializes Vue, Pinia, BootstrapVue, FontAwesome, and Axios interceptors.
+ * It also configures Vue compatibility mode and provides global services and components.
+ * 
+ * @file /media/nimadesk/Ausbildung/Code/stock-manager-jh/src/main/webapp/app/main.ts
+ * 
+ * @module main
+ * 
+ * @requires vue
+ * @requires pinia
+ * @requires ./app.vue
+ * @requires ./router
+ * @requires ./shared/config/config
+ * @requires ./shared/config/config-bootstrap-vue
+ * @requires ./shared/jhi-item-count.vue
+ * @requires ./shared/sort/jhi-sort-indicator.vue
+ * @requires ./account/login.service
+ * @requires ./account/account.service
+ * @requires @/shared/config/axios-interceptor
+ * @requires @/store
+ * @requires ../content/scss/global.scss
+ * @requires ../content/scss/vendor.scss
+ * 
+ * @function initBootstrapVue - Initializes BootstrapVue with Vue.
+ * @function initFortAwesome - Initializes FontAwesome with the Vue application.
+ * @function setupAxiosInterceptors - Sets up Axios interceptors for handling HTTP requests and responses.
+ * 
+ * @component App - The root Vue component.
+ * @component JhiItemCountComponent - Component for displaying item count.
+ * @component JhiSortIndicatorComponent - Component for displaying sort indicators.
+ * 
+ * @service LoginService - Service for handling user login.
+ * @service AccountService - Service for handling user account information.
+ * 
+ * @provides loginService - Provides the login service globally.
+ * @provides currentLanguage - Provides the current language globally.
+ * @provides authenticated - Provides the authentication status globally.
+ * @provides currentUsername - Provides the current username globally.
+ * @provides accountService - Provides the account service globally.
+ * 
+ * @vue-compat-config MODE - Sets the Vue compatibility mode.
+ * @vue-compat-config ATTR_FALSE_VALUE - Suppresses warnings for false attribute values.
+ * @vue-compat-config COMPONENT_FUNCTIONAL - Suppresses warnings for functional components.
+ * @vue-compat-config COMPONENT_V_MODEL - Suppresses warnings for v-model in components.
+ * @vue-compat-config CONFIG_OPTION_MERGE_STRATS - Suppresses warnings for option merge strategies.
+ * @vue-compat-config CONFIG_WHITESPACE - Suppresses warnings for whitespace configuration.
+ * @vue-compat-config CUSTOM_DIR - Suppresses warnings for custom directives.
+ * @vue-compat-config GLOBAL_EXTEND - Suppresses warnings for global extend.
+ * @vue-compat-config GLOBAL_MOUNT - Suppresses warnings for global mount.
+ * @vue-compat-config GLOBAL_PRIVATE_UTIL - Suppresses warnings for global private utilities.
+ * @vue-compat-config GLOBAL_PROTOTYPE - Suppresses warnings for global prototype.
+ * @vue-compat-config GLOBAL_SET - Suppresses warnings for global set.
+ * @vue-compat-config INSTANCE_ATTRS_CLASS_STYLE - Suppresses warnings for instance attributes class style.
+ * @vue-compat-config INSTANCE_CHILDREN - Suppresses warnings for instance children.
+ * @vue-compat-config INSTANCE_DELETE - Suppresses warnings for instance delete.
+ * @vue-compat-config INSTANCE_DESTROY - Suppresses warnings for instance destroy.
+ * @vue-compat-config INSTANCE_EVENT_EMITTER - Suppresses warnings for instance event emitter.
+ * @vue-compat-config INSTANCE_EVENT_HOOKS - Suppresses warnings for instance event hooks.
+ * @vue-compat-config INSTANCE_LISTENERS - Suppresses warnings for instance listeners.
+ * @vue-compat-config INSTANCE_SCOPED_SLOTS - Suppresses warnings for instance scoped slots.
+ * @vue-compat-config INSTANCE_SET - Suppresses warnings for instance set.
+ * @vue-compat-config OPTIONS_BEFORE_DESTROY - Suppresses warnings for options before destroy.
+ * @vue-compat-config OPTIONS_DATA_MERGE - Suppresses warnings for options data merge.
+ * @vue-compat-config OPTIONS_DESTROYED - Suppresses warnings for options destroyed.
+ * @vue-compat-config RENDER_FUNCTION - Suppresses warnings for render function.
+ * @vue-compat-config WATCH_ARRAY - Suppresses warnings for watch array.
+ * @vue-compat-config PRIVATE_APIS - Suppresses warnings for private APIs.
+ */
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.common with an alias.
+import Vue, { computed, createApp, provide } from 'vue';
+import { createPinia, storeToRefs } from 'pinia';
+
+import App from './app.vue';
+import router from './router';
+import { initFortAwesome } from './shared/config/config';
+import { initBootstrapVue } from './shared/config/config-bootstrap-vue';
+import JhiItemCountComponent from './shared/jhi-item-count.vue';
+import JhiSortIndicatorComponent from './shared/sort/jhi-sort-indicator.vue';
+import LoginService from './account/login.service';
+import AccountService from './account/account.service';
+import { setupAxiosInterceptors } from '@/shared/config/axios-interceptor';
+import { useStore } from '@/store';
+
+import '../content/scss/global.scss';
+import '../content/scss/vendor.scss';
+
+const pinia = createPinia();
+
+// jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
+
+initBootstrapVue(Vue);
+
+Vue.configureCompat({
+  MODE: 2,
+  ATTR_FALSE_VALUE: 'suppress-warning',
+  COMPONENT_FUNCTIONAL: 'suppress-warning',
+  COMPONENT_V_MODEL: 'suppress-warning',
+  CONFIG_OPTION_MERGE_STRATS: 'suppress-warning',
+  CONFIG_WHITESPACE: 'suppress-warning',
+  CUSTOM_DIR: 'suppress-warning',
+  GLOBAL_EXTEND: 'suppress-warning',
+  GLOBAL_MOUNT: 'suppress-warning',
+  GLOBAL_PRIVATE_UTIL: 'suppress-warning',
+  GLOBAL_PROTOTYPE: 'suppress-warning',
+  GLOBAL_SET: 'suppress-warning',
+  INSTANCE_ATTRS_CLASS_STYLE: 'suppress-warning',
+  INSTANCE_CHILDREN: 'suppress-warning',
+  INSTANCE_DELETE: 'suppress-warning',
+  INSTANCE_DESTROY: 'suppress-warning',
+  INSTANCE_EVENT_EMITTER: 'suppress-warning',
+  INSTANCE_EVENT_HOOKS: 'suppress-warning',
+  INSTANCE_LISTENERS: 'suppress-warning',
+  INSTANCE_SCOPED_SLOTS: 'suppress-warning',
+  INSTANCE_SET: 'suppress-warning',
+  OPTIONS_BEFORE_DESTROY: 'suppress-warning',
+  OPTIONS_DATA_MERGE: 'suppress-warning',
+  OPTIONS_DESTROYED: 'suppress-warning',
+  RENDER_FUNCTION: 'suppress-warning',
+  WATCH_ARRAY: 'suppress-warning',
+  PRIVATE_APIS: 'suppress-warning',
+});
+
+const app = createApp({
+  
+  components: { App },
+  template: '&lt;App/>',
+  setup(_props, { emit }) {
+    const loginService = new LoginService({ emit });
+    provide('loginService', loginService);
+    const store = useStore();
+    const accountService = new AccountService(store);
+    provide(
+      'currentLanguage',
+      computed(() => store.account?.langKey ?? navigator.language ?? 'de'),
+    );
+
+    router.beforeResolve(async (to, from, next) => {
+      // Make sure login modal is closed
+      loginService.hideLogin();
+
+      if (!store.authenticated) {
+        await accountService.update();
+      }
+      if (to.meta?.authorities &amp;&amp; to.meta.authorities.length > 0) {
+        const value = await accountService.hasAnyAuthorityAndCheckAuth(to.meta.authorities);
+        if (!value) {
+          if (from.path !== '/forbidden') {
+            next({ path: '/forbidden' });
+            return;
+          }
+        }
+      }
+      next();
+    });
+
+    setupAxiosInterceptors(
+      error => {
+        const url = error.response?.config?.url;
+        const status = error.status || error.response.status;
+        if (status === 401) {
+          // Store logged out state.
+          store.logout();
+          if (!url.endsWith('api/account') &amp;&amp; !url.endsWith('api/authenticate')) {
+            // Ask for a new authentication
+            loginService.openLogin();
+            return;
+          }
+        }
+        return Promise.reject(error);
+      },
+      error => {
+        return Promise.reject(error);
+      },
+    );
+
+    const { authenticated } = storeToRefs(store);
+    provide('authenticated', authenticated);
+    provide(
+      'currentUsername',
+      computed(() => store.account?.login),
+    );
+
+    provide('accountService', accountService);
+    // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
+  },
+});
+
+initFortAwesome(app);
+
+app
+  .component('jhi-item-count', JhiItemCountComponent)
+  .component('jhi-sort-indicator', JhiSortIndicatorComponent)
+  .use(router)
+  .use(pinia)
+  .mount('#app');
+</code></pre>
+            </article>
+          </section>
+        </div>
+
+        <footer class="footer">
+          <div class="content has-text-centered">
+            <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+            <p class="sidebar-created-by">
+              <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with
+              <i class="fas fa-heart"></i> by
+              <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+            </p>
+          </div>
+        </footer>
+      </div>
+      <div id="side-nav" class="side-nav"></div>
+    </div>
+    <script src="scripts/app.min.js"></script>
+    <script>
+      PR.prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

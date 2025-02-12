@@ -5,7 +5,6 @@ import { type IBrand } from '@/shared/model/brand.model';
 import { useAlertService } from '@/shared/alert/alert.service';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Brand',
   setup() {
     const brandService = inject('brandService', () => new BrandService());

@@ -4,7 +4,6 @@ import ActivateService from './activate.service';
 import type LoginService from '@/account/login.service';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   setup() {
     const activateService = inject('activateService', () => new ActivateService(), true);
     const loginService = inject<LoginService>('loginService');

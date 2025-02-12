@@ -1,50 +1,3 @@
-@import 'bootstrap-variables';
-
-/* ==============================================================
-Bootstrap tweaks
-===============================================================*/
-
-body,
-h1,
-h2,
-h3,
-h4 {
-  font-weight: 300;
-}
-
-body {
-  margin: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Helvetica Neue,
-    Arial,
-    sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: left;
-}
-
-a {
-  color: #533f03;
-  font-weight: bold;
-}
-
-a:hover {
-  color: #533f03;
-  /* make sure browsers use the pointer cursor for anchors, even with no href */
-  cursor: pointer;
-}
-.dropdown-item:hover,
-.dropdown-item:focus {
-  color: white;
-  text-decoration: none;
-  background-color: #373a3c;
-}
-
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
@@ -184,32 +137,6 @@ Custom alerts for notification
 /* ==========================================================================
 entity tables helpers
 ========================================================================== */
-
-/* Remove Bootstrap padding from the element
-http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
-@mixin no-padding($side) {
-  @if $side == 'all' {
-    .no-padding {
-      padding: 0 !important;
-    }
-  } @else {
-    .no-padding-#{$side} {
-      padding-#{$side}: 0 !important;
-    }
-  }
-}
-@include no-padding('left');
-@include no-padding('right');
-@include no-padding('top');
-@include no-padding('bottom');
-@include no-padding('all');
-
-/* bootstrap 3 input-group 100% width
-http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min {
-  width: 1% !important;
-}
-
 /* ==========================================================================
 entity detail page css
 ========================================================================== */
@@ -237,37 +164,6 @@ entity detail page css
       margin-left: 0;
     }
   }
-}
-
-/* ==========================================================================
-ui bootstrap tweaks
-========================================================================== */
-.nav,
-.pagination,
-.carousel,
-.card-title a {
-  cursor: pointer;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table .btn-secondary,
-.uib-datepicker-popup > li > div.uib-datepicker > table .btn-secondary {
-  border: 0;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table:focus,
-.uib-datepicker-popup > li > div.uib-datepicker > table:focus {
-  outline: none;
-}
-
-.thread-dump-modal-lock {
-  max-width: 450px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.svg-inline--fa {
-  padding: 0 5px;
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */

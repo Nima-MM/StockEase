@@ -5,7 +5,6 @@ import { maxLength, minLength, required, sameAs } from '@vuelidate/validators';
 import type LoginService from '@/account/login.service';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ResetPasswordFinish',
   validations() {
     return {

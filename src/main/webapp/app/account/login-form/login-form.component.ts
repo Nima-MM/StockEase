@@ -5,7 +5,6 @@ import type AccountService from '../account.service';
 import type LoginService from '@/account/login.service';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   setup() {
     const authenticationError: Ref<boolean> = ref(false);
     const login: Ref<string> = ref(null);
