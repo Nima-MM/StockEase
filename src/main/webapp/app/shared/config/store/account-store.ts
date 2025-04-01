@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 export interface AccountStateStorable {
-  logon: boolean;
+  logon: boolean | null;
   userIdentity: null | any;
   authenticated: boolean;
   profilesLoaded: boolean;
@@ -24,10 +24,10 @@ export const useAccountStore = defineStore('main', {
     account: state => state.userIdentity,
   },
   actions: {
-    authenticate(promise) {
+    authenticate(promise: boolean) {
       this.logon = promise;
     },
-    setAuthentication(identity) {
+    setAuthentication(identity: any) {
       this.userIdentity = identity;
       this.authenticated = true;
       this.logon = null;
@@ -40,10 +40,10 @@ export const useAccountStore = defineStore('main', {
     setProfilesLoaded() {
       this.profilesLoaded = true;
     },
-    setActiveProfiles(profile) {
+    setActiveProfiles(profile: string) {
       this.activeProfiles = profile;
     },
-    setRibbonOnProfiles(ribbon) {
+    setRibbonOnProfiles(ribbon: string) {
       this.ribbonOnProfiles = ribbon;
     },
   },

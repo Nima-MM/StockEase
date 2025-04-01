@@ -1,12 +1,38 @@
 import { type Ref, defineComponent, inject, onMounted, ref } from 'vue';
-
 import ProductService from './product.service';
 import { type IProduct } from '@/shared/model/product.model';
 import { useAlertService } from '@/shared/alert/alert.service';
+import DeleteDialog from './dialogs/delete-dialog.vue';
+import EditDialog from './dialogs/edit-dialog.vue';
+import RefillDialog from './dialogs/refill-dialog.vue';
+import DecreaseDialog from './dialogs/decrease-dialog.vue';
 
+interface ProductTableHeaders {
+  title: string;
+  align?: 'start' | 'end' | 'center';
+  key?: string;
+  sortable?: boolean;
+}
 export default defineComponent({
   name: 'Product',
+  components: {
+    RefillDialog: RefillDialog,
+    DecreaseDialog: DecreaseDialog,
+    DeleteDialog: DeleteDialog,
+    EditDialog: EditDialog,
+  },
   setup() {
+    const productTableHeaders = ref<ProductTableHeaders[]>([
+      // { title: "ID", key: "id", align: "start" },
+      { title: 'EAN', key: 'ean', align: 'center' },
+      { title: 'Kategorie', key: 'category.name', align: 'center' },
+      { title: 'Marke', key: 'brand.name', align: 'center' },
+      { title: 'Produktname', key: 'name', sortable: true },
+      { title: 'Stückzahl', key: 'stock', align: 'center' },
+      { title: 'Farbe', key: 'color.name', align: 'center' },
+      { title: 'Aktionen', key: 'actions', align: 'center', sortable: false },
+    ]);
+    const search = ref<string>('');
     const productService = inject('productService', () => new ProductService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
@@ -60,6 +86,8 @@ export default defineComponent({
 
     return {
       products,
+      productTableHeaders,
+      search,
       handleSyncList,
       isFetching,
       retrieveProducts,

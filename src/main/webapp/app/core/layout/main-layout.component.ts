@@ -1,31 +1,25 @@
 import { defineComponent, provide, inject, type ComputedRef } from 'vue';
-import MainLayout from './core/layout/main-layout.vue';
-import AccountLayout from './account/layout/account-layout.vue';
-import Ribbon from '@/core/ribbon/ribbon.vue';
 import { useTheme } from '@/shared/composables/theme';
+import MainNavbar from '@/core/main-navbar/main-navbar.vue';
 import JhiFooter from '@/core/jhi-footer/jhi-footer.vue';
 import { useAlertService } from '@/shared/alert/alert.service';
 // imports
 import '@/shared/config/dayjs';
 
 export default defineComponent({
-  name: 'App',
+  name: 'MainLayout',
   components: {
-    ribbon: Ribbon,
-    'account-layout': AccountLayout,
-    'main-layout': MainLayout,
+    'main-navbar': MainNavbar,
     'jhi-footer': JhiFooter,
   },
   setup() {
     provide('alertService', useAlertService());
-    const authenticated = inject<ComputedRef<boolean>>('authenticated');
     const { theme } = useTheme();
 
     // methods
 
     return {
       theme,
-      authenticated,
     };
   },
 });

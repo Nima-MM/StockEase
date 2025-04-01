@@ -59,7 +59,7 @@ const app = createApp({
       if (!store.authenticated) {
         await accountService.update();
       }
-      if (to.meta?.authorities && to.meta.authorities.length > 0) {
+      if (Array.isArray(to.meta?.authorities) && to.meta.authorities.length > 0) {
         const value = await accountService.hasAnyAuthorityAndCheckAuth(to.meta.authorities);
         if (!value) {
           if (from.path !== '/forbidden') {
@@ -72,7 +72,7 @@ const app = createApp({
     });
 
     setupAxiosInterceptors(
-      error => {
+      (error: any) => {
         const url = error.response?.config?.url;
         const status = error.status || error.response.status;
         if (status === 401) {
@@ -86,7 +86,7 @@ const app = createApp({
         }
         return Promise.reject(error);
       },
-      error => {
+      (error: any) => {
         return Promise.reject(error);
       },
     );

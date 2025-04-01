@@ -5,18 +5,19 @@ import type AccountService from '../account.service';
 import type LoginService from '@/account/login.service';
 
 export default defineComponent({
+  name: 'Login',
   setup() {
     const authenticationError: Ref<boolean> = ref(false);
-    const login: Ref<string> = ref(null);
-    const password: Ref<string> = ref(null);
+    const login: Ref<string | null> = ref(null);
+    const password: Ref<string | null> = ref(null);
     const rememberMe: Ref<boolean> = ref(false);
     const route = useRoute();
     const router = useRouter();
 
     const previousState = () => router.go(-1);
 
-    const accountService = inject<AccountService>('accountService');
-    const loginService = inject<LoginService>('loginService');
+    const accountService = inject<AccountService>('accountService')!; // !-operator indicates that accountService is not undefined
+    const loginService = inject<LoginService>('loginService')!;
 
     const doLogin = async () => {
       const data = { username: login.value, password: password.value, rememberMe: rememberMe.value };
@@ -44,6 +45,22 @@ export default defineComponent({
         authenticationError.value = true;
       }
     };
+
+    // // const firstName = ref('');
+    // // const firstNameRules = [
+    // //   value => {
+    // //     if (value?.length >= 3) return true;
+    // //     return 'First name must be at least 3 characters.';
+    // //   },
+    // // ];
+
+    // // const lastName = ref('123');
+    // // const lastNameRules = [
+    // //   value => {
+    // //     if (/[^0-9]/.test(value)) return true;
+    // //     return 'Last name can not contain digits.';
+    // //   },
+    // // ];
     return {
       authenticationError,
       login,
