@@ -1,5 +1,7 @@
 import { type Ref, defineComponent, inject, onMounted, ref } from 'vue';
 import ProductService from './product.service';
+import CategoryService from '../category/category.service';
+
 import { type IProduct } from '@/shared/model/product.model';
 import { useAlertService } from '@/shared/alert/alert.service';
 import DeleteDialog from './dialogs/delete-dialog.vue';
@@ -34,9 +36,11 @@ export default defineComponent({
     ]);
     const search = ref<string>('');
     const productService = inject('productService', () => new ProductService());
+    const categoryService = inject('categoryService', () => new CategoryService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const products: Ref<IProduct[]> = ref([]);
+    const categories: Ref<any[]> = ref([]);
 
     const isFetching = ref(false);
 
@@ -53,6 +57,17 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
+    const retrieveCategories = async () => {
+      isFetching.value = true;
+      try {
+        const res = await categoryService().retrieve();
+        categories.value = res.data;
+      } catch (err) {
+        alertService.showHttpError(err.response);
+      } finally {
+        isFetching.value = false;
+      }
+    };
 
     const handleSyncList = () => {
       retrieveProducts();
@@ -60,29 +75,8 @@ export default defineComponent({
 
     onMounted(async () => {
       await retrieveProducts();
+      await retrieveCategories();
     });
-
-    const removeId: Ref<number> = ref(null);
-    const removeEntity = ref<any>(null);
-    const prepareRemove = (instance: IProduct) => {
-      removeId.value = instance.id;
-      removeEntity.value.show();
-    };
-    const closeDialog = () => {
-      removeEntity.value.hide();
-    };
-    const removeProduct = async () => {
-      try {
-        await productService().delete(removeId.value);
-        const message = `A Product is deleted with identifier ${removeId.value}`;
-        alertService.showInfo(message, { variant: 'danger' });
-        removeId.value = null;
-        retrieveProducts();
-        closeDialog();
-      } catch (error) {
-        alertService.showHttpError(error.response);
-      }
-    };
 
     return {
       products,
@@ -92,11 +86,33 @@ export default defineComponent({
       isFetching,
       retrieveProducts,
       clear,
-      removeId,
-      removeEntity,
-      prepareRemove,
-      closeDialog,
-      removeProduct,
+      // // removeId,
+      // // removeEntity,
+      // // prepareRemove,
+      // // closeDialog,
+      // // removeProduct,
     };
   },
 });
+
+// // const removeId: Ref<number> = ref(null);
+// // const removeEntity = ref<any>(null);
+// // const prepareRemove = (instance: IProduct) => {
+// //   removeId.value = instance.id;
+// //   removeEntity.value.show();
+// // };
+// // const closeDialog = () => {
+// //   removeEntity.value.hide();
+// // };
+// // const removeProduct = async () => {
+// //   try {
+// //     await productService().delete(removeId.value);
+// //     const message = `A Product is deleted with identifier ${removeId.value}`;
+// //     alertService.showInfo(message, { variant: 'danger' });
+// //     removeId.value = null;
+// //     retrieveProducts();
+// //     closeDialog();
+// //   } catch (error) {
+// //     alertService.showHttpError(error.response);
+// //   }
+// // };

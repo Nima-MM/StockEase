@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { useProductsStore } from '@/entities/product/product.store';
 import { type IProduct } from '@/shared/model/product.model';
 import type { I } from 'vitest/dist/chunks/reporters.WnPwkmgA.js';
 
@@ -25,6 +25,7 @@ export default class ProductService {
         .get(baseApiUrl)
         .then(res => {
           resolve(res);
+          useProductsStore().initStore(res.data);
         })
         .catch(err => {
           reject(err);

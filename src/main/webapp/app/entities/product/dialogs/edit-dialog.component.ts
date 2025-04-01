@@ -1,8 +1,10 @@
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, inject, ref, computed } from 'vue';
 import type { PropType } from 'vue';
 import { type IProduct } from '@/shared/model/product.model';
 import ProductService from '@/entities/product/product.service';
 import DialogTemplateComponent from '@/shared/dialog/dialog-template.vue';
+import { useAttributeUpdater } from '@/shared/composables/attribute.composable';
+import { useCategoryStore } from '@/entities/category/category.store';
 
 export default defineComponent({
   name: 'EditDialog',
@@ -17,6 +19,8 @@ export default defineComponent({
   },
   setup(props) {
     const productService = inject('productService', () => new ProductService());
+    const categories = useCategoryStore().getCategories;
+    // console.log('Categories: ', categories);
     // data
     const productToUpdate = ref<IProduct>({
       id: props.product?.id || 0,
@@ -29,6 +33,8 @@ export default defineComponent({
       brand: { id: props.product?.brand?.id, name: props.product?.brand?.name || '' },
       color: { id: props.product?.color?.id, name: props.product?.color?.name || '' },
     });
+    const categoryNames = computed(() => useCategoryStore().getCategoryNames);
+    const { updateAttribute: updateCategory } = useAttributeUpdater(categories, productToUpdate, 'category');
 
     const confirmEdit = async (close: Function) => {
       try {
@@ -45,7 +51,7 @@ export default defineComponent({
             productToUpdate.value.brand.id = parseInt(productToUpdate.value.brand.id as any);
           }
           const p = JSON.parse(JSON.stringify(productToUpdate.value));
-          console.log(p);
+          // console.log(p);
           await productService().update(p);
           await productService().retrieve();
           close();
@@ -55,6 +61,8 @@ export default defineComponent({
       }
     };
     return {
+      categoryNames,
+      updateCategory,
       productToUpdate,
       confirmEdit,
     };

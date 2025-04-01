@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { useCategoryStore } from '@/entities/category/category.store';
 import { type ICategory } from '@/shared/model/category.model';
 
 const baseApiUrl = 'api/categories';
@@ -24,6 +24,8 @@ export default class CategoryService {
         .get(baseApiUrl)
         .then(res => {
           resolve(res);
+          console.log('Category Store: ', res.data);
+          useCategoryStore().initStore(res.data);
         })
         .catch(err => {
           reject(err);
