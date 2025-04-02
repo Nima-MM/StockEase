@@ -24,7 +24,6 @@ export default class CategoryService {
         .get(baseApiUrl)
         .then(res => {
           resolve(res);
-          console.log('Category Store: ', res.data);
           useCategoryStore().initStore(res.data);
         })
         .catch(err => {

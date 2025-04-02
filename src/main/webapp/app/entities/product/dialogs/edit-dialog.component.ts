@@ -5,6 +5,7 @@ import ProductService from '@/entities/product/product.service';
 import DialogTemplateComponent from '@/shared/dialog/dialog-template.vue';
 import { useAttributeUpdater } from '@/shared/composables/attribute.composable';
 import { useCategoryStore } from '@/entities/category/category.store';
+import { useBrandStore } from '@/entities/brand/brand.store';
 
 export default defineComponent({
   name: 'EditDialog',
@@ -19,8 +20,9 @@ export default defineComponent({
   },
   setup(props) {
     const productService = inject('productService', () => new ProductService());
-    const categories = useCategoryStore().getCategories;
-    // console.log('Categories: ', categories);
+    const categories = useCategoryStore().getData;
+    const brands = useBrandStore().getData;
+
     // data
     const productToUpdate = ref<IProduct>({
       id: props.product?.id || 0,
@@ -33,9 +35,15 @@ export default defineComponent({
       brand: { id: props.product?.brand?.id, name: props.product?.brand?.name || '' },
       color: { id: props.product?.color?.id, name: props.product?.color?.name || '' },
     });
-    const categoryNames = computed(() => useCategoryStore().getCategoryNames);
+    // category
+    const categoryNames = computed(() => useCategoryStore().getNames);
     const { updateAttribute: updateCategory } = useAttributeUpdater(categories, productToUpdate, 'category');
+    // brand
+    const brandNames = computed(() => useBrandStore().getNames);
+    const { updateAttribute: updateBrand } = useAttributeUpdater(brands, productToUpdate, 'brands');
+    // color
 
+    // methods
     const confirmEdit = async (close: Function) => {
       try {
         if (props.product) {
@@ -63,6 +71,8 @@ export default defineComponent({
     return {
       categoryNames,
       updateCategory,
+      brandNames,
+      updateBrand,
       productToUpdate,
       confirmEdit,
     };

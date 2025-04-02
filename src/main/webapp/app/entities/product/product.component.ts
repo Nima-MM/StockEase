@@ -1,6 +1,7 @@
 import { type Ref, defineComponent, inject, onMounted, ref } from 'vue';
 import ProductService from './product.service';
 import CategoryService from '../category/category.service';
+import BrandService from '../brand/brand.service';
 
 import { type IProduct } from '@/shared/model/product.model';
 import { useAlertService } from '@/shared/alert/alert.service';
@@ -37,10 +38,12 @@ export default defineComponent({
     const search = ref<string>('');
     const productService = inject('productService', () => new ProductService());
     const categoryService = inject('categoryService', () => new CategoryService());
+    const brandService = inject('brandService', () => new BrandService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const products: Ref<IProduct[]> = ref([]);
     const categories: Ref<any[]> = ref([]);
+    const brands: Ref<any[]> = ref([]);
 
     const isFetching = ref(false);
 
@@ -68,6 +71,18 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
+    const retrieveBrands = async () => {
+      isFetching.value = true;
+      try {
+        const res = await brandService().retrieve();
+        brands.value = res.data;
+        console.log('Brands: ', brands.value);
+      } catch (err) {
+        alertService.showHttpError(err.response);
+      } finally {
+        isFetching.value = false;
+      }
+    };
 
     const handleSyncList = () => {
       retrieveProducts();
@@ -76,6 +91,7 @@ export default defineComponent({
     onMounted(async () => {
       await retrieveProducts();
       await retrieveCategories();
+      await retrieveBrands();
     });
 
     return {

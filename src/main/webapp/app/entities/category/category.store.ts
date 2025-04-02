@@ -10,8 +10,8 @@ export const useCategoryStore = defineStore('Category', () => {
    * Computed property to get list of all Category.
    * @returns {ICategory[]} - Current list of Category.
    */
-  const getCategories = computed(() => storedData.value);
-  const getCategoryNames = computed(() => (storedData.value ? storedData.value.map(category => category.name) : []));
+  const getData = computed(() => storedData.value);
+  const getNames = computed(() => (storedData.value ? storedData.value.map(category => category.name) : []));
   // !Setters - mutations
   /**
    * Reqest ressource from Api set response as state.category
@@ -23,8 +23,8 @@ export const useCategoryStore = defineStore('Category', () => {
 
   return {
     storedData,
-    getCategoryNames,
-    getCategories,
+    getNames,
+    getData,
     initStore,
   };
 });

@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { useBrandStore } from '@/entities/brand/brand.store';
 import { type IBrand } from '@/shared/model/brand.model';
 
 const baseApiUrl = 'api/brands';
@@ -24,6 +24,8 @@ export default class BrandService {
         .get(baseApiUrl)
         .then(res => {
           resolve(res);
+          console.log('BrandService: ', res.data);
+          useBrandStore().initStore(res.data);
         })
         .catch(err => {
           reject(err);
