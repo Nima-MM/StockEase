@@ -2,7 +2,7 @@ import { type Ref, defineComponent, inject, onMounted, ref } from 'vue';
 import ProductService from './product.service';
 import CategoryService from '../category/category.service';
 import BrandService from '../brand/brand.service';
-
+import ColorService from '../color/color.service';
 import { type IProduct } from '@/shared/model/product.model';
 import { useAlertService } from '@/shared/alert/alert.service';
 import DeleteDialog from './dialogs/delete-dialog.vue';
@@ -39,11 +39,13 @@ export default defineComponent({
     const productService = inject('productService', () => new ProductService());
     const categoryService = inject('categoryService', () => new CategoryService());
     const brandService = inject('brandService', () => new BrandService());
+    const colorService = inject('colorService', () => new ColorService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const products: Ref<IProduct[]> = ref([]);
     const categories: Ref<any[]> = ref([]);
     const brands: Ref<any[]> = ref([]);
+    const colors: Ref<any[]> = ref([]);
 
     const isFetching = ref(false);
 
@@ -83,6 +85,18 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
+    const retrieveColor = async () => {
+      isFetching.value = true;
+      try {
+        const res = await colorService().retrieve();
+        colors.value = res.data;
+        console.log('colors: ', colors.value);
+      } catch (err) {
+        alertService.showHttpError(err.response);
+      } finally {
+        isFetching.value = false;
+      }
+    };
 
     const handleSyncList = () => {
       retrieveProducts();
@@ -92,6 +106,7 @@ export default defineComponent({
       await retrieveProducts();
       await retrieveCategories();
       await retrieveBrands();
+      await retrieveColor();
     });
 
     return {

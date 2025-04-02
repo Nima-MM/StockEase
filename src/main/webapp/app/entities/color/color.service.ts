@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { useColorStore } from '@/entities/color/color.store';
 import { type IColor } from '@/shared/model/color.model';
 
 const baseApiUrl = 'api/colors';
@@ -24,6 +24,7 @@ export default class ColorService {
         .get(baseApiUrl)
         .then(res => {
           resolve(res);
+          useColorStore().initStore(res.data);
         })
         .catch(err => {
           reject(err);

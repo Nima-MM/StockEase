@@ -18,7 +18,6 @@ export const useBrandStore = defineStore('Brand', () => {
    */
   const initStore = async (brand: IBrand[]) => {
     storedData.value = brand;
-    console.log('Brand Store: ', storedData.value);
   };
 
   return {

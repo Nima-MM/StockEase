@@ -24,7 +24,6 @@ export default class BrandService {
         .get(baseApiUrl)
         .then(res => {
           resolve(res);
-          console.log('BrandService: ', res.data);
           useBrandStore().initStore(res.data);
         })
         .catch(err => {

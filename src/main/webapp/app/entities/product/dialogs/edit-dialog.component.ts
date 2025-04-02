@@ -6,6 +6,7 @@ import DialogTemplateComponent from '@/shared/dialog/dialog-template.vue';
 import { useAttributeUpdater } from '@/shared/composables/attribute.composable';
 import { useCategoryStore } from '@/entities/category/category.store';
 import { useBrandStore } from '@/entities/brand/brand.store';
+import { useColorStore } from '@/entities/color/color.store';
 
 export default defineComponent({
   name: 'EditDialog',
@@ -22,6 +23,7 @@ export default defineComponent({
     const productService = inject('productService', () => new ProductService());
     const categories = useCategoryStore().getData;
     const brands = useBrandStore().getData;
+    const color = useColorStore().getData;
 
     // data
     const productToUpdate = ref<IProduct>({
@@ -42,7 +44,8 @@ export default defineComponent({
     const brandNames = computed(() => useBrandStore().getNames);
     const { updateAttribute: updateBrand } = useAttributeUpdater(brands, productToUpdate, 'brands');
     // color
-
+    const colorNames = computed(() => useColorStore().getNames);
+    const { updateAttribute: updateColor } = useAttributeUpdater(color, productToUpdate, 'color');
     // methods
     const confirmEdit = async (close: Function) => {
       try {
@@ -73,6 +76,8 @@ export default defineComponent({
       updateCategory,
       brandNames,
       updateBrand,
+      colorNames,
+      updateColor,
       productToUpdate,
       confirmEdit,
     };
