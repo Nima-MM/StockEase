@@ -41,7 +41,7 @@
         prepend-icon="mdi-storefront-outline"
         title="Lager"
         v-tooltip="'Übersicht über alle Waren im Lager'"
-        to=" /product"
+        to="/product"
         @click.stop="!toggleRailState"
       ></v-list-item>
 
