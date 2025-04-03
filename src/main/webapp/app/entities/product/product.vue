@@ -13,7 +13,7 @@
       ></v-text-field>
     </template>
     <!-- table -->
-    <v-data-table :headers="productTableHeaders" :items="products" :sort-by="[{ key: 'id', order: 'asc' }]" :hover="true">
+    <v-data-table :headers="productTableHeaders" :items="products" :sort-by="[{ key: 'id', order: 'asc' }]" :hover="true" :search="search">
       <template v-slot:item.actions="{ item }">
         <div class="actions">
           <RefillDialog :product="item" />

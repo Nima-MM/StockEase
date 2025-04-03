@@ -78,7 +78,6 @@ export default defineComponent({
       try {
         const res = await brandService().retrieve();
         brands.value = res.data;
-        console.log('Brands: ', brands.value);
       } catch (err) {
         alertService.showHttpError(err.response);
       } finally {
@@ -90,7 +89,6 @@ export default defineComponent({
       try {
         const res = await colorService().retrieve();
         colors.value = res.data;
-        console.log('colors: ', colors.value);
       } catch (err) {
         alertService.showHttpError(err.response);
       } finally {

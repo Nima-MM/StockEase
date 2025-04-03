@@ -18,7 +18,6 @@ export const useCategoryStore = defineStore('Category', () => {
    */
   const initStore = async (category: ICategory[]) => {
     storedData.value = category;
-    console.log('Category Store: ', storedData.value);
   };
 
   return {

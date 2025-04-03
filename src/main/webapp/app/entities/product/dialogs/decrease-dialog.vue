@@ -7,7 +7,7 @@
   >
     <!-- Activator Slot -->
     <template #activator="{ open }">
-      <v-icon @click="open" class="icon" color="#FF5722">mdi-archive-minus-outline</v-icon>
+      <v-icon @click="open" v-tooltip="'Den Bestand verringern'" class="icon" color="#FF5722">mdi-archive-minus-outline</v-icon>
     </template>
     <!-- Optionaler Header-Slot -->
     <template #header></template>

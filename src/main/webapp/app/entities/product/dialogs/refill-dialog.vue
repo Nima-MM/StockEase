@@ -2,7 +2,7 @@
   <dialog-template header-height="100px" header-background-color="#009688" header-icon="mdi-archive-plus" header-title="BESTAND AUFFÜLLEN">
     <!-- Activator Slot -->
     <template #activator="{ open }">
-      <v-icon @click="open" class="icon" color="#009688">mdi-archive-plus-outline</v-icon>
+      <v-icon @click="open" v-tooltip="'Den Bestand erhöhen'" class="icon" color="#009688">mdi-archive-plus-outline</v-icon>
     </template>
     <!-- Optionaler Header-Slot -->
     <template #header></template>

@@ -62,7 +62,7 @@ export default defineComponent({
             productToUpdate.value.brand.id = parseInt(productToUpdate.value.brand.id as any);
           }
           const p = JSON.parse(JSON.stringify(productToUpdate.value));
-          // console.log(p);
+          console.log(p);
           await productService().update(p);
           await productService().retrieve();
           close();

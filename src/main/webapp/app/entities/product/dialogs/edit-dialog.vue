@@ -2,7 +2,7 @@
   <dialog-template header-height="100px" header-background-color="#2196F3" header-icon="mdi-pen" header-title="EDITIEREN">
     <!-- Activator Slot -->
     <template #activator="{ open }">
-      <v-icon @click="open" class="icon" color="#2196F3">mdi-pen</v-icon>
+      <v-icon @click="open" v-tooltip="'Produktdatenblatt ändern'" class="icon" color="#2196F3">mdi-pen</v-icon>
     </template>
     <!-- Optionaler Header-Slot -->
     <template #header></template>

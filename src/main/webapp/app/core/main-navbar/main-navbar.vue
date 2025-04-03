@@ -4,7 +4,11 @@
     <v-btn icon="mdi-menu" variant="text" @click="toggleDrawerState"></v-btn>
     <v-spacer></v-spacer>
     <RouterLink to="/" class="text-decoration-none">
-      <v-toolbar-title class="text-uppercase text-decoration-overline font-weight-black" style="color: #303f9f">
+      <v-toolbar-title
+        class="text-uppercase text-decoration-overline font-weight-black"
+        v-tooltip="'Zurück zum Dashboard'"
+        style="color: #303f9f"
+      >
         MEINE LAGER
       </v-toolbar-title>
     </RouterLink>
@@ -36,7 +40,8 @@
         style="color: #0277bd"
         prepend-icon="mdi-storefront-outline"
         title="Lager"
-        to="/product"
+        v-tooltip="'Übersicht über alle Waren im Lager'"
+        to=" /product"
         @click.stop="!toggleRailState"
       ></v-list-item>
 
@@ -65,6 +70,7 @@
         style="color: #0277bd"
         prepend-icon="mdi-shape"
         title="Kategorien"
+        v-tooltip="'MVP in Developement - coming soon'"
         to="/categories/page"
         @click.stop="!toggleRailState"
       ></v-list-item>
@@ -74,6 +80,7 @@
         style="color: #0277bd"
         prepend-icon="mdi-hanger"
         title="Marken"
+        v-tooltip="'MVP in Developement - coming soon'"
         to="/brands/page"
         @click.stop="!toggleRailState"
       ></v-list-item>
@@ -83,6 +90,7 @@
         style="color: #0277bd"
         prepend-icon="mdi-palette"
         title="Farben"
+        v-tooltip="'MVP in Developement - coming soon'"
         to="/colors/page"
         @click.stop="!toggleRailState"
       ></v-list-item>
@@ -92,6 +100,7 @@
         style="color: #0277bd"
         prepend-icon="mdi-account-multiple"
         title="Benutzerkontensteuerung"
+        v-tooltip="'MVP in Developement - coming soon'"
         to="/user-accounts-administration/page"
         @click.stop="!toggleRailState"
       ></v-list-item>
@@ -100,6 +109,7 @@
       <v-list-item
         prepend-icon="mdi-frequently-asked-questions"
         title="FAQ"
+        v-tooltip="'MVP in Developement - coming soon'"
         :disabled="true"
         to="/faq/page"
         @click.stop="!toggleRailState"
@@ -111,6 +121,7 @@
       <v-list-item
         :variant="rail === true ? 'text' : 'outlined'"
         base-color="#D50000"
+        v-tooltip="'MVP in Developement - coming soon'"
         :style="
           rail === true
             ? { fontSize: 'larger', textAlign: 'center', margin: '0 0px 10px 0px' }

@@ -2,7 +2,7 @@
   <dialog-template header-height="100px" header-background-color="#D32F2F" header-icon="mdi-delete" header-title="PRODUKT LÖSCHEN">
     <!-- Activator Slot -->
     <template #activator="{ open }">
-      <v-icon @click="open" class="icon" color="#D32F2F">mdi-delete</v-icon>
+      <v-icon @click="open" v-tooltip="'Produkt aus dem Inventar Löschen'" class="icon" color="#D32F2F">mdi-delete</v-icon>
     </template>
     <!-- Optionaler Header-Slot -->
     <template #header></template>
