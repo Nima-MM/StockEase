@@ -2,6 +2,23 @@
 
 ## Project Structure
 
+- [Stock-Manager](#stock-manager)
+  - [Project Structure](#project-structure)
+  - [Development](#development)
+    - [PWA Support](#pwa-support)
+    - [Managing dependencies](#managing-dependencies)
+  - [Building for production](#building-for-production)
+    - [Packaging as jar](#packaging-as-jar)
+    - [Packaging as war](#packaging-as-war)
+    - [JHipster Control Center](#jhipster-control-center)
+  - [Testing](#testing)
+    - [Spring Boot tests](#spring-boot-tests)
+    - [Client tests](#client-tests)
+  - [Others](#others)
+    - [Code quality using Sonar](#code-quality-using-sonar)
+    - [Using Docker to simplify development (optional)](#using-docker-to-simplify-development-optional)
+  - [Continuous Integration (optional)](#continuous-integration-optional)
+
 ## Development
 
 The build system will install automatically the recommended version of Node and npm.
