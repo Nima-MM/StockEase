@@ -93,6 +93,12 @@ public class ProductResource {
         return productService.updateProduct(product);
     }
 
+    @PatchMapping(value = "/update/patch", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(description = "updates a product with new data")
+    public Product patchProduct(@RequestBody final Product product) throws Exception {
+        return productService.patchProduct(product);
+    }
+
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "adds a product with new data")
     public Product addProduct(@RequestBody final Product product) throws Exception {

@@ -104,6 +104,12 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public Product patchProduct(final Product product) {
+        LOGGER.info("Patching Product: " + product);
+
+        return productRepository.save(product);
+    }
+
     public Product createProduct(final Product product) {
         return productRepository.save(product);
     }

@@ -60,9 +60,10 @@ export default class ProductService {
   }
 
   public update(entity: IProduct): Promise<IProduct> {
+    console.log('ProductService.update', entity);
     return new Promise<IProduct>((resolve, reject) => {
       axios
-        .put(`${baseApiUrl}/${entity.id}`, entity)
+        .put(`${baseApiUrl}/update/${entity.id}`, entity)
         .then(res => {
           resolve(res.data);
         })
@@ -72,10 +73,12 @@ export default class ProductService {
     });
   }
 
+  //TODO: fix endpoint
   public partialUpdate(entity: IProduct): Promise<IProduct> {
+    console.log('ProductService.partialUpdate', entity);
     return new Promise<IProduct>((resolve, reject) => {
       axios
-        .patch(`${baseApiUrl}/${entity.id}`, entity)
+        .patch(`${baseApiUrl}/update/patch`, entity)
         .then(res => {
           resolve(res.data);
         })
