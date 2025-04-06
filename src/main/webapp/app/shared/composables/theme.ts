@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue';
 
-const theme = ref<'light' | 'dark'>('light');
+const theme = ref<'light' | 'dark'>('dark');
 
 export function useTheme() {
   const toggleTheme = () => {
