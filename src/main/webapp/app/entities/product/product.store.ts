@@ -32,7 +32,7 @@ export const useProductsStore = defineStore('products', () => {
    */
   const initStore = async (products: any) => {
     storedData.value = products;
-    // console.log('Products Store: ', storedData.value);
+    console.log('Products Store: ', storedData.value);
   };
 
   return {

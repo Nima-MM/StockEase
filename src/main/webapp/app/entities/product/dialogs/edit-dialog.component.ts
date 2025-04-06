@@ -21,9 +21,9 @@ export default defineComponent({
   },
   setup(props) {
     const productService = inject('productService', () => new ProductService());
-    const categories = useCategoryStore().getData;
-    const brands = useBrandStore().getData;
-    const color = useColorStore().getData;
+    const categories = computed(() => useCategoryStore().getData);
+    const brands = computed(() => useBrandStore().getData);
+    const color = computed(() => useColorStore().getData);
 
     // data
     const productToUpdate = ref<IProduct>({
@@ -42,7 +42,7 @@ export default defineComponent({
     const { updateAttribute: updateCategory } = useAttributeUpdater(categories, productToUpdate, 'category');
     // brand
     const brandNames = computed(() => useBrandStore().getNames);
-    const { updateAttribute: updateBrand } = useAttributeUpdater(brands, productToUpdate, 'brands');
+    const { updateAttribute: updateBrand } = useAttributeUpdater(brands, productToUpdate, 'brand');
     // color
     const colorNames = computed(() => useColorStore().getNames);
     const { updateAttribute: updateColor } = useAttributeUpdater(color, productToUpdate, 'color');

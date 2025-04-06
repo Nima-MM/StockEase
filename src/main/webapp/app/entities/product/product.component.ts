@@ -1,4 +1,4 @@
-import { type Ref, defineComponent, inject, onMounted, ref } from 'vue';
+import { type Ref, defineComponent, inject, onMounted, ref, computed } from 'vue';
 import ProductService from './product.service';
 import CategoryService from '../category/category.service';
 import BrandService from '../brand/brand.service';
@@ -9,6 +9,7 @@ import DeleteDialog from './dialogs/delete-dialog.vue';
 import EditDialog from './dialogs/edit-dialog.vue';
 import RefillDialog from './dialogs/refill-dialog.vue';
 import DecreaseDialog from './dialogs/decrease-dialog.vue';
+import { useProductsStore } from './product.store';
 
 interface ProductTableHeaders {
   title: string;
@@ -42,10 +43,10 @@ export default defineComponent({
     const colorService = inject('colorService', () => new ColorService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
-    const products: Ref<IProduct[]> = ref([]);
-    const categories: Ref<any[]> = ref([]);
-    const brands: Ref<any[]> = ref([]);
-    const colors: Ref<any[]> = ref([]);
+    const products: Ref<IProduct[]> = ref(computed(() => useProductsStore().getProducts));
+    const categories: Ref<any[]> = ref(computed(() => useProductsStore().getCategoryNames));
+    const brands: Ref<any[]> = ref(computed(() => useProductsStore().getBrandNames));
+    const colors: Ref<any[]> = ref(computed(() => useProductsStore().getColorNames));
 
     const isFetching = ref(false);
 
@@ -115,33 +116,6 @@ export default defineComponent({
       isFetching,
       retrieveProducts,
       clear,
-      // // removeId,
-      // // removeEntity,
-      // // prepareRemove,
-      // // closeDialog,
-      // // removeProduct,
     };
   },
 });
-
-// // const removeId: Ref<number> = ref(null);
-// // const removeEntity = ref<any>(null);
-// // const prepareRemove = (instance: IProduct) => {
-// //   removeId.value = instance.id;
-// //   removeEntity.value.show();
-// // };
-// // const closeDialog = () => {
-// //   removeEntity.value.hide();
-// // };
-// // const removeProduct = async () => {
-// //   try {
-// //     await productService().delete(removeId.value);
-// //     const message = `A Product is deleted with identifier ${removeId.value}`;
-// //     alertService.showInfo(message, { variant: 'danger' });
-// //     removeId.value = null;
-// //     retrieveProducts();
-// //     closeDialog();
-// //   } catch (error) {
-// //     alertService.showHttpError(error.response);
-// //   }
-// // };

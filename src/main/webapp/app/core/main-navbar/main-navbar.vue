@@ -9,7 +9,7 @@
         v-tooltip="'Zurück zum Dashboard'"
         style="color: #303f9f"
       >
-        MEINE LAGER
+        MEIN LAGER
       </v-toolbar-title>
     </RouterLink>
     <v-spacer></v-spacer>
