@@ -1,5 +1,5 @@
 ---
-name: "🚀 Feature Request"
+name: "🚀 Feature Request deutsch"
 about: "Schlage ein neues Feature oder eine Erweiterung für StockEase vor"
 title: "🚀 [Feature Request]: "
 labels: ["enhancement"]

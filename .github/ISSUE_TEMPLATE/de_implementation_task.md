@@ -1,5 +1,5 @@
 ---
-name: "⚙️ Technical Task"
+name: "⚙️ Technical Task deutsch"
 about: "Definiere eine technische Aufgabe oder Implementierungsschritte"
 title: "⚙️ [Implementation]: "
 labels: ["technical"]

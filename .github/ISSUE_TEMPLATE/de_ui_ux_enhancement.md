@@ -1,5 +1,5 @@
 ---
-name: "🎨 UI/UX Enhancement"
+name: "🎨 UI/UX Enhancement deutsch"
 about: "Verbessere das Design und die Benutzerfreundlichkeit von StockEase"
 title: "🎨 [UI/UX]: "
 labels: ["ui/ux"]

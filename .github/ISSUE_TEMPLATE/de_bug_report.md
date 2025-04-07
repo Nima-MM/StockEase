@@ -1,5 +1,5 @@
 ---
-name: "🐞 Bug Report"
+name: "🐞 Bug Report deutsch"
 about: "Melde einen Fehler oder ein unerwartetes Verhalten in StockEase"
 title: "🐞 [Bug]: "
 labels: ["bug"]
