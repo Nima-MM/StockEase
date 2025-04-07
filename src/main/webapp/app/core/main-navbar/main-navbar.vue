@@ -128,7 +128,7 @@
             : { fontSize: 'larger', textAlign: 'center', margin: '0 10px 10px 10px', borderRadius: '20px' }
         "
         @click.stop="!toggleRailState"
-        @click=""
+        @click="logout"
         block
         :prepend-icon="rail === true ? 'mdi-logout' : ''"
         >{{ rail === true ? '' : 'Logout' }}</v-list-item
