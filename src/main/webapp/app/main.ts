@@ -9,12 +9,7 @@ import LoginService from './account/login.service';
 import AccountService from './account/account.service';
 import { setupAxiosInterceptors } from '@/shared/config/axios-interceptor';
 import { useStore } from '@/store';
-// Vuetify
-import 'vuetify/styles';
-import { createVuetify } from 'vuetify';
-import * as components from 'vuetify/components';
-import * as directives from 'vuetify/directives';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
+
 // Styles
 import '@mdi/font/css/materialdesignicons.css';
 import 'vuetify/styles';
@@ -23,20 +18,7 @@ import '../content/scss/global.scss';
 import '../content/scss/vendor.scss';
 
 const pinia = createPinia();
-const vuetify = createVuetify({
-  components,
-  directives,
-  theme: {
-    defaultTheme: 'dark',
-  },
-  icons: {
-    defaultSet: 'mdi',
-    aliases,
-    sets: {
-      mdi,
-    },
-  },
-});
+
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 const app = createApp({
@@ -103,4 +85,4 @@ const app = createApp({
   },
 });
 
-app.use(vuetify).use(router).use(pinia).mount('#app');
+app.use(router).use(pinia).mount('#app');
