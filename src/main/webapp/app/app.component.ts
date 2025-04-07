@@ -7,6 +7,7 @@ import JhiFooter from '@/core/jhi-footer/jhi-footer.vue';
 import { useAlertService } from '@/shared/alert/alert.service';
 // imports
 import '@/shared/config/dayjs';
+import Button from 'primevue/button';
 
 export default defineComponent({
   name: 'App',
@@ -15,6 +16,7 @@ export default defineComponent({
     'account-layout': AccountLayout,
     'main-layout': MainLayout,
     'jhi-footer': JhiFooter,
+    prime: Button,
   },
   setup() {
     provide('alertService', useAlertService());

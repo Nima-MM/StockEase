@@ -10,15 +10,17 @@ import AccountService from './account/account.service';
 import { setupAxiosInterceptors } from '@/shared/config/axios-interceptor';
 import { useStore } from '@/store';
 
+// PrimeVue
+import PrimeVue from 'primevue/config';
+import Aura from '@primeuix/themes/aura';
+
 // Styles
 import '@mdi/font/css/materialdesignicons.css';
-import 'vuetify/styles';
 
 import '../content/scss/global.scss';
 import '../content/scss/vendor.scss';
 
 const pinia = createPinia();
-
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 const app = createApp({
@@ -85,4 +87,17 @@ const app = createApp({
   },
 });
 
-app.use(router).use(pinia).mount('#app');
+app
+  .use(PrimeVue, {
+    theme: {
+      preset: Aura,
+      options: {
+        prefix: 'p',
+        darkModeSelector: 'system',
+        cssLayer: false,
+      },
+    },
+  })
+  .use(router)
+  .use(pinia)
+  .mount('#app');
