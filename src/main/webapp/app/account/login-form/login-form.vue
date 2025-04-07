@@ -14,7 +14,7 @@
           <!-- <v-text-field v-model="login" :rules="firstNameRules" label="Login"></v-text-field> -->
           <v-text-field type="email" v-model="login" label="Benutzername"></v-text-field>
           <v-text-field type="password" v-model="password" label="Passwort"></v-text-field>
-
+          <v-checkbox v-model="rememberMe" color="info" :label="`Angemeldet bleiben? ${rememberMe.toString()}`"></v-checkbox>
           <v-btn class="mt-2" type="submit" @click="doLogin" block>Anmelden</v-btn>
         </v-form>
       </v-sheet>
