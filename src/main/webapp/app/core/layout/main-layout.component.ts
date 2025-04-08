@@ -1,4 +1,4 @@
-import { defineComponent, provide, inject, type ComputedRef } from 'vue';
+import { defineComponent, provide } from 'vue';
 import { useTheme } from '@/shared/composables/theme';
 import MainNavbar from '@/core/main-navbar/main-navbar.vue';
 import JhiFooter from '@/core/jhi-footer/jhi-footer.vue';

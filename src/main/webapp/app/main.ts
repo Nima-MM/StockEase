@@ -13,7 +13,9 @@ import { useStore } from '@/store';
 // PrimeVue
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
-
+import ToastService from 'primevue/toastservice';
+import StyleClass from 'primevue/styleclass';
+import Ripple from 'primevue/ripple';
 // Styles
 import '@mdi/font/css/materialdesignicons.css';
 
@@ -90,7 +92,9 @@ const app = createApp({
 app
   .use(PrimeVue, {
     theme: {
+      // unstyled: true,
       preset: Aura,
+      ripple: true,
       options: {
         prefix: 'p',
         darkModeSelector: 'system',
@@ -98,6 +102,9 @@ app
       },
     },
   })
+  .use(ToastService)
   .use(router)
   .use(pinia)
+  .directive('styleclass', StyleClass)
+  .directive('ripple', Ripple)
   .mount('#app');

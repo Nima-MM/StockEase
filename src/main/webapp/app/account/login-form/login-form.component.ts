@@ -4,11 +4,29 @@ import { useRoute, useRouter } from 'vue-router';
 import type AccountService from '../account.service';
 import type LoginService from '@/account/login.service';
 
+// PrimeVue imports
+import { Form } from '@primevue/forms';
+import FormField from '@primevue/forms/formfield';
+import Fieldset from 'primevue/fieldset';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import Message from 'primevue/message';
+import Button from 'primevue/button';
+
 export default defineComponent({
   name: 'Login',
+  components: {
+    Form: Form,
+    FormField: FormField,
+    Fieldset: Fieldset,
+    InputText: InputText,
+    Password: Password,
+    Message: Message,
+    Button: Button,
+  },
   setup() {
     const authenticationError: Ref<boolean> = ref(false);
-    const login: Ref<string | null> = ref(null);
+    const username: Ref<string | null> = ref(null);
     const password: Ref<string | null> = ref(null);
     const rememberMe: Ref<boolean> = ref(false);
     const route = useRoute();
@@ -20,8 +38,9 @@ export default defineComponent({
     const loginService = inject<LoginService>('loginService')!;
 
     const doLogin = async () => {
-      const data = { username: login.value, password: password.value, rememberMe: rememberMe.value };
+      const data = { username: username.value, password: password.value, rememberMe: rememberMe.value };
       try {
+        console.log('login', data);
         const result = await axios.post('api/authenticate', data);
         const bearerToken = result.headers.authorization;
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
@@ -46,24 +65,9 @@ export default defineComponent({
       }
     };
 
-    // // const firstName = ref('');
-    // // const firstNameRules = [
-    // //   value => {
-    // //     if (value?.length >= 3) return true;
-    // //     return 'First name must be at least 3 characters.';
-    // //   },
-    // // ];
-
-    // // const lastName = ref('123');
-    // // const lastNameRules = [
-    // //   value => {
-    // //     if (/[^0-9]/.test(value)) return true;
-    // //     return 'Last name can not contain digits.';
-    // //   },
-    // // ];
     return {
       authenticationError,
-      login,
+      username,
       password,
       rememberMe,
       accountService,

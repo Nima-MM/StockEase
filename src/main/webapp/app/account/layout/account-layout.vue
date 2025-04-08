@@ -11,8 +11,8 @@
 }
 </style>
 <template>
-  <v-layout class="le">
-    <login-form></login-form>
-  </v-layout>
+  <!-- <v-layout class="le"> -->
+  <login-form></login-form>
+  <!-- </v-layout> -->
 </template>
 <script lang="ts" src="./account-layout.component.ts"></script>

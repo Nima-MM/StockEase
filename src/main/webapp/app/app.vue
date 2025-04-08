@@ -6,19 +6,13 @@
 }
 </style>
 <template>
-  <!-- <div id="app">
-    Hello!
-    <prime></prime>
-  </div> -->
-  <prime>Verify</prime>
-  <h1 class="text-3xl font-bold underline">Hello world!</h1>
   <!-- <v-app :style="{ height: appMinHeight }" class="layout" :theme="theme"> -->
-  <!-- <v-app class="layout" :theme="theme"> -->
-  <!-- ACCOUNT LAYOUT -->
-  <!-- <account-layout v-if="!authenticated"></account-layout> -->
-  <!-- CORE LAYOUT -->
-  <!-- <main-layout v-else></main-layout> -->
-  <!-- </v-app> -->
+  <div class="layout" :theme="theme">
+    <!-- ACCOUNT LAYOUT -->
+    <account-layout v-if="!authenticated"></account-layout>
+    <!-- CORE LAYOUT -->
+    <main-layout v-else></main-layout>
+  </div>
 </template>
 
 <script lang="ts" src="./app.component.ts"></script>
