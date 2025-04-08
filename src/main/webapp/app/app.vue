@@ -11,6 +11,7 @@
     <prime></prime>
   </div> -->
   <prime>Verify</prime>
+  <h1 class="text-3xl font-bold underline">Hello world!</h1>
   <!-- <v-app :style="{ height: appMinHeight }" class="layout" :theme="theme"> -->
   <!-- <v-app class="layout" :theme="theme"> -->
   <!-- ACCOUNT LAYOUT -->
