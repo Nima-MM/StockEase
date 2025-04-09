@@ -16,6 +16,7 @@ import Aura from '@primeuix/themes/aura';
 import ToastService from 'primevue/toastservice';
 import StyleClass from 'primevue/styleclass';
 import Ripple from 'primevue/ripple';
+
 // Styles
 import '@mdi/font/css/materialdesignicons.css';
 
