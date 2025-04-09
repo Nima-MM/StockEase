@@ -61,6 +61,7 @@ export default {
       },
     });
     return {
+      props,
       theme,
       ptViewMerge,
     };

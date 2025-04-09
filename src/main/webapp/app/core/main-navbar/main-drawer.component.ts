@@ -10,18 +10,16 @@ import Menubar from 'primevue/menubar';
 import Avatar from 'primevue/avatar';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
-import MainDrawer from './main-drawer.vue';
-import Toolbar from 'primevue/toolbar';
+import Fieldset from 'primevue/fieldset';
 
 export default defineComponent({
-  name: 'MainNavbar',
+  name: 'MainDrawer',
   components: {
     Menubar: Menubar,
     Avatar: Avatar,
     Button: Button,
     Drawer: Drawer,
-    Toolbar: Toolbar,
-    MainDrawer: MainDrawer,
+    Fieldset: Fieldset,
   },
 
   setup() {
