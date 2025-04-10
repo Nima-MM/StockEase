@@ -13,7 +13,7 @@ export const createRouter = () =>
     routes: [
       {
         path: '/',
-        name: 'Home',
+        name: 'HomeRoute',
         component: Home,
       },
       {
