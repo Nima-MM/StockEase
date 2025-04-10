@@ -1,5 +1,5 @@
 <template>
-  <div class="card container h-svh flex justify-center justify-self-center" :theme="theme">
+  <div class="card h-svh flex justify-center justify-self-center" :theme="theme">
     <!-- ACCOUNT LAYOUT -->
     <!-- <ribbon></ribbon> -->
     <account-layout v-if="!authenticated"></account-layout>

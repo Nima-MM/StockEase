@@ -12,6 +12,9 @@ import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
 import MainDrawer from './main-drawer.vue';
 import Toolbar from 'primevue/toolbar';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
+import InputText from 'primevue/inputtext';
 
 export default defineComponent({
   name: 'MainNavbar',
@@ -22,6 +25,9 @@ export default defineComponent({
     Drawer: Drawer,
     Toolbar: Toolbar,
     MainDrawer: MainDrawer,
+    IconField: IconField,
+    InputIcon: InputIcon,
+    InputText: InputText,
   },
 
   setup() {

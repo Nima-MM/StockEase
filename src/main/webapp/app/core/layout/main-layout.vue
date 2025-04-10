@@ -2,7 +2,7 @@
   <div class="w-screen">
     <main-navbar />
     <main>
-      <router-view />
+      <router-view class="container justify-self-center" />
     </main>
   </div>
 </template>

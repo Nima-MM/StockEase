@@ -1,9 +1,13 @@
 <template>
   <div class="card">
     <DataTable
+      v-model:filters="filters"
       v-model:expandedRows="expandedRows"
+      :loading="isFetching"
       :value="products"
       dataKey="id"
+      filterDisplay="menu"
+      :globalFilterFields="['name', 'stock', 'ean', 'category.name', 'brand.name', 'color.name']"
       paginator
       :rows="5"
       :rowsPerPageOptions="[5, 10, 20, 50]"
@@ -14,9 +18,19 @@
       tableStyle="min-width: 60rem"
     >
       <template #header>
-        <div class="flex flex-wrap justify-end gap-2">
-          <Button text icon="pi pi-plus" label="Expand All" @click="expandAll" />
-          <Button text icon="pi pi-minus" label="Collapse All" @click="collapseAll" />
+        <div class="flex justify-between">
+          <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="" />
+          <div class="flex flex-wrap justify-end gap-2">
+            <IconField>
+              <InputIcon>
+                <i class="pi pi-search" />
+              </InputIcon>
+              <InputText v-model="filters['global'].value" placeholder="Suche im Lager nach..." />
+              <!-- <InputText placeholder="Keyword Search" /> -->
+            </IconField>
+            <Button text icon="pi pi-plus" label="Alle ausklappen" @click="expandAll" />
+            <Button text icon="pi pi-minus" label="Alle kollabieren" @click="collapseAll" />
+          </div>
         </div>
       </template>
       <template #empty> No customers found. </template>

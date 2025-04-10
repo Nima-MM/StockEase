@@ -1,20 +1,30 @@
 <template>
   <div class="card">
-    <Toolbar style="border-radius: 3rem; padding: 1rem 1rem 1rem 1.5rem">
+    <Toolbar style="border-radius: 1rem; padding: 1rem 1rem 1rem 1.5rem">
       <template #start>
         <MainDrawer />
       </template>
       <template #center>
-        <router-link :to="'/'">
-          <a
-            v-ripple
-            class="flex align-items-center items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
-            :to="'/'"
-          >
-            <i class="pi pi-home mr-2"></i>
-            <span class="text-2xl font-medium">Dashboard</span>
-          </a>
-        </router-link>
+        <div class="card">
+          <router-link :to="'/'">
+            <a
+              v-ripple
+              class="flex align-items-center items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
+              :to="'/'"
+            >
+              <i class="pi pi-home mr-2"></i>
+              <span class="text-2xl font-medium">Dashboard</span>
+            </a>
+          </router-link>
+        </div>
+        <div class="card">
+          <IconField>
+            <InputIcon>
+              <i class="pi pi-search" />
+            </InputIcon>
+            <InputText placeholder="Suche" />
+          </IconField>
+        </div>
       </template>
       <template #end>
         <svg viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 2rem; margin-right: 1rem">

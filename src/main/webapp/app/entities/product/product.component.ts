@@ -15,6 +15,10 @@ import Button from 'primevue/button';
 import Column from 'primevue/column';
 import { useToast } from 'primevue/usetoast';
 import Tag from 'primevue/tag';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
+import InputText from 'primevue/inputtext';
+import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 
 interface ProductTableHeaders {
   title: string;
@@ -33,6 +37,9 @@ export default defineComponent({
     Button: Button,
     Column: Column,
     Tag: Tag,
+    IconField: IconField,
+    InputIcon: InputIcon,
+    InputText: InputText,
   },
   setup() {
     const productTableHeaders = ref([
@@ -62,6 +69,8 @@ export default defineComponent({
 
     // PrimeVue
     const expandedRows = ref();
+    const filters = ref();
+
     const toast = useToast();
     const onRowExpand = (event: any) => {
       toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
@@ -95,7 +104,13 @@ export default defineComponent({
     };
     // -------- //
     const clear = () => {};
-
+    const initFilters = () => {
+      filters.value = {
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+      };
+    };
+    initFilters();
     const retrieveProducts = async () => {
       isFetching.value = true;
       try {
@@ -155,6 +170,8 @@ export default defineComponent({
 
     return {
       // PrimeVue
+      filters,
+      initFilters,
       expandedRows,
       onRowExpand,
       onRowCollapse,
