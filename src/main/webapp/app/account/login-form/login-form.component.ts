@@ -12,6 +12,7 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Message from 'primevue/message';
 import Button from 'primevue/button';
+import Checkbox from 'primevue/checkbox';
 
 export default defineComponent({
   name: 'Login',
@@ -23,6 +24,7 @@ export default defineComponent({
     Password: Password,
     Message: Message,
     Button: Button,
+    Checkbox: Checkbox,
   },
   setup() {
     const authenticationError: Ref<boolean> = ref(false);

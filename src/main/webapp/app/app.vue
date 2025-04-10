@@ -1,14 +1,7 @@
-<style scoped>
-.layout {
-  height: 100svh;
-  max-width: 1768px;
-  margin: 0 auto;
-}
-</style>
 <template>
-  <!-- <v-app :style="{ height: appMinHeight }" class="layout" :theme="theme"> -->
-  <div class="layout" :theme="theme">
+  <div class="card container h-svh flex justify-center justify-self-center" :theme="theme">
     <!-- ACCOUNT LAYOUT -->
+    <!-- <ribbon></ribbon> -->
     <account-layout v-if="!authenticated"></account-layout>
     <!-- CORE LAYOUT -->
     <main-layout v-else></main-layout>
