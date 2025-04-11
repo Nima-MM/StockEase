@@ -5,23 +5,9 @@ import { useTheme } from '@/shared/composables/theme';
 // import ThemeBtn from '../theme/theme-btn.vue';
 import { useStore } from '@/store';
 import { useRouter } from 'vue-router';
-// primevue imports
-import Menubar from 'primevue/menubar';
-import Avatar from 'primevue/avatar';
-import Button from 'primevue/button';
-import Drawer from 'primevue/drawer';
-import Fieldset from 'primevue/fieldset';
 
 export default defineComponent({
   name: 'MainDrawer',
-  components: {
-    Menubar: Menubar,
-    Avatar: Avatar,
-    Button: Button,
-    Drawer: Drawer,
-    Fieldset: Fieldset,
-  },
-
   setup() {
     const items = ref([
       {

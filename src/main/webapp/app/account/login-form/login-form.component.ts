@@ -2,30 +2,10 @@ import axios from 'axios';
 import { type Ref, defineComponent, inject, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type AccountService from '../account.service';
-import type LoginService from '@/account/login.service';
-
-// PrimeVue imports
-import { Form } from '@primevue/forms';
-import FormField from '@primevue/forms/formfield';
-import Fieldset from 'primevue/fieldset';
-import InputText from 'primevue/inputtext';
-import Password from 'primevue/password';
-import Message from 'primevue/message';
-import Button from 'primevue/button';
-import Checkbox from 'primevue/checkbox';
+// import type LoginService from '@/account/login.service';
 
 export default defineComponent({
   name: 'Login',
-  components: {
-    Form: Form,
-    FormField: FormField,
-    Fieldset: Fieldset,
-    InputText: InputText,
-    Password: Password,
-    Message: Message,
-    Button: Button,
-    Checkbox: Checkbox,
-  },
   setup() {
     const authenticationError: Ref<boolean> = ref(false);
     const username: Ref<string | null> = ref(null);
@@ -37,7 +17,7 @@ export default defineComponent({
     const previousState = () => router.go(-1);
 
     const accountService = inject<AccountService>('accountService')!; // !-operator indicates that accountService is not undefined
-    const loginService = inject<LoginService>('loginService')!;
+    // const loginService = inject<LoginService>('loginService')!;
 
     const doLogin = async () => {
       const data = { username: username.value, password: password.value, rememberMe: rememberMe.value };
@@ -57,7 +37,7 @@ export default defineComponent({
         }
 
         authenticationError.value = false;
-        loginService.hideLogin();
+        // loginService.hideLogin();
         await accountService.retrieveAccount();
         if (route.path === '/forbidden') {
           previousState();

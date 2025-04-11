@@ -10,18 +10,12 @@ import AccountService from './account/account.service';
 import { setupAxiosInterceptors } from '@/shared/config/axios-interceptor';
 import { useStore } from '@/store';
 
-// PrimeVue
-import PrimeVue from 'primevue/config';
-import Aura from '@primeuix/themes/aura';
-import ToastService from 'primevue/toastservice';
-import StyleClass from 'primevue/styleclass';
-import Ripple from 'primevue/ripple';
-
 // Styles
 import '@mdi/font/css/materialdesignicons.css';
 
 import '../content/scss/global.scss';
 import '../content/scss/vendor.scss';
+import { initPrimeVue } from './shared/config/primevue.config';
 
 const pinia = createPinia();
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
@@ -30,6 +24,9 @@ const app = createApp({
   components: { App },
   template: '<App/>',
   setup(_props, { emit }) {
+    // Initialize PrimeVue
+    initPrimeVue(app);
+
     const loginService = new LoginService({ emit });
     provide('loginService', loginService);
     const store = useStore();
@@ -41,7 +38,7 @@ const app = createApp({
 
     router.beforeResolve(async (to, from, next) => {
       // Make sure login modal is closed
-      loginService.hideLogin();
+      // loginService.hideLogin();
 
       if (!store.authenticated) {
         await accountService.update();
@@ -86,26 +83,7 @@ const app = createApp({
     );
 
     provide('accountService', accountService);
-    // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
   },
 });
 
-app
-  .use(PrimeVue, {
-    theme: {
-      // unstyled: true,
-      preset: Aura,
-      ripple: true,
-      options: {
-        prefix: 'p',
-        darkModeSelector: 'system',
-        cssLayer: false,
-      },
-    },
-  })
-  .use(ToastService)
-  .use(router)
-  .use(pinia)
-  .directive('styleclass', StyleClass)
-  .directive('ripple', Ripple)
-  .mount('#app');
+app.use(router).use(pinia).mount('#app');

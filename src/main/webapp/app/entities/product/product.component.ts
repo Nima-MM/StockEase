@@ -10,14 +10,7 @@ import EditDialog from './dialogs/edit-dialog.vue';
 import RefillDialog from './dialogs/refill-dialog.vue';
 import DecreaseDialog from './dialogs/decrease-dialog.vue';
 import { useProductsStore } from './product.store';
-import DataTable from 'primevue/datatable';
-import Button from 'primevue/button';
-import Column from 'primevue/column';
 import { useToast } from 'primevue/usetoast';
-import Tag from 'primevue/tag';
-import IconField from 'primevue/iconfield';
-import InputIcon from 'primevue/inputicon';
-import InputText from 'primevue/inputtext';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 
 interface ProductTableHeaders {
@@ -33,13 +26,6 @@ export default defineComponent({
     DecreaseDialog: DecreaseDialog,
     DeleteDialog: DeleteDialog,
     EditDialog: EditDialog,
-    DataTable: DataTable,
-    Button: Button,
-    Column: Column,
-    Tag: Tag,
-    IconField: IconField,
-    InputIcon: InputIcon,
-    InputText: InputText,
   },
   setup() {
     const productTableHeaders = ref([
