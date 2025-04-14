@@ -1,51 +1,25 @@
-import { type Ref, defineComponent, inject, onMounted, ref, computed } from 'vue';
-import ProductService from './product.service';
-import CategoryService from '../category/category.service';
-import BrandService from '../brand/brand.service';
-import ColorService from '../color/color.service';
-import { type IProduct } from '@/shared/model/product.model';
-import { useAlertService } from '@/shared/alert/alert.service';
-import DeleteDialog from './product-dialogs/delete-dialog.vue';
-import EditDialog from './product-dialogs/edit-dialog.vue';
-import RefillDialog from './product-dialogs/refill-dialog.vue';
-import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
+import { defineComponent, onMounted, ref, computed, reactive } from 'vue';
 import { useProductsStore } from './product.store';
 import { useToast } from 'primevue/usetoast';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
+import type { IProduct } from '@/shared/model/product.model';
 
 export default defineComponent({
   name: 'Product',
-  components: {
-    RefillDialog: RefillDialog,
-    DecreaseDialog: DecreaseDialog,
-    DeleteDialog: DeleteDialog,
-    EditDialog: EditDialog,
-  },
+  components: {},
   setup() {
     const productTableHeaders = ref([
-      // { title: "ID", key: "id", align: "start" },
-      { title: 'EAN', key: 'ean', align: 'center' },
-      { title: 'Kategorie', key: 'category.name', align: 'center' },
-      { title: 'Marke', key: 'brand.name', align: 'center' },
-      { title: 'Produktname', key: 'name', sortable: true },
-      { title: 'Stückzahl', key: 'stock', align: 'center' },
-      { title: 'Farbe', key: 'color.name', align: 'center' },
-      { title: 'Aktionen', key: 'actions', align: 'center', sortable: false },
+      { title: 'EAN', key: 'ean' },
+      { title: 'Kategorie', key: 'category.name' },
+      { title: 'Marke', key: 'brand.name' },
+      { title: 'Produktname', key: 'name' },
+      { title: 'Stückzahl', key: 'stock' },
+      { title: 'Farbe', key: 'color.name' },
+      { title: 'Aktionen', key: 'actions' },
     ]);
-    const search = ref<string>('');
-    const productService = inject('productService', () => new ProductService());
-    const categoryService = inject('categoryService', () => new CategoryService());
-    const brandService = inject('brandService', () => new BrandService());
-    const colorService = inject('colorService', () => new ColorService());
-    const alertService = inject('alertService', () => useAlertService(), true);
 
-    // const products: Ref<IProduct[]> = ref(computed(() => useProductsStore().getProducts));
-    const products = ref<IProduct[]>([]);
-    const categories: Ref<any[]> = ref(computed(() => useProductsStore().getCategoryNames));
-    const brands: Ref<any[]> = ref(computed(() => useProductsStore().getBrandNames));
-    const colors: Ref<any[]> = ref(computed(() => useProductsStore().getColorNames));
-
-    const isFetching = ref(false);
+    const products = reactive(computed<IProduct[]>(() => useProductsStore().getProducts));
+    const isFetching = reactive(computed<boolean>(() => useProductsStore().isFetching));
 
     // PrimeVue
     const expandedRows = ref();
@@ -91,47 +65,15 @@ export default defineComponent({
       };
     };
     initFilters();
-    const retrieveProducts = async () => {
-      isFetching.value = true;
-      try {
-        if (!productService) {
-          throw new Error('productService is not provided');
-        }
-        const res = await productService().retrieve();
-        products.value = res.data;
-        console.log('products', products.value);
-      } catch (err) {
-        alertService.showHttpError(err.response);
-      } finally {
-        isFetching.value = false;
-      }
-    };
 
-    const initRelationships = () => {
-      categoryService()
-        .retrieve()
-        .then(res => {
-          categories.value = res.data;
-        });
-      brandService()
-        .retrieve()
-        .then(res => {
-          brands.value = res.data;
-        });
-      colorService()
-        .retrieve()
-        .then(res => {
-          colors.value = res.data;
-        });
-    };
-
-    initRelationships();
+    // initRelationships();
     const handleSyncList = () => {
-      retrieveProducts();
+      useProductsStore().retrieveEntity();
+      // initRelationships();
     };
 
     onMounted(async () => {
-      await retrieveProducts();
+      await useProductsStore().retrieveEntity();
     });
 
     return {
@@ -148,45 +90,8 @@ export default defineComponent({
       // PrimeVue
       products,
       productTableHeaders,
-      search,
-      handleSyncList,
       isFetching,
-      retrieveProducts,
       clear,
     };
   },
 });
-
-// // const retrieveCategories = async () => {
-// //   isFetching.value = true;
-// //   try {
-// //     const res = await categoryService().retrieve();
-// //     categories.value = res.data;
-// //   } catch (err) {
-// //     alertService.showHttpError(err.response);
-// //   } finally {
-// //     isFetching.value = false;
-// //   }
-// // };
-// // const retrieveBrands = async () => {
-// //   isFetching.value = true;
-// //   try {
-// //     const res = await brandService().retrieve();
-// //     brands.value = res.data;
-// //   } catch (err) {
-// //     alertService.showHttpError(err.response);
-// //   } finally {
-// //     isFetching.value = false;
-// //   }
-// // };
-// // const retrieveColor = async () => {
-// //   isFetching.value = true;
-// //   try {
-// //     const res = await colorService().retrieve();
-// //     colors.value = res.data;
-// //   } catch (err) {
-// //     alertService.showHttpError(err.response);
-// //   } finally {
-// //     isFetching.value = false;
-// //   }
-// // };

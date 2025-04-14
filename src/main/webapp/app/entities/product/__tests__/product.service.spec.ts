@@ -2,7 +2,7 @@
 import axios from 'axios';
 import sinon from 'sinon';
 import { describe, it, expect, beforeEach } from 'vitest';
-import ProductService from './product.service';
+import ProductService from '../product.service';
 import { Product } from '@/shared/model/product.model';
 
 const error = {

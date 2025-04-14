@@ -6,8 +6,8 @@ import { Authority } from '@/shared/security/authority';
 const Entities = () => import('@/entities/entities.vue');
 
 const Product = () => import('@/entities/product/product.vue');
-const ProductUpdate = () => import('@/entities/product/product-update.vue');
-const ProductDetails = () => import('@/entities/product/product-details.vue');
+const ProductUpdate = () => import('@/entities/product/product-dialogs/product-update.vue');
+const ProductDetails = () => import('@/entities/product/product-dialogs/product-details.vue');
 
 const Category = () => import('@/entities/category/category.vue');
 const CategoryUpdate = () => import('@/entities/category/category-update.vue');
@@ -27,6 +27,7 @@ export default {
   path: '/warehouses',
   name: 'EntitiesRoute',
   component: Entities,
+  meta: { authorities: [Authority.USER] },
   children: [
     {
       path: '/warehouses/storage',

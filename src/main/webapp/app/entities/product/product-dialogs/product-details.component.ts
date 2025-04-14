@@ -1,7 +1,7 @@
 import { type Ref, defineComponent, inject, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import ProductService from './product.service';
+import ProductService from '../product.service';
 import { type IProduct } from '@/shared/model/product.model';
 import { useAlertService } from '@/shared/alert/alert.service';
 

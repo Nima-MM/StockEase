@@ -19,6 +19,7 @@ import {
   Menubar,
   Message,
   Password,
+  Skeleton,
   Tab,
   Tabs,
   TabList,
@@ -68,6 +69,7 @@ export function initPrimeVue(vue: App): void {
   vue.component('Menubar', Menubar);
   vue.component('Message', Message);
   vue.component('Password', Password);
+  vue.component('Skeleton', Skeleton);
   vue.component('Tab', Tab);
   vue.component('Tabs', Tabs);
   vue.component('TabList', TabList);

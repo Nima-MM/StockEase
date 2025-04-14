@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const TIMEOUT = 1000000;
-const onRequestSuccess = config => {
+const onRequestSuccess = (config: any) => {
   const token = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
   if (token) {
     if (!config.headers) {
@@ -13,8 +13,8 @@ const onRequestSuccess = config => {
   config.url = `${SERVER_API_URL}${config.url}`;
   return config;
 };
-const setupAxiosInterceptors = (onUnauthenticated, onServerError) => {
-  const onResponseError = err => {
+const setupAxiosInterceptors = (onUnauthenticated: any, onServerError: any) => {
+  const onResponseError = (err: any) => {
     const status = err.status || err.response.status;
     if (status === 403 || status === 401) {
       return onUnauthenticated(err);

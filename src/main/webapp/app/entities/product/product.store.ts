@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { IProduct } from '@/shared/model/product.model';
-
+import ProductService from './product.service';
 /**
  * Store for managing products.
  *
@@ -12,11 +12,13 @@ import type { IProduct } from '@/shared/model/product.model';
  * @property {ComputedRef<string[]>} getBrandNames - Computed property to get the list of all brand names.
  * @property {ComputedRef<string[]>} getColorNames - Computed property to get the list of all color names.
  * @property {ComputedRef<Function>} getProductById -Computed property that takes an ID and returns matching product, or undefined if not found.
- * @property {Function} initStore - Function to initialize the store with products from an API.
+ * @property {Function} retrieveEntity - Function to initialize the store with products from an API.
  */
 export const useProductsStore = defineStore('products', () => {
+  let productService: ProductService;
   // !State - Products
   const storedData = ref<IProduct[]>([]);
+  const isFetching = ref<boolean>(false);
   // !Getters
   const getProducts = computed(() => storedData.value);
   const getCategoryNames = computed(() => storedData.value.map((product: IProduct) => product.category?.name));
@@ -26,13 +28,28 @@ export const useProductsStore = defineStore('products', () => {
   const getProductById = computed(() => (id: number): IProduct | undefined => {
     return storedData.value.find((product: IProduct) => product.id === id);
   });
+
   // !Setters - mutations
+  // !Services
+  const setService = (service: ProductService) => {
+    productService = service;
+  };
   /**
    * Reqest Products from Api.
    */
-  const initStore = async (products: any) => {
-    storedData.value = products;
-    console.log('Products Store: ', storedData.value);
+  const retrieveEntity = async () => {
+    isFetching.value = true;
+    try {
+      if (!productService) {
+        throw new Error('productService is not provided');
+      }
+      const res = await productService.retrieve();
+      storedData.value = res.data;
+    } catch (err) {
+      // useAlertService().showHttpError(err.response);
+    } finally {
+      isFetching.value = false;
+    }
   };
 
   return {
@@ -42,6 +59,8 @@ export const useProductsStore = defineStore('products', () => {
     getColorNames,
     getProducts,
     getProductById,
-    initStore,
+    isFetching,
+    retrieveEntity,
+    setService,
   };
 });

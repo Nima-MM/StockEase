@@ -5,7 +5,7 @@ import sinon, { type SinonStubbedInstance } from 'sinon';
 import { type RouteLocation } from 'vue-router';
 
 import ProductDetails from './product-details.vue';
-import ProductService from './product.service';
+import ProductService from '../product.service';
 import AlertService from '@/shared/alert/alert.service';
 
 type ProductDetailsComponentType = InstanceType<typeof ProductDetails>;

@@ -2,7 +2,7 @@ import { type Ref, computed, defineComponent, inject, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core';
 
-import ProductService from './product.service';
+import ProductService from '../product.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
