@@ -19,7 +19,7 @@
     >
       <template #header>
         <div class="flex justify-between">
-          <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined @click="" />
+          <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined />
           <div class="flex flex-wrap justify-end gap-2">
             <IconField>
               <InputIcon>

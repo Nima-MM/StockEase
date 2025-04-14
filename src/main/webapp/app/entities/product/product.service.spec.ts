@@ -1,7 +1,7 @@
 /* tslint:disable max-line-length */
 import axios from 'axios';
 import sinon from 'sinon';
-
+import { describe, it, expect, beforeEach } from 'vitest';
 import ProductService from './product.service';
 import { Product } from '@/shared/model/product.model';
 
@@ -24,12 +24,22 @@ const axiosStub = {
 
 describe('Service Tests', () => {
   describe('Product Service', () => {
-    let service: ProductService;
-    let elemDefault;
+    let myService: ProductService;
+    let elemDefault: Product;
 
     beforeEach(() => {
-      service = new ProductService();
-      elemDefault = new Product(123, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      myService = new ProductService();
+      elemDefault = new Product(
+        123,
+        0,
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        { id: 1, name: 'B' },
+        { id: 2, name: 'BB' },
+        { id: 3, name: 'BBB' },
+      );
     });
 
     describe('Service methods', () => {
@@ -37,14 +47,14 @@ describe('Service Tests', () => {
         const returnedFromService = { ...elemDefault };
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return myService.find(123).then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
 
-      it('should not find an element', async () => {
+      it('should find not an element', async () => {
         axiosStub.get.rejects(error);
-        return service
+        return myService
           .find(123)
           .then()
           .catch(err => {
@@ -57,7 +67,7 @@ describe('Service Tests', () => {
         const expected = { ...returnedFromService };
 
         axiosStub.post.resolves({ data: returnedFromService });
-        return service.create({}).then(res => {
+        return myService.create({}).then(res => {
           expect(res).toMatchObject(expected);
         });
       });
@@ -65,7 +75,7 @@ describe('Service Tests', () => {
       it('should not create a Product', async () => {
         axiosStub.post.rejects(error);
 
-        return service
+        return myService
           .create({})
           .then()
           .catch(err => {
@@ -79,7 +89,7 @@ describe('Service Tests', () => {
         const expected = { ...returnedFromService };
         axiosStub.put.resolves({ data: returnedFromService });
 
-        return service.update(expected).then(res => {
+        return myService.update(expected).then(res => {
           expect(res).toMatchObject(expected);
         });
       });
@@ -87,7 +97,7 @@ describe('Service Tests', () => {
       it('should not update a Product', async () => {
         axiosStub.put.rejects(error);
 
-        return service
+        return myService
           .update({})
           .then()
           .catch(err => {
@@ -95,22 +105,22 @@ describe('Service Tests', () => {
           });
       });
 
-      it('should partial update a Product', async () => {
+      it('should patch a Product', async () => {
         const patchObject = { stock: 1, name: 'BBBBBB', image: 'BBBBBB', ...new Product() };
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = { ...returnedFromService };
         axiosStub.patch.resolves({ data: returnedFromService });
 
-        return service.partialUpdate(patchObject).then(res => {
+        return myService.partialUpdate(patchObject).then(res => {
           expect(res).toMatchObject(expected);
         });
       });
 
-      it('should not partial update a Product', async () => {
+      it('should not patch a Product', async () => {
         axiosStub.patch.rejects(error);
 
-        return service
+        return myService
           .partialUpdate({})
           .then()
           .catch(err => {
@@ -122,7 +132,7 @@ describe('Service Tests', () => {
         const returnedFromService = { stock: 1, name: 'BBBBBB', image: 'BBBBBB', ean: 'BBBBBB', description: 'BBBBBB', ...elemDefault };
         const expected = { ...returnedFromService };
         axiosStub.get.resolves([returnedFromService]);
-        return service.retrieve().then(res => {
+        return myService.retrieve().then(res => {
           expect(res).toContainEqual(expected);
         });
       });
@@ -130,7 +140,7 @@ describe('Service Tests', () => {
       it('should not return a list of Product', async () => {
         axiosStub.get.rejects(error);
 
-        return service
+        return myService
           .retrieve()
           .then()
           .catch(err => {
@@ -140,7 +150,7 @@ describe('Service Tests', () => {
 
       it('should delete a Product', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return myService.delete(123).then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -148,7 +158,7 @@ describe('Service Tests', () => {
       it('should not delete a Product', async () => {
         axiosStub.delete.rejects(error);
 
-        return service
+        return myService
           .delete(123)
           .then()
           .catch(err => {

@@ -5,20 +5,14 @@ import BrandService from '../brand/brand.service';
 import ColorService from '../color/color.service';
 import { type IProduct } from '@/shared/model/product.model';
 import { useAlertService } from '@/shared/alert/alert.service';
-import DeleteDialog from './dialogs/delete-dialog.vue';
-import EditDialog from './dialogs/edit-dialog.vue';
-import RefillDialog from './dialogs/refill-dialog.vue';
-import DecreaseDialog from './dialogs/decrease-dialog.vue';
+import DeleteDialog from './product-dialogs/delete-dialog.vue';
+import EditDialog from './product-dialogs/edit-dialog.vue';
+import RefillDialog from './product-dialogs/refill-dialog.vue';
+import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
 import { useProductsStore } from './product.store';
 import { useToast } from 'primevue/usetoast';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 
-interface ProductTableHeaders {
-  title: string;
-  align?: 'start' | 'end' | 'center';
-  key?: string;
-  sortable?: boolean;
-}
 export default defineComponent({
   name: 'Product',
   components: {
@@ -100,6 +94,9 @@ export default defineComponent({
     const retrieveProducts = async () => {
       isFetching.value = true;
       try {
+        if (!productService) {
+          throw new Error('productService is not provided');
+        }
         const res = await productService().retrieve();
         products.value = res.data;
         console.log('products', products.value);
@@ -109,49 +106,32 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
-    const retrieveCategories = async () => {
-      isFetching.value = true;
-      try {
-        const res = await categoryService().retrieve();
-        categories.value = res.data;
-      } catch (err) {
-        alertService.showHttpError(err.response);
-      } finally {
-        isFetching.value = false;
-      }
-    };
-    const retrieveBrands = async () => {
-      isFetching.value = true;
-      try {
-        const res = await brandService().retrieve();
-        brands.value = res.data;
-      } catch (err) {
-        alertService.showHttpError(err.response);
-      } finally {
-        isFetching.value = false;
-      }
-    };
-    const retrieveColor = async () => {
-      isFetching.value = true;
-      try {
-        const res = await colorService().retrieve();
-        colors.value = res.data;
-      } catch (err) {
-        alertService.showHttpError(err.response);
-      } finally {
-        isFetching.value = false;
-      }
+
+    const initRelationships = () => {
+      categoryService()
+        .retrieve()
+        .then(res => {
+          categories.value = res.data;
+        });
+      brandService()
+        .retrieve()
+        .then(res => {
+          brands.value = res.data;
+        });
+      colorService()
+        .retrieve()
+        .then(res => {
+          colors.value = res.data;
+        });
     };
 
+    initRelationships();
     const handleSyncList = () => {
       retrieveProducts();
     };
 
     onMounted(async () => {
       await retrieveProducts();
-      await retrieveCategories();
-      await retrieveBrands();
-      await retrieveColor();
     });
 
     return {
@@ -176,3 +156,37 @@ export default defineComponent({
     };
   },
 });
+
+// // const retrieveCategories = async () => {
+// //   isFetching.value = true;
+// //   try {
+// //     const res = await categoryService().retrieve();
+// //     categories.value = res.data;
+// //   } catch (err) {
+// //     alertService.showHttpError(err.response);
+// //   } finally {
+// //     isFetching.value = false;
+// //   }
+// // };
+// // const retrieveBrands = async () => {
+// //   isFetching.value = true;
+// //   try {
+// //     const res = await brandService().retrieve();
+// //     brands.value = res.data;
+// //   } catch (err) {
+// //     alertService.showHttpError(err.response);
+// //   } finally {
+// //     isFetching.value = false;
+// //   }
+// // };
+// // const retrieveColor = async () => {
+// //   isFetching.value = true;
+// //   try {
+// //     const res = await colorService().retrieve();
+// //     colors.value = res.data;
+// //   } catch (err) {
+// //     alertService.showHttpError(err.response);
+// //   } finally {
+// //     isFetching.value = false;
+// //   }
+// // };
