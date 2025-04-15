@@ -19,8 +19,14 @@
     >
       <!-- table bar -->
       <template #header>
-        <div class="flex justify-between">
-          <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined />
+        <div class="flex flex-wrap justify-between">
+          <div class="flex flex-wrap justify-end gap-2">
+            <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined />
+            <Button type="button" icon="pi pi-plus" label="Neues Produkt" class="p-button-outlined" @click="addProduct" />
+            <Button type="button" icon="pi pi-download" label="Export" class="p-button-outlined" />
+            <Button type="button" icon="pi pi-upload" label="Import" class="p-button-outlined" />
+            <Button type="button" icon="pi pi-cog" label="Einstellungen" class="p-button-outlined" />
+          </div>
           <div class="flex flex-wrap justify-end gap-2">
             <IconField>
               <InputIcon>
@@ -39,27 +45,54 @@
       <template #loading>Loading customers data. Please wait. </template>
       <!-- table headers -->
       <Column expander style="width: 5rem" />
-      <Column field="ean" :header="productTableHeaders[0].title"></Column>
-      <Column field="stock" :header="productTableHeaders[4].title"></Column>
-      <Column field="name" :header="productTableHeaders[3].title"></Column>
-      <Column :header="productTableHeaders[1].title">
+      <!-- <Column header="slotProps"><template #body="slotProps">{{ slotProps.data }}</template>
+      </Column> -->
+      <Column field="ean" :header="columnKeys.ean"></Column>
+      <Column field="stock" :header="columnKeys.stock"></Column>
+      <Column field="name" :header="columnKeys.name"></Column>
+      <Column :header="columnKeys.category">
         <template #body="slotProps">
           <Skeleton v-if="isFetching"></Skeleton>
           {{ slotProps.data.category.name }}
         </template>
       </Column>
-      <Column :header="productTableHeaders[2].title">
+      <Column :header="columnKeys.brand">
         <template #body="slotProps">
           <Skeleton v-if="isFetching"></Skeleton>
           {{ slotProps.data.brand.name }}
         </template>
       </Column>
-      <Column :header="productTableHeaders[5].title">
+      <Column :header="columnKeys.color">
         <template #body="slotProps">
           <Skeleton v-if="isFetching"></Skeleton>
           {{ slotProps.data.color.name }}
         </template>
       </Column>
+      <template #expansion="slotProps">
+        <div class="flex gap-1">
+          <Button
+            variant="text"
+            type="button"
+            icon="pi pi-star"
+            label="Favoriten"
+            class="p-button-outlined"
+            @click="collapseAll"
+            disabled
+          />
+          <Button variant="text" type="button" icon="pi pi-eye" label="Details" class="p-button-outlined" @click="collapseAll" disabled />
+          <Button variant="text" type="button" icon="pi pi-pencil" label="Ändern" class="p-button-outlined" @click="collapseAll" />
+          <Button variant="text" type="button" icon="pi pi-plus" label="Bestand erhöhen" class="p-button-outlined" @click="collapseAll" />
+          <Button
+            variant="text"
+            type="button"
+            icon="pi pi-minus"
+            label="Bestand verringern"
+            class="p-button-outlined"
+            @click="collapseAll"
+          />
+          <Button variant="text" type="button" icon="pi pi-trash" label="Löschen" class="p-button-outlined" @click="collapseAll" />
+        </div>
+      </template>
     </DataTable>
   </div>
 </template>

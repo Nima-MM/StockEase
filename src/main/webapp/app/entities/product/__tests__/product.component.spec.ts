@@ -5,10 +5,6 @@ import { describe, it, expect, beforeEach, vitest } from 'vitest';
 // Deine Komponenten/Services
 import Product from './product.vue';
 import ProductService from '../product.service';
-import CategoryService from '../../category/category.service';
-import BrandService from '../../brand/brand.service';
-import ColorService from '../../color/color.service';
-import { useAlertService } from '@/shared/alert/alert.service';
 
 // PrimeVue ToastService
 import ToastService from 'primevue/toastservice';

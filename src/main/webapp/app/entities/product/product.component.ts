@@ -8,15 +8,14 @@ export default defineComponent({
   name: 'Product',
   components: {},
   setup() {
-    const productTableHeaders = ref([
-      { title: 'EAN', key: 'ean' },
-      { title: 'Kategorie', key: 'category.name' },
-      { title: 'Marke', key: 'brand.name' },
-      { title: 'Produktname', key: 'name' },
-      { title: 'Stückzahl', key: 'stock' },
-      { title: 'Farbe', key: 'color.name' },
-      { title: 'Aktionen', key: 'actions' },
-    ]);
+    const columnKeys = ref({
+      ean: 'EAN',
+      category: 'Kategorie',
+      brand: 'Marke',
+      name: 'Produktname',
+      stock: 'Stückzahl',
+      color: 'Farbe',
+    });
 
     const products = reactive(computed<IProduct[]>(() => useProductsStore().getProducts));
     const isFetching = reactive(computed<boolean>(() => useProductsStore().isFetching));
@@ -25,6 +24,9 @@ export default defineComponent({
     const expandedRows = ref();
     const filters = ref();
 
+    const addProduct = async () => {
+      // const product = {}
+    };
     const toast = useToast();
     const onRowExpand = (event: any) => {
       toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
@@ -87,11 +89,12 @@ export default defineComponent({
       getSeverity,
       expandAll,
       collapseAll,
+      clear,
       // PrimeVue
       products,
-      productTableHeaders,
+      columnKeys,
       isFetching,
-      clear,
+      addProduct,
     };
   },
 });

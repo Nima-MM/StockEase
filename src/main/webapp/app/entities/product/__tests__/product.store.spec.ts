@@ -6,7 +6,6 @@ import { useProductsStore } from '../product.store';
 import Product from '../product.vue';
 import ProductService from '../product.service';
 import sinon, { type SinonStubbedInstance } from 'sinon';
-import { privateDecrypt } from 'crypto';
 
 describe('Product Store', () => {
   setActivePinia(createPinia());
