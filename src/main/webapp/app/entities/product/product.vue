@@ -1,32 +1,100 @@
 <template>
-  <v-card class="fill-height" flat>
-    <!-- search bar -->
-    <template v-slot:text>
-      <v-text-field
-        type="search"
-        v-model="search"
-        label="Produkt suchen"
-        prepend-inner-icon="mdi-magnify"
-        variant="outlined"
-        hide-details
-        single-line
-      ></v-text-field>
-    </template>
-    <!-- table -->
-    <v-data-table :headers="productTableHeaders" :items="products" :sort-by="[{ key: 'id', order: 'asc' }]" :hover="true" :search="search">
-      <template v-slot:item.actions="{ item }">
-        <div class="actions">
-          <RefillDialog :product="item" />
-          <DecreaseDialog :product="item" />
-          <EditDialog :product="item" />
-          <DeleteDialog :product="item" />
+  <div class="card">
+    <DataTable
+      v-model:filters="filters"
+      v-model:expandedRows="expandedRows"
+      :loading="isFetching"
+      :value="products"
+      dataKey="id"
+      filterDisplay="menu"
+      :globalFilterFields="['name', 'stock', 'ean', 'category.name', 'brand.name', 'color.name']"
+      paginator
+      :rows="5"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      :size="'small'"
+      stripedRows
+      @rowExpand="onRowExpand"
+      @rowCollapse="onRowCollapse"
+      tableStyle="min-width: 60rem"
+    >
+      <!-- table bar -->
+      <template #header>
+        <div class="flex flex-wrap justify-between">
+          <div class="flex flex-wrap justify-end gap-2">
+            <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined />
+            <Button type="button" icon="pi pi-plus" label="Neues Produkt" class="p-button-outlined" @click="addProduct" />
+            <Button type="button" icon="pi pi-download" label="Export" class="p-button-outlined" />
+            <Button type="button" icon="pi pi-upload" label="Import" class="p-button-outlined" />
+            <Button type="button" icon="pi pi-cog" label="Einstellungen" class="p-button-outlined" />
+          </div>
+          <div class="flex flex-wrap justify-end gap-2">
+            <IconField>
+              <InputIcon>
+                <i class="pi pi-search" />
+              </InputIcon>
+              <InputText v-model="filters['global'].value" placeholder="Suche im Lager nach..." />
+              <!-- <InputText placeholder="Keyword Search" /> -->
+            </IconField>
+            <Button text icon="pi pi-plus" label="Alle ausklappen" @click="expandAll" />
+            <Button text icon="pi pi-minus" label="Alle kollabieren" @click="collapseAll" />
+          </div>
         </div>
       </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="retrieveProducts"> Reset </v-btn>
+      <!-- table fallbacks -->
+      <template #empty> No customers found. </template>
+      <template #loading>Loading customers data. Please wait. </template>
+      <!-- table headers -->
+      <Column expander style="width: 5rem" />
+      <!-- <Column header="slotProps"><template #body="slotProps">{{ slotProps.data }}</template>
+      </Column> -->
+      <Column field="ean" :header="columnKeys.ean"></Column>
+      <Column field="stock" :header="columnKeys.stock"></Column>
+      <Column field="name" :header="columnKeys.name"></Column>
+      <Column :header="columnKeys.category">
+        <template #body="slotProps">
+          <Skeleton v-if="isFetching"></Skeleton>
+          {{ slotProps.data.category.name }}
+        </template>
+      </Column>
+      <Column :header="columnKeys.brand">
+        <template #body="slotProps">
+          <Skeleton v-if="isFetching"></Skeleton>
+          {{ slotProps.data.brand.name }}
+        </template>
+      </Column>
+      <Column :header="columnKeys.color">
+        <template #body="slotProps">
+          <Skeleton v-if="isFetching"></Skeleton>
+          {{ slotProps.data.color.name }}
+        </template>
+      </Column>
+      <template #expansion="slotProps">
+        <div class="flex gap-1">
+          <Button
+            variant="text"
+            type="button"
+            icon="pi pi-star"
+            label="Favoriten"
+            class="p-button-outlined"
+            @click="collapseAll"
+            disabled
+          />
+          <Button variant="text" type="button" icon="pi pi-eye" label="Details" class="p-button-outlined" @click="collapseAll" disabled />
+          <Button variant="text" type="button" icon="pi pi-pencil" label="Ändern" class="p-button-outlined" @click="collapseAll" />
+          <Button variant="text" type="button" icon="pi pi-plus" label="Bestand erhöhen" class="p-button-outlined" @click="collapseAll" />
+          <Button
+            variant="text"
+            type="button"
+            icon="pi pi-minus"
+            label="Bestand verringern"
+            class="p-button-outlined"
+            @click="collapseAll"
+          />
+          <Button variant="text" type="button" icon="pi pi-trash" label="Löschen" class="p-button-outlined" @click="collapseAll" />
+        </div>
       </template>
-    </v-data-table>
-  </v-card>
+    </DataTable>
+  </div>
 </template>
 
 <script lang="ts" src="./product.component.ts"></script>

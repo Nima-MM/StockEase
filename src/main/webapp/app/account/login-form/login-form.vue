@@ -1,25 +1,31 @@
 <template>
-  <v-card
-    class="mx-auto h-50"
-    color="surface-variant"
-    image="transparent"
-    max-width="1768"
-    subtitle="Sie haben noch keinen Zugang?"
-    title="Anmeldung"
-  >
-    &nbsp;<router-link class="alert-link" to="/register">Registrieren Sie sich</router-link>
-    <template v-slot:actions>
-      <v-sheet class="mx-auto" width="300">
-        <v-form fast-fail @submit.prevent>
-          <!-- <v-text-field v-model="login" :rules="firstNameRules" label="Login"></v-text-field> -->
-          <v-text-field type="email" v-model="login" label="Benutzername"></v-text-field>
-          <v-text-field type="password" v-model="password" label="Passwort"></v-text-field>
-          <v-checkbox v-model="rememberMe" color="info" :label="`Angemeldet bleiben? ${rememberMe.toString()}`"></v-checkbox>
-          <v-btn class="mt-2" type="submit" @click="doLogin" block>Anmelden</v-btn>
-        </v-form>
-      </v-sheet>
-    </template>
-  </v-card>
+  <div class="card max-w-3xl">
+    <Fieldset legend="Anmeldung" pt:content:class="flex justify-center">
+      <div class="card flex justify-center">
+        <!-- <Form :resolver @submit="onFormSubmit" class="flex flex-col gap-4 w-full sm:w-56"> -->
+        <Form class="flex flex-col gap-4 w-full sm:w-56">
+          <FormField v-slot="$field" as="section" name="username" initialValue="" class="flex flex-col gap-2">
+            <InputText v-model="username" type="text" placeholder="Benutzername" />
+            <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+          </FormField>
+          <FormField v-slot="$field" asChild name="password" initialValue="">
+            <section class="flex flex-col gap-2">
+              <Password v-model="password" type="text" placeholder="Passwort" :feedback="false" toggleMask fluid />
+              <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+            </section>
+          </FormField>
+          <FormField v-slot="$field" asChild name="rememberMe" initialValue="true">
+            <section class="flex gap-2">
+              <Checkbox v-model="rememberMe" inputId="rememberMe" binary />
+              <label for="rememberMe">Automatische Anmeldung</label>
+              <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+            </section>
+          </FormField>
+          <Button type="submit" @click="doLogin" severity="secondary" label="Anmelden" />
+        </Form>
+      </div>
+    </Fieldset>
+  </div>
 </template>
 <script lang="ts" src="./login-form.component.ts"></script>
 

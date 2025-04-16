@@ -2,8 +2,7 @@ import { URL, fileURLToPath } from 'node:url';
 import { existsSync } from 'node:fs';
 import { defineConfig, normalizePath } from 'vite';
 import Layouts from 'vite-plugin-vue-layouts';
-import VueRouter from 'unplugin-vue-router/vite';
-
+import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
@@ -20,6 +19,7 @@ const config = defineConfig({
   plugins: [
     vue(),
     Layouts(),
+    tailwindcss(),
     viteStaticCopy({
       targets: [
         {

@@ -1,11 +1,13 @@
 import { Authority } from '@/shared/security/authority';
 /* tslint:disable */
 // prettier-ignore
+// const Home = () => import('@/core/home/home.vue');
+
 const Entities = () => import('@/entities/entities.vue');
 
 const Product = () => import('@/entities/product/product.vue');
-const ProductUpdate = () => import('@/entities/product/product-update.vue');
-const ProductDetails = () => import('@/entities/product/product-details.vue');
+const ProductUpdate = () => import('@/entities/product/product-dialogs/product-update.vue');
+const ProductDetails = () => import('@/entities/product/product-dialogs/product-details.vue');
 
 const Category = () => import('@/entities/category/category.vue');
 const CategoryUpdate = () => import('@/entities/category/category-update.vue');
@@ -22,12 +24,14 @@ const ColorDetails = () => import('@/entities/color/color-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default {
-  path: '/',
+  path: '/warehouses',
+  name: 'EntitiesRoute',
   component: Entities,
+  meta: { authorities: [Authority.USER] },
   children: [
     {
-      path: 'product',
-      name: 'Product',
+      path: '/warehouses/storage',
+      name: 'ProductRoute',
       component: Product,
       meta: { authorities: [Authority.USER] },
     },
@@ -35,89 +39,89 @@ export default {
       path: 'product/new',
       name: 'ProductCreate',
       component: ProductUpdate,
-      meta: { authorities: [Authority.USER] },
+      meta: { authorities: [Authority.ADMIN] },
     },
     {
       path: 'product/:productId/edit',
-      name: 'ProductEdit',
+      name: 'ProductEditRoute',
       component: ProductUpdate,
-      meta: { authorities: [Authority.USER] },
+      meta: { authorities: [Authority.ADMIN] },
     },
     {
       path: 'product/:productId/view',
-      name: 'ProductView',
+      name: 'ProductViewRoute',
       component: ProductDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'category',
-      name: 'Category',
+      name: 'CategoryRoute',
       component: Category,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'category/new',
-      name: 'CategoryCreate',
+      name: 'CategoryCreateRoute',
       component: CategoryUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'category/:categoryId/edit',
-      name: 'CategoryEdit',
+      name: 'CategoryEditRoute',
       component: CategoryUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'category/:categoryId/view',
-      name: 'CategoryView',
+      name: 'CategoryViewRoute',
       component: CategoryDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'brand',
-      name: 'Brand',
+      name: 'BrandRoute',
       component: Brand,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'brand/new',
-      name: 'BrandCreate',
+      name: 'BrandCreateRoute',
       component: BrandUpdate,
-      meta: { authorities: [Authority.USER] },
+      meta: { authorities: [Authority.ADMIN] },
     },
     {
       path: 'brand/:brandId/edit',
-      name: 'BrandEdit',
+      name: 'BrandEditRoute',
       component: BrandUpdate,
-      meta: { authorities: [Authority.USER] },
+      meta: { authorities: [Authority.ADMIN] },
     },
     {
       path: 'brand/:brandId/view',
-      name: 'BrandView',
+      name: 'BrandViewRoute',
       component: BrandDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'color',
-      name: 'Color',
+      name: 'ColorRoute',
       component: Color,
       meta: { authorities: [Authority.USER] },
     },
     {
       path: 'color/new',
-      name: 'ColorCreate',
+      name: 'ColorCreateRoute',
       component: ColorUpdate,
-      meta: { authorities: [Authority.USER] },
+      meta: { authorities: [Authority.ADMIN] },
     },
     {
       path: 'color/:colorId/edit',
-      name: 'ColorEdit',
+      name: 'ColorEditRoute',
       component: ColorUpdate,
-      meta: { authorities: [Authority.USER] },
+      meta: { authorities: [Authority.ADMIN] },
     },
     {
       path: 'color/:colorId/view',
-      name: 'ColorView',
+      name: 'ColorViewRoute',
       component: ColorDetails,
       meta: { authorities: [Authority.USER] },
     },

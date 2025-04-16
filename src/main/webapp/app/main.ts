@@ -9,40 +9,23 @@ import LoginService from './account/login.service';
 import AccountService from './account/account.service';
 import { setupAxiosInterceptors } from '@/shared/config/axios-interceptor';
 import { useStore } from '@/store';
-// Vuetify
-import 'vuetify/styles';
-import { createVuetify } from 'vuetify';
-import * as components from 'vuetify/components';
-import * as directives from 'vuetify/directives';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
+
 // Styles
 import '@mdi/font/css/materialdesignicons.css';
-import 'vuetify/styles';
 
 import '../content/scss/global.scss';
 import '../content/scss/vendor.scss';
+import { initPrimeVue } from './shared/config/primevue.config';
 
 const pinia = createPinia();
-const vuetify = createVuetify({
-  components,
-  directives,
-  theme: {
-    defaultTheme: 'dark',
-  },
-  icons: {
-    defaultSet: 'mdi',
-    aliases,
-    sets: {
-      mdi,
-    },
-  },
-});
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 const app = createApp({
   components: { App },
   template: '<App/>',
   setup(_props, { emit }) {
+    initPrimeVue(app);
+
     const loginService = new LoginService({ emit });
     provide('loginService', loginService);
     const store = useStore();
@@ -54,7 +37,7 @@ const app = createApp({
 
     router.beforeResolve(async (to, from, next) => {
       // Make sure login modal is closed
-      loginService.hideLogin();
+      // loginService.hideLogin();
 
       if (!store.authenticated) {
         await accountService.update();
@@ -99,8 +82,7 @@ const app = createApp({
     );
 
     provide('accountService', accountService);
-    // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
   },
 });
 
-app.use(vuetify).use(router).use(pinia).mount('#app');
+app.use(router).use(pinia).mount('#app');

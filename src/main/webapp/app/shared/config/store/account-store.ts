@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 export interface AccountStateStorable {
-  logon: boolean | null;
+  logon: boolean | Promise<boolean> | null;
   userIdentity: null | any;
   authenticated: boolean;
   profilesLoaded: boolean;
@@ -24,7 +24,7 @@ export const useAccountStore = defineStore('main', {
     account: state => state.userIdentity,
   },
   actions: {
-    authenticate(promise: boolean) {
+    authenticate(promise: Promise<boolean> | null) {
       this.logon = promise;
     },
     setAuthentication(identity: any) {

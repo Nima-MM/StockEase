@@ -1,18 +1,24 @@
-// imports
 import { defineComponent, ref } from 'vue';
 import '@/shared/config/dayjs';
 import { useTheme } from '@/shared/composables/theme';
-import ThemeBtn from '../theme/theme-btn.vue';
 import { useStore } from '@/store';
 import { useRouter } from 'vue-router';
+import MainDrawer from './main-drawer.vue';
 
 export default defineComponent({
-  name: 'App',
+  name: 'MainNavbar',
   components: {
-    'theme-btn': ThemeBtn,
+    MainDrawer: MainDrawer,
   },
 
   setup() {
+    const items = ref([
+      {
+        label: 'Dashboard',
+        icon: 'pi pi-home',
+      },
+    ]);
+    const visible = ref<boolean>(true);
     const rail = ref<boolean>(false);
     const drawer = ref<boolean>(true);
     const store = useStore();
@@ -34,6 +40,6 @@ export default defineComponent({
         router.push('/');
       }
     };
-    return { logout, toggleDrawerState, toggleRailState, drawer, rail, nameColor, navColor };
+    return { items, visible, logout, toggleDrawerState, toggleRailState, drawer, rail, nameColor, navColor };
   },
 });

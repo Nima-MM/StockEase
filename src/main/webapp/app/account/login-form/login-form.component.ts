@@ -2,13 +2,13 @@ import axios from 'axios';
 import { type Ref, defineComponent, inject, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type AccountService from '../account.service';
-import type LoginService from '@/account/login.service';
+// import type LoginService from '@/account/login.service';
 
 export default defineComponent({
   name: 'Login',
   setup() {
     const authenticationError: Ref<boolean> = ref(false);
-    const login: Ref<string | null> = ref(null);
+    const username: Ref<string | null> = ref(null);
     const password: Ref<string | null> = ref(null);
     const rememberMe: Ref<boolean> = ref(false);
     const route = useRoute();
@@ -17,11 +17,12 @@ export default defineComponent({
     const previousState = () => router.go(-1);
 
     const accountService = inject<AccountService>('accountService')!; // !-operator indicates that accountService is not undefined
-    const loginService = inject<LoginService>('loginService')!;
+    // const loginService = inject<LoginService>('loginService')!;
 
     const doLogin = async () => {
-      const data = { username: login.value, password: password.value, rememberMe: rememberMe.value };
+      const data = { username: username.value, password: password.value, rememberMe: rememberMe.value };
       try {
+        console.log('login', data);
         const result = await axios.post('api/authenticate', data);
         const bearerToken = result.headers.authorization;
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
@@ -36,7 +37,7 @@ export default defineComponent({
         }
 
         authenticationError.value = false;
-        loginService.hideLogin();
+        // loginService.hideLogin();
         await accountService.retrieveAccount();
         if (route.path === '/forbidden') {
           previousState();
@@ -46,24 +47,9 @@ export default defineComponent({
       }
     };
 
-    // // const firstName = ref('');
-    // // const firstNameRules = [
-    // //   value => {
-    // //     if (value?.length >= 3) return true;
-    // //     return 'First name must be at least 3 characters.';
-    // //   },
-    // // ];
-
-    // // const lastName = ref('123');
-    // // const lastNameRules = [
-    // //   value => {
-    // //     if (/[^0-9]/.test(value)) return true;
-    // //     return 'Last name can not contain digits.';
-    // //   },
-    // // ];
     return {
       authenticationError,
-      login,
+      username,
       password,
       rememberMe,
       accountService,

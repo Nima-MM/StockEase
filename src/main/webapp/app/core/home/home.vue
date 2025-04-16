@@ -1,5 +1,5 @@
 <template>
-  <div class="home row">
+  <div class="home flex-col justify-items-center p-8">
     <div class="col-md-3">
       <span class="hipster img-fluid rounded"></span>
     </div>
