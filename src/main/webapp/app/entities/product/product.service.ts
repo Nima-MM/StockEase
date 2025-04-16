@@ -103,10 +103,12 @@ export default class ProductService {
   //! Reduce stock of a product
   public decreaseStock(id: number | undefined, amount: number | undefined): Promise<IProduct> {
     return new Promise<IProduct>(async (resolve, reject) => {
+      console.log('ProductService.decreaseStock.id', id, 'ProductService.decreaseStock.amount', amount);
       axios
         .put(`${baseApiUrl}/${id}/buy?amount=${amount}`)
         .then(res => {
           resolve(res.data);
+          console.log('ProductService.decreaseStock.res', res.data);
         })
         .catch(err => {
           reject(err);

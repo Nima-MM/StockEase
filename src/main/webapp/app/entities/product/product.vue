@@ -70,6 +70,7 @@
       </Column>
       <template #expansion="slotProps">
         <div class="flex gap-1">
+          <decrease-dialog :product="slotProps.data"></decrease-dialog>
           <Button
             variant="text"
             type="button"

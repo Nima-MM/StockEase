@@ -11,10 +11,12 @@ import {
   Checkbox,
   Column,
   DataTable,
+  Dialog,
   Drawer,
   Fieldset,
   IconField,
   InputIcon,
+  InputNumber,
   InputText,
   Menubar,
   Message,
@@ -61,10 +63,12 @@ export function initPrimeVue(vue: App): void {
   vue.component('Column', Column);
   vue.component('Checkbox', Checkbox);
   vue.component('DataTable', DataTable);
+  vue.component('Dialog', Dialog);
   vue.component('Drawer', Drawer);
   vue.component('Fieldset', Fieldset);
   vue.component('IconField', IconField);
   vue.component('InputIcon', InputIcon);
+  vue.component('InputNumber', InputNumber);
   vue.component('InputText', InputText);
   vue.component('Menubar', Menubar);
   vue.component('Message', Message);

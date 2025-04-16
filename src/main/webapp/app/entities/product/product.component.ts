@@ -3,10 +3,13 @@ import { useProductsStore } from './product.store';
 import { useToast } from 'primevue/usetoast';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import type { IProduct } from '@/shared/model/product.model';
+import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
 
 export default defineComponent({
   name: 'Product',
-  components: {},
+  components: {
+    'decrease-dialog': DecreaseDialog,
+  },
   setup() {
     const columnKeys = ref({
       ean: 'EAN',
@@ -16,7 +19,6 @@ export default defineComponent({
       stock: 'Stückzahl',
       color: 'Farbe',
     });
-
     const products = reactive(computed<IProduct[]>(() => useProductsStore().getProducts));
     const isFetching = reactive(computed<boolean>(() => useProductsStore().isFetching));
 
