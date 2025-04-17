@@ -2,7 +2,10 @@ import type { App } from 'vue';
 
 // PrimeVue
 import PrimeVue from 'primevue/config';
-import Aura from '@primeuix/themes/aura';
+// import Aura from '@primeuix/themes/aura';
+// import Material from '@primeuix/themes/material';
+// import Lara from '@primeuix/themes/lara';
+import Nora from '@primeuix/themes/nora';
 import StyleClass from 'primevue/styleclass';
 import Ripple from 'primevue/ripple';
 import {
@@ -41,7 +44,7 @@ export function initPrimeVue(vue: App): void {
   vue.use(PrimeVue, {
     theme: {
       // unstyled: true,
-      preset: Aura,
+      preset: Nora,
       ripple: true,
       options: {
         prefix: 'p',

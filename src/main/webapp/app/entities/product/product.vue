@@ -70,7 +70,6 @@
       </Column>
       <template #expansion="slotProps">
         <div class="flex gap-1">
-          <decrease-dialog :product="slotProps.data"></decrease-dialog>
           <Button
             variant="text"
             type="button"
@@ -82,15 +81,8 @@
           />
           <Button variant="text" type="button" icon="pi pi-eye" label="Details" class="p-button-outlined" @click="collapseAll" disabled />
           <Button variant="text" type="button" icon="pi pi-pencil" label="Ändern" class="p-button-outlined" @click="collapseAll" />
+          <decrease-dialog :product="slotProps.data"></decrease-dialog>
           <Button variant="text" type="button" icon="pi pi-plus" label="Bestand erhöhen" class="p-button-outlined" @click="collapseAll" />
-          <Button
-            variant="text"
-            type="button"
-            icon="pi pi-minus"
-            label="Bestand verringern"
-            class="p-button-outlined"
-            @click="collapseAll"
-          />
           <Button variant="text" type="button" icon="pi pi-trash" label="Löschen" class="p-button-outlined" @click="collapseAll" />
         </div>
       </template>
