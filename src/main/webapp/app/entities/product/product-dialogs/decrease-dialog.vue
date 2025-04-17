@@ -1,6 +1,14 @@
 <template>
   <div class="card flex justify-center">
-    <Button variant="text" type="button" icon="pi pi-minus" label="Bestand verringern" class="p-button-outlined" @click="visible = true" />
+    <Button
+      variant="text"
+      type="button"
+      icon="pi pi-minus"
+      label="Bestand verringern"
+      class="p-button-outlined"
+      severity="warn"
+      @click="visible = true"
+    />
 
     <Dialog v-model:visible="visible" modal pt:root:class="!border-0 " pt:mask:class="backdrop-blur-sm">
       <template #header style="background-image: radial-gradient(circle at left top, red, red, #e64a19)">

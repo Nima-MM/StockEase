@@ -4,11 +4,13 @@ import { useToast } from 'primevue/usetoast';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import type { IProduct } from '@/shared/model/product.model';
 import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
+import RefillDialog from './product-dialogs/refill-dialog.vue';
 
 export default defineComponent({
   name: 'Product',
   components: {
     'decrease-dialog': DecreaseDialog,
+    'refill-dialog': RefillDialog,
   },
   setup() {
     const columnKeys = ref({

@@ -67,6 +67,21 @@ export const useProductsStore = defineStore('products', () => {
     }
   };
 
+  const addToStock = async (id: number, amount: number) => {
+    isFetching.value = true;
+    try {
+      if (!productService) {
+        throw new Error('productService is not provided');
+      }
+      await productService.addToStock(id, amount);
+      await retrieveEntity();
+    } catch (err) {
+      // useAlertService().showHttpError(err.response);
+    } finally {
+      isFetching.value = false;
+    }
+  };
+
   return {
     storedData,
     getCategoryNames,
@@ -78,5 +93,6 @@ export const useProductsStore = defineStore('products', () => {
     setService,
     retrieveEntity,
     decreaseStock,
+    addToStock,
   };
 });
