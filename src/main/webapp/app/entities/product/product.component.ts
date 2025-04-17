@@ -5,12 +5,14 @@ import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import type { IProduct } from '@/shared/model/product.model';
 import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
 import RefillDialog from './product-dialogs/refill-dialog.vue';
+import DeleteDialog from './product-dialogs/delete-dialog.vue';
 
 export default defineComponent({
   name: 'Product',
   components: {
     'decrease-dialog': DecreaseDialog,
     'refill-dialog': RefillDialog,
+    'delete-dialog': DeleteDialog,
   },
   setup() {
     const columnKeys = ref({
@@ -74,12 +76,12 @@ export default defineComponent({
 
     // initRelationships();
     const handleSyncList = () => {
-      useProductsStore().retrieveEntity();
+      useProductsStore().retrieveEntities();
       // initRelationships();
     };
 
     onMounted(async () => {
-      await useProductsStore().retrieveEntity();
+      await useProductsStore().retrieveEntities();
     });
 
     return {

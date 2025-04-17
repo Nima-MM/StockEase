@@ -13,7 +13,7 @@
     <Dialog v-model:visible="visible" modal pt:root:class="!border-0 " pt:mask:class="backdrop-blur-sm">
       <template #header style="background-image: radial-gradient(circle at left top, red, red, #e64a19)">
         <header>
-          <span class="font-bold text-xl text-red-600"> BESTAND REDUZIEREN</span>
+          <span class="font-bold text-xl text-red-600">BESTAND REDUZIEREN</span>
         </header>
         <!--  <svg width="35" height="40" viewBox="0 0 35 40" fill="none"
           xmlns="http://www.w3.org/2000/svg" class="block mx-auto">

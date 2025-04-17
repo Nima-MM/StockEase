@@ -101,15 +101,7 @@
           />
           <decrease-dialog :product="slotProps.data"></decrease-dialog>
           <refill-dialog :product="slotProps.data"></refill-dialog>
-          <Button
-            variant="text"
-            type="button"
-            icon="pi pi-trash"
-            label="Löschen"
-            class="p-button-outlined"
-            severity="danger"
-            @click="collapseAll"
-          />
+          <delete-dialog :product="slotProps.data"></delete-dialog>
         </div>
       </template>
     </DataTable>
