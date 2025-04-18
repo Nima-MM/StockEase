@@ -43,23 +43,23 @@
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'EntitiesRoute' }">
-                      <a
-                        v-ripple
-                        v-styleclass="{
-                          selector: '@next',
-                          enterFromClass: 'hidden',
-                          enterActiveClass: 'animate-slidedown',
-                          leaveToClass: 'hidden',
-                          leaveActiveClass: 'animate-slideup',
-                        }"
-                        class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
-                      >
+                    <a
+                      v-ripple
+                      v-styleclass="{
+                        selector: '@next',
+                        enterFromClass: 'hidden',
+                        enterActiveClass: 'animate-slidedown',
+                        leaveToClass: 'hidden',
+                        leaveActiveClass: 'animate-slideup',
+                      }"
+                      class="cursor-pointer rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
+                    >
+                      <router-link :to="{ name: 'EntitiesRoute' }" class="flex items-center p-4">
                         <i class="pi pi-warehouse mr-2"></i>
                         <span class="font-medium">Warenhäuser</span>
                         <i class="pi pi-chevron-down ml-auto"></i>
-                      </a>
-                    </router-link>
+                      </router-link>
+                    </a>
                     <ul class="list-none py-0 pl-4 pr-0 m-0 hidden overflow-y-hidden transition-all duration-[400ms] ease-in-out">
                       <li>
                         <a
