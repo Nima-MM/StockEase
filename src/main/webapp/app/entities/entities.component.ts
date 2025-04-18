@@ -9,6 +9,7 @@ import { useProductsStore } from './product/product.store';
 import { useCategoryStore } from './category/category.store';
 import { useBrandStore } from './brand/brand.store';
 import { useColorStore } from './color/color.store';
+import Product from './product/product.vue';
 // // import { ICategory } from '@/shared/model/category.model';
 // // import { IBrand } from '@/shared/model/brand.model';
 // // import { IColor } from '@/shared/model/color.model';
@@ -16,7 +17,9 @@ import { useColorStore } from './color/color.store';
 
 export default defineComponent({
   name: 'Entities',
-  components: {},
+  components: {
+    Product,
+  },
   setup() {
     // const categories = reactive<ICategory[]>([]);
     // const brands = reactive<IBrand[]>([]);

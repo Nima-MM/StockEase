@@ -44,8 +44,6 @@
       <template #loading>Loading customers data. Please wait. </template>
       <!-- table headers -->
       <Column expander style="width: 5rem" />
-      <!-- <Column header="slotProps"><template #body="slotProps">{{ slotProps.data }}</template>
-      </Column> -->
       <Column field="ean" :header="columnKeys.ean"></Column>
       <Column field="stock" :header="columnKeys.stock"></Column>
       <Column field="name" :header="columnKeys.name"></Column>
@@ -100,10 +98,3 @@
 </template>
 
 <script lang="ts" src="./product.component.ts"></script>
-<style scoped>
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: 10%;
-}
-</style>

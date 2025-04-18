@@ -46,7 +46,7 @@ export default defineComponent({
       toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
     };
     const expandAll = () => {
-      // expandedRows.value = products.value.reduce((acc, p) => (acc[p.id] = true) && acc, {});
+      expandedRows.value = products.value.reduce((acc, p) => (acc[p.id] = true) && acc, {});
     };
     const collapseAll = () => {
       expandedRows.value = null;
