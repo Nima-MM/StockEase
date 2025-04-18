@@ -17,6 +17,7 @@ import {
   Dialog,
   Drawer,
   Fieldset,
+  FloatLabel,
   IconField,
   InputIcon,
   InputNumber,
@@ -24,6 +25,8 @@ import {
   Menubar,
   Message,
   Password,
+  Select,
+  SelectButton,
   Skeleton,
   Tab,
   Tabs,
@@ -31,10 +34,12 @@ import {
   TabPanel,
   TabPanels,
   Tag,
+  ToggleSwitch,
   Toolbar,
 } from 'primevue';
 import { Form, FormField } from '@primevue/forms';
 import ToastService from 'primevue/toastservice';
+// import ThemeSwitcher from '@/core/theme/ThemeSwitcher.vue';
 
 /**
  * global primevue configuration
@@ -69,6 +74,7 @@ export function initPrimeVue(vue: App): void {
   vue.component('Dialog', Dialog);
   vue.component('Drawer', Drawer);
   vue.component('Fieldset', Fieldset);
+  vue.component('FloatLabel', FloatLabel);
   vue.component('IconField', IconField);
   vue.component('InputIcon', InputIcon);
   vue.component('InputNumber', InputNumber);
@@ -76,6 +82,8 @@ export function initPrimeVue(vue: App): void {
   vue.component('Menubar', Menubar);
   vue.component('Message', Message);
   vue.component('Password', Password);
+  vue.component('Select', Select);
+  vue.component('SelectButton', SelectButton);
   vue.component('Skeleton', Skeleton);
   vue.component('Tab', Tab);
   vue.component('Tabs', Tabs);
@@ -83,8 +91,11 @@ export function initPrimeVue(vue: App): void {
   vue.component('TabPanel', TabPanel);
   vue.component('TabPanels', TabPanels);
   vue.component('Tag', Tag);
+  vue.component('ToggleSwitch', ToggleSwitch);
   vue.component('Toolbar', Toolbar);
   /* import from @primevue/forms */
   vue.component('Form', Form);
   vue.component('FormField', FormField);
+  /* custom components */
+  // vue.component('theme-switcher', ThemeSwitcher);
 }

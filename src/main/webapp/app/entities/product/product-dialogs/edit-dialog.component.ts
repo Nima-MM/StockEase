@@ -1,18 +1,15 @@
-import { defineComponent, inject, ref, computed } from 'vue';
+import { defineComponent, ref, computed, reactive } from 'vue';
 import type { PropType } from 'vue';
 import { type IProduct } from '@/shared/model/product.model';
-import ProductService from '@/entities/product/product.service';
-import DialogTemplateComponent from '@/shared/dialog/dialog-template.vue';
 import { useAttributeUpdater } from '@/shared/composables/attribute.composable';
 import { useCategoryStore } from '@/entities/category/category.store';
 import { useBrandStore } from '@/entities/brand/brand.store';
 import { useColorStore } from '@/entities/color/color.store';
+import { useProductsStore } from '../product.store';
 
 export default defineComponent({
   name: 'EditDialog',
-  components: {
-    'dialog-template': DialogTemplateComponent,
-  },
+  components: {},
   props: {
     product: {
       type: Object as PropType<IProduct>,
@@ -20,13 +17,10 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const productService = inject('productService', () => new ProductService());
-    const categories = computed(() => useCategoryStore().getData);
-    const brands = computed(() => useBrandStore().getData);
-    const color = computed(() => useColorStore().getData);
-
+    const visible = ref<boolean>(false);
+    // TODO: unit test this. it must be at least initialized with fetched data
     // data
-    const productToUpdate = ref<IProduct>({
+    const productToUpdate = reactive<IProduct>({
       id: props.product?.id || 0,
       stock: props.product?.stock || 0,
       name: props.product?.name || '',
@@ -37,42 +31,42 @@ export default defineComponent({
       brand: { id: props.product?.brand?.id, name: props.product?.brand?.name || '' },
       color: { id: props.product?.color?.id, name: props.product?.color?.name || '' },
     });
+    // stores
     // category
+    const categories = computed(() => useCategoryStore().getData);
     const categoryNames = computed(() => useCategoryStore().getNames);
     const { updateAttribute: updateCategory } = useAttributeUpdater(categories, productToUpdate, 'category');
     // brand
+    const brands = computed(() => useBrandStore().getData);
     const brandNames = computed(() => useBrandStore().getNames);
     const { updateAttribute: updateBrand } = useAttributeUpdater(brands, productToUpdate, 'brand');
     // color
+    const color = computed(() => useColorStore().getData);
     const colorNames = computed(() => useColorStore().getNames);
     const { updateAttribute: updateColor } = useAttributeUpdater(color, productToUpdate, 'color');
+
     // methods
-    const confirmEdit = async (close: Function) => {
-      console.log('confirmEdit');
-      try {
-        if (props.product) {
-          productToUpdate.value.id = parseInt(productToUpdate.value.id as any);
-          productToUpdate.value.stock = parseInt(productToUpdate.value.stock as any);
-          if (productToUpdate.value.color) {
-            productToUpdate.value.color.id = parseInt(productToUpdate.value.color.id as any);
-          }
-          if (productToUpdate.value.category) {
-            productToUpdate.value.category.id = parseInt(productToUpdate.value.category.id as any);
-          }
-          if (productToUpdate.value.brand) {
-            productToUpdate.value.brand.id = parseInt(productToUpdate.value.brand.id as any);
-          }
-          const p = JSON.parse(JSON.stringify(productToUpdate.value));
-          // console.log(p);
-          await productService().partialUpdate(p);
-          await productService().retrieve();
-          close();
+    const confirmEdit = async () => {
+      if (props.product) {
+        productToUpdate.id = parseInt(productToUpdate.id as any);
+        productToUpdate.stock = parseInt(productToUpdate.stock as any);
+        if (productToUpdate.color) {
+          productToUpdate.color.id = parseInt(productToUpdate.color.id as any);
         }
-      } catch (error) {
-        // alertService.showHttpError(error.response);
+        if (productToUpdate.category) {
+          productToUpdate.category.id = parseInt(productToUpdate.category.id as any);
+        }
+        if (productToUpdate.brand) {
+          productToUpdate.brand.id = parseInt(productToUpdate.brand.id as any);
+        }
+        const p = JSON.parse(JSON.stringify(productToUpdate));
+        console.log('p: ', p);
+        await useProductsStore().editEntity(p);
+        visible.value = false;
       }
     };
     return {
+      visible,
       categoryNames,
       updateCategory,
       brandNames,

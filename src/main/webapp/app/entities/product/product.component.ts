@@ -6,10 +6,15 @@ import type { IProduct } from '@/shared/model/product.model';
 import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
 import RefillDialog from './product-dialogs/refill-dialog.vue';
 import DeleteDialog from './product-dialogs/delete-dialog.vue';
+import EditDialog from './product-dialogs/edit-dialog.vue';
+import { useCategoryStore } from '../category/category.store';
+import { useBrandStore } from '../brand/brand.store';
+import { useColorStore } from '../color/color.store';
 
 export default defineComponent({
   name: 'Product',
   components: {
+    'edit-dialog': EditDialog,
     'decrease-dialog': DecreaseDialog,
     'refill-dialog': RefillDialog,
     'delete-dialog': DeleteDialog,
@@ -72,16 +77,13 @@ export default defineComponent({
         name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
       };
     };
+
     initFilters();
-
-    // initRelationships();
-    const handleSyncList = () => {
-      useProductsStore().retrieveEntities();
-      // initRelationships();
-    };
-
     onMounted(async () => {
       await useProductsStore().retrieveEntities();
+      await useCategoryStore().retrieveEntities();
+      await useBrandStore().retrieveEntities();
+      await useColorStore().retrieveEntities();
     });
 
     return {

@@ -1,7 +1,7 @@
 <template>
   <!-- <Product /> -->
   <div class="card">
-    <Tabs value="0">
+    <Tabs value="1">
       <TabList>
         <Tab value="1"
           ><router-link :to="{ name: 'ProductRoute' }">

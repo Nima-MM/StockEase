@@ -7,6 +7,9 @@ import ColorService from './color/color.service';
 import UserService from '@/entities/user/user.service';
 import Product from './product/product.vue';
 import { useProductsStore } from './product/product.store';
+import { useCategoryStore } from './category/category.store';
+import { useBrandStore } from './brand/brand.store';
+import { useColorStore } from './color/color.store';
 // // import { ICategory } from '@/shared/model/category.model';
 // // import { IBrand } from '@/shared/model/brand.model';
 // // import { IColor } from '@/shared/model/color.model';
@@ -28,5 +31,8 @@ export default defineComponent({
     provide('brandService', () => new BrandService());
     provide('colorService', () => new ColorService());
     useProductsStore().setService(new ProductService());
+    useCategoryStore().setService(new CategoryService());
+    useBrandStore().setService(new BrandService());
+    useColorStore().setService(new ColorService());
   },
 });

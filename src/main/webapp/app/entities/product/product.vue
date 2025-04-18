@@ -25,7 +25,6 @@
             <Button type="button" icon="pi pi-plus" label="Neues Produkt" class="p-button-outlined" @click="addProduct" />
             <Button type="button" icon="pi pi-download" label="Export" class="p-button-outlined" />
             <Button type="button" icon="pi pi-upload" label="Import" class="p-button-outlined" />
-            <Button type="button" icon="pi pi-cog" label="Einstellungen" class="p-button-outlined" />
           </div>
           <div class="flex flex-wrap justify-end gap-2">
             <IconField>
@@ -90,15 +89,7 @@
             @click="collapseAll"
             disabled
           />
-          <Button
-            variant="text"
-            type="button"
-            icon="pi pi-pencil"
-            label="Ändern"
-            class="p-button-outlined"
-            severity="info"
-            @click="collapseAll"
-          />
+          <edit-dialog :product="slotProps.data"></edit-dialog>
           <decrease-dialog :product="slotProps.data"></decrease-dialog>
           <refill-dialog :product="slotProps.data"></refill-dialog>
           <delete-dialog :product="slotProps.data"></delete-dialog>

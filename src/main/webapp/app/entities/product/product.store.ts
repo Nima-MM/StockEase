@@ -51,6 +51,20 @@ export const useProductsStore = defineStore('products', () => {
       isFetching.value = false;
     }
   };
+  const editEntity = async (product: IProduct) => {
+    isFetching.value = true;
+    try {
+      if (!productService) {
+        throw new Error('productService is not provided');
+      }
+      await productService.update(product);
+      await retrieveEntities();
+    } catch (error) {
+      // alertService.showHttpError(error.response);
+    } finally {
+      isFetching.value = false;
+    }
+  };
 
   const deleteEntity = async (id: number) => {
     isFetching.value = true;
@@ -107,6 +121,7 @@ export const useProductsStore = defineStore('products', () => {
     isFetching,
     setService,
     retrieveEntities,
+    editEntity,
     deleteEntity,
     decreaseStock,
     addToStock,
