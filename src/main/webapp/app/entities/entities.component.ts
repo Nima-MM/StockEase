@@ -1,11 +1,10 @@
-import { defineComponent, provide, reactive } from 'vue';
+import { defineComponent, provide } from 'vue';
 
 import ProductService from './product/product.service';
 import CategoryService from './category/category.service';
 import BrandService from './brand/brand.service';
 import ColorService from './color/color.service';
 import UserService from '@/entities/user/user.service';
-import Product from './product/product.vue';
 import { useProductsStore } from './product/product.store';
 import { useCategoryStore } from './category/category.store';
 import { useBrandStore } from './brand/brand.store';
@@ -17,9 +16,7 @@ import { useColorStore } from './color/color.store';
 
 export default defineComponent({
   name: 'Entities',
-  components: {
-    Product: Product,
-  },
+  components: {},
   setup() {
     // const categories = reactive<ICategory[]>([]);
     // const brands = reactive<IBrand[]>([]);

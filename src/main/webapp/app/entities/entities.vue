@@ -1,5 +1,4 @@
 <template>
-  <!-- <Product /> -->
   <div class="card">
     <Tabs value="1">
       <TabList>

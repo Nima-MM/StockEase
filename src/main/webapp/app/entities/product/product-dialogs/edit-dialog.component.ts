@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed, reactive } from 'vue';
+import { defineComponent, ref, computed, onMounted } from 'vue';
 import type { PropType } from 'vue';
 import { type IProduct } from '@/shared/model/product.model';
 import { useAttributeUpdater } from '@/shared/composables/attribute.composable';
@@ -20,16 +20,16 @@ export default defineComponent({
     const visible = ref<boolean>(false);
     // TODO: unit test this. it must be at least initialized with fetched data
     // data
-    const productToUpdate = reactive<IProduct>({
-      id: props.product?.id || 0,
-      stock: props.product?.stock || 0,
-      name: props.product?.name || '',
-      image: props.product?.image || '',
-      ean: props.product?.ean || '',
-      description: props.product?.description || '',
-      category: { id: props.product?.category?.id, name: props.product?.category?.name },
-      brand: { id: props.product?.brand?.id, name: props.product?.brand?.name || '' },
-      color: { id: props.product?.color?.id, name: props.product?.color?.name || '' },
+    const productToUpdate = ref<IProduct>({
+      id: 0,
+      stock: 0,
+      name: '',
+      image: '',
+      ean: '',
+      description: '',
+      category: { id: 0, name: '' },
+      brand: { id: 0, name: '' },
+      color: { id: 0, name: '' },
     });
     // stores
     // category
@@ -41,31 +41,36 @@ export default defineComponent({
     const brandNames = computed(() => useBrandStore().getNames);
     const { updateAttribute: updateBrand } = useAttributeUpdater(brands, productToUpdate, 'brand');
     // color
-    const color = computed(() => useColorStore().getData);
+    const colors = computed(() => useColorStore().getData);
     const colorNames = computed(() => useColorStore().getNames);
-    const { updateAttribute: updateColor } = useAttributeUpdater(color, productToUpdate, 'color');
-
+    const { updateAttribute: updateColor } = useAttributeUpdater(colors, productToUpdate, 'color');
     // methods
     const confirmEdit = async () => {
       if (props.product) {
-        productToUpdate.id = parseInt(productToUpdate.id as any);
-        productToUpdate.stock = parseInt(productToUpdate.stock as any);
-        if (productToUpdate.color) {
-          productToUpdate.color.id = parseInt(productToUpdate.color.id as any);
+        productToUpdate.value.id = parseInt(productToUpdate.value.id as any);
+        productToUpdate.value.stock = parseInt(productToUpdate.value.stock as any);
+        if (productToUpdate.value.color) {
+          productToUpdate.value.color.id = parseInt(productToUpdate.value.color.id as any);
         }
-        if (productToUpdate.category) {
-          productToUpdate.category.id = parseInt(productToUpdate.category.id as any);
+        if (productToUpdate.value.category) {
+          productToUpdate.value.category.id = parseInt(productToUpdate.value.category.id as any);
         }
-        if (productToUpdate.brand) {
-          productToUpdate.brand.id = parseInt(productToUpdate.brand.id as any);
+        if (productToUpdate.value.brand) {
+          productToUpdate.value.brand.id = parseInt(productToUpdate.value.brand.id as any);
         }
-        const p = JSON.parse(JSON.stringify(productToUpdate));
-        console.log('p: ', p);
+        const p = JSON.parse(JSON.stringify(productToUpdate.value));
         await useProductsStore().editEntity(p);
         visible.value = false;
       }
     };
+    // lifecycle hooks
+    onMounted(() => {
+      productToUpdate.value = props.product;
+    });
     return {
+      brands,
+      categories,
+      colors,
       visible,
       categoryNames,
       updateCategory,

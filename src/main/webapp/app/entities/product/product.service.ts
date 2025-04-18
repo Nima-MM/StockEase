@@ -60,8 +60,9 @@ export default class ProductService {
   public update(entity: IProduct): Promise<IProduct> {
     console.log('ProductService.update', entity);
     return new Promise<IProduct>((resolve, reject) => {
+      // .put(`${baseApiUrl}/update/${entity.id}`, entity)
       axios
-        .put(`${baseApiUrl}/update/${entity.id}`, entity)
+        .put(`${baseApiUrl}/update`, entity)
         .then(res => {
           resolve(res.data);
         })

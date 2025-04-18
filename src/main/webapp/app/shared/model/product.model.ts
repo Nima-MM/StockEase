@@ -4,26 +4,26 @@ import { type IColor } from '@/shared/model/color.model';
 
 export interface IProduct {
   id?: number;
-  stock?: number | null;
-  name?: string | null;
-  image?: string | null;
-  ean?: string | null;
-  description?: string | null;
-  category?: ICategory | null;
-  brand?: IBrand | null;
-  color?: IColor | null;
+  stock?: number;
+  name?: string;
+  image?: string;
+  ean?: string;
+  description?: string;
+  category?: ICategory;
+  brand?: IBrand;
+  color?: IColor;
 }
 
 export class Product implements IProduct {
   constructor(
     public id?: number,
-    public stock?: number | null,
-    public name?: string | null,
-    public image?: string | null,
-    public ean?: string | null,
-    public description?: string | null,
-    public category?: ICategory | null,
-    public brand?: IBrand | null,
-    public color?: IColor | null,
+    public stock?: number,
+    public name?: string,
+    public image?: string,
+    public ean?: string,
+    public description?: string,
+    public category?: ICategory,
+    public brand?: IBrand,
+    public color?: IColor,
   ) {}
 }
