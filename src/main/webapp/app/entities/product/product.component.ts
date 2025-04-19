@@ -3,10 +3,22 @@ import { useProductsStore } from './product.store';
 import { useToast } from 'primevue/usetoast';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import type { IProduct } from '@/shared/model/product.model';
+import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
+import RefillDialog from './product-dialogs/refill-dialog.vue';
+import DeleteDialog from './product-dialogs/delete-dialog.vue';
+import EditDialog from './product-dialogs/edit-dialog.vue';
+import { useCategoryStore } from '../category/category.store';
+import { useBrandStore } from '../brand/brand.store';
+import { useColorStore } from '../color/color.store';
 
 export default defineComponent({
   name: 'Product',
-  components: {},
+  components: {
+    'edit-dialog': EditDialog,
+    'decrease-dialog': DecreaseDialog,
+    'refill-dialog': RefillDialog,
+    'delete-dialog': DeleteDialog,
+  },
   setup() {
     const columnKeys = ref({
       ean: 'EAN',
@@ -16,7 +28,6 @@ export default defineComponent({
       stock: 'Stückzahl',
       color: 'Farbe',
     });
-
     const products = reactive(computed<IProduct[]>(() => useProductsStore().getProducts));
     const isFetching = reactive(computed<boolean>(() => useProductsStore().isFetching));
 
@@ -35,7 +46,7 @@ export default defineComponent({
       toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
     };
     const expandAll = () => {
-      // expandedRows.value = products.value.reduce((acc, p) => (acc[p.id] = true) && acc, {});
+      expandedRows.value = products.value.reduce((acc, p) => (acc[p.id] = true) && acc, {});
     };
     const collapseAll = () => {
       expandedRows.value = null;
@@ -66,16 +77,13 @@ export default defineComponent({
         name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
       };
     };
+
     initFilters();
-
-    // initRelationships();
-    const handleSyncList = () => {
-      useProductsStore().retrieveEntity();
-      // initRelationships();
-    };
-
     onMounted(async () => {
-      await useProductsStore().retrieveEntity();
+      await useProductsStore().retrieveEntities();
+      await useCategoryStore().retrieveEntities();
+      await useBrandStore().retrieveEntities();
+      await useColorStore().retrieveEntities();
     });
 
     return {

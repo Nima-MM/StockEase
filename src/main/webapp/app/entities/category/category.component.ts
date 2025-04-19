@@ -3,6 +3,7 @@ import { type Ref, defineComponent, inject, onMounted, ref } from 'vue';
 import CategoryService from './category.service';
 import { type ICategory } from '@/shared/model/category.model';
 import { useAlertService } from '@/shared/alert/alert.service';
+import { useCategoryStore } from './category.store';
 
 export default defineComponent({
   name: 'Category',
@@ -33,6 +34,7 @@ export default defineComponent({
     };
 
     onMounted(async () => {
+      await useCategoryStore().retrieveEntities();
       await retrieveCategorys();
     });
 

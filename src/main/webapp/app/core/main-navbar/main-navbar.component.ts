@@ -4,11 +4,12 @@ import { useTheme } from '@/shared/composables/theme';
 import { useStore } from '@/store';
 import { useRouter } from 'vue-router';
 import MainDrawer from './main-drawer.vue';
-
+import ThemeSwitcher from '../theme/ThemeSwitcher.vue';
 export default defineComponent({
   name: 'MainNavbar',
   components: {
     MainDrawer: MainDrawer,
+    ThemeSwitcher: ThemeSwitcher,
   },
 
   setup() {

@@ -1,14 +1,11 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
 import type { PropType } from 'vue';
 import { type IProduct } from '@/shared/model/product.model';
-import ProductService from '@/entities/product/product.service';
-import DialogTemplateComponent from '@/shared/dialog/dialog-template.vue';
+import { useProductsStore } from '../product.store';
 
 export default defineComponent({
   name: 'DeleteDialog',
-  components: {
-    'dialog-template': DialogTemplateComponent,
-  },
+  components: {},
   props: {
     product: {
       type: Object as PropType<IProduct>,
@@ -16,21 +13,18 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const productService = inject('productService', () => new ProductService());
+    const visible = ref<boolean>(false);
 
-    const confirmDeletion = async (close: Function) => {
-      try {
-        if (props.product) {
-          await productService().delete(props.product.id);
-          await productService().retrieve();
-          close();
-        }
-      } catch (error) {
-        // alertService.showHttpError(error.response);
+    const confirmDeletion = async () => {
+      if (props.product.id) {
+        await useProductsStore().deleteEntity(props.product.id);
       }
+      visible.value = false;
     };
+
     return {
       confirmDeletion,
+      visible,
     };
   },
 });
