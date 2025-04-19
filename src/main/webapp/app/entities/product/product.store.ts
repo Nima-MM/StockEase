@@ -51,13 +51,16 @@ export const useProductsStore = defineStore('products', () => {
       isFetching.value = false;
     }
   };
-  const editEntity = async (product: IProduct) => {
+  const newEntity = async (entity: IProduct) => {
     isFetching.value = true;
     try {
       if (!productService) {
         throw new Error('productService is not provided');
       }
-      await productService.update(product);
+      if (entity) {
+        entity = JSON.parse(JSON.stringify(entity));
+        await productService.create(entity);
+      }
       await retrieveEntities();
     } catch (error) {
       // alertService.showHttpError(error.response);
@@ -66,13 +69,13 @@ export const useProductsStore = defineStore('products', () => {
     }
   };
 
-  const deleteEntity = async (id: number) => {
+  const editEntity = async (entity: IProduct) => {
     isFetching.value = true;
     try {
       if (!productService) {
         throw new Error('productService is not provided');
       }
-      await productService.delete(id);
+      await productService.update(entity);
       await retrieveEntities();
     } catch (error) {
       // alertService.showHttpError(error.response);
@@ -81,13 +84,28 @@ export const useProductsStore = defineStore('products', () => {
     }
   };
 
-  const decreaseStock = async (id: number, amount: number) => {
+  const deleteEntity = async (entityId: number) => {
     isFetching.value = true;
     try {
       if (!productService) {
         throw new Error('productService is not provided');
       }
-      await productService.decreaseStock(id, amount);
+      await productService.delete(entityId);
+      await retrieveEntities();
+    } catch (error) {
+      // alertService.showHttpError(error.response);
+    } finally {
+      isFetching.value = false;
+    }
+  };
+
+  const decreaseStock = async (entityId: number, amount: number) => {
+    isFetching.value = true;
+    try {
+      if (!productService) {
+        throw new Error('productService is not provided');
+      }
+      await productService.decreaseStock(entityId, amount);
       await retrieveEntities();
     } catch (err) {
       // useAlertService().showHttpError(err.response);
@@ -96,13 +114,13 @@ export const useProductsStore = defineStore('products', () => {
     }
   };
 
-  const addToStock = async (id: number, amount: number) => {
+  const addToStock = async (entityId: number, amount: number) => {
     isFetching.value = true;
     try {
       if (!productService) {
         throw new Error('productService is not provided');
       }
-      await productService.addToStock(id, amount);
+      await productService.addToStock(entityId, amount);
       await retrieveEntities();
     } catch (err) {
       // useAlertService().showHttpError(err.response);
@@ -121,6 +139,7 @@ export const useProductsStore = defineStore('products', () => {
     isFetching,
     setService,
     retrieveEntities,
+    newEntity,
     editEntity,
     deleteEntity,
     decreaseStock,

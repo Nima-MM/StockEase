@@ -47,7 +47,7 @@ export default class ProductService {
   public create(entity: IProduct): Promise<IProduct> {
     return new Promise<IProduct>((resolve, reject) => {
       axios
-        .post(`${baseApiUrl}`, entity)
+        .post(`${baseApiUrl}/add`, entity)
         .then(res => {
           resolve(res.data);
         })
