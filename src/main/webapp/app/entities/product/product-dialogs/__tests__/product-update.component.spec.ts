@@ -5,9 +5,9 @@ import sinon, { type SinonStubbedInstance } from 'sinon';
 import { type RouteLocation } from 'vue-router';
 
 import ProductUpdate from './product-update.vue';
-import ProductService from '../product.service';
+import ProductService from '../../product.service';
 import AlertService from '@/shared/alert/alert.service';
-
+import { describe, beforeEach, afterEach, it, expect } from 'vitest';
 import CategoryService from '@/entities/category/category.service';
 import BrandService from '@/entities/brand/brand.service';
 import ColorService from '@/entities/color/color.service';
@@ -37,11 +37,11 @@ describe('Component Tests', () => {
       productServiceStub = sinon.createStubInstance<ProductService>(ProductService);
       productServiceStub.retrieve.onFirstCall().resolves(Promise.resolve([]));
 
-      alertService = new AlertService({
-        bvToast: {
-          toast: vitest.fn(),
-        } as any,
-      });
+      // alertService = new AlertService({
+      //   bvToast: {
+      //     toast: vitest.fn(),
+      //   } as any,
+      // });
 
       mountOptions = {
         stubs: {
@@ -52,7 +52,7 @@ describe('Component Tests', () => {
           'b-form-input': true,
         },
         provide: {
-          alertService,
+          // alertService,
           productService: () => productServiceStub,
           categoryService: () =>
             sinon.createStubInstance<CategoryService>(CategoryService, {

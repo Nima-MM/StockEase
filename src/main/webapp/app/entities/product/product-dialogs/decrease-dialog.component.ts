@@ -1,14 +1,11 @@
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import type { PropType } from 'vue';
 import { type IProduct } from '@/shared/model/product.model';
-import ProductService from '@/entities/product/product.service';
-import DialogTemplateComponent from '@/shared/dialog/dialog-template.vue';
+import { useProductsStore } from '../product.store';
 
 export default defineComponent({
   name: 'DecreaseDialog',
-  components: {
-    'dialog-template': DialogTemplateComponent,
-  },
+  components: {},
   props: {
     product: {
       type: Object as PropType<IProduct>,
@@ -16,18 +13,23 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const productService = inject('productService', () => new ProductService());
-    const amount = ref<number | null>();
-    const confirmReduction = async (close: Function) => {
+    const visible = ref<boolean>(false);
+    const amount = ref<number>(0);
+
+    const confirmReduction = async () => {
       if (props.product) {
-        amount.value = parseInt(amount.value as any);
-        props.product.stock = (props.product.stock as any) - (amount.value || 0);
-        await productService().decreaseStock(props.product.id, amount.value);
-        amount.value = null;
-        close();
+        if (isNaN(amount.value)) {
+          console.error('amount.value is NaN');
+          amount.value = parseInt(amount.value as any);
+        }
+        if (props.product.id) {
+          await useProductsStore().decreaseStock(props.product.id, amount.value);
+        }
+        amount.value = 0;
+        visible.value = false;
       }
     };
 
-    return { amount, confirmReduction };
+    return { visible, amount, confirmReduction };
   },
 });
