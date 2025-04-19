@@ -22,7 +22,6 @@
         <div class="flex flex-wrap justify-between">
           <div class="flex flex-wrap justify-end gap-2">
             <!-- <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined /> -->
-            <Button type="button" icon="pi pi-plus" label="Neues Produkt" class="p-button-outlined" @click="addProduct" />
             <Button type="button" icon="pi pi-download" label="Export" class="p-button-outlined" />
             <Button type="button" icon="pi pi-upload" label="Import" class="p-button-outlined" />
           </div>

@@ -1,5 +1,4 @@
-import { defineComponent, provide, reactive } from 'vue';
-
+import { defineComponent, provide } from 'vue';
 import ProductService from './product/product.service';
 import CategoryService from './category/category.service';
 import BrandService from './brand/brand.service';
@@ -10,15 +9,13 @@ import { useCategoryStore } from './category/category.store';
 import { useBrandStore } from './brand/brand.store';
 import { useColorStore } from './color/color.store';
 import Product from './product/product.vue';
-// // import { ICategory } from '@/shared/model/category.model';
-// // import { IBrand } from '@/shared/model/brand.model';
-// // import { IColor } from '@/shared/model/color.model';
-// jhipster-needle-add-entity-service-to-entities-component-import - JHipster will import entities services here
+import NewProductDialog from './product/product-dialogs/new-product-dialog.vue';
 
 export default defineComponent({
   name: 'Entities',
   components: {
     Product,
+    NewProductDialog,
   },
   setup() {
     // const categories = reactive<ICategory[]>([]);

@@ -31,7 +31,7 @@ export default defineComponent({
       brand: { id: 0, name: '' },
       color: { id: 0, name: '' },
     });
-    // stores
+    // stores state
     // category
     const categories = computed(() => useCategoryStore().getData);
     const categoryNames = computed(() => useCategoryStore().getNames);
