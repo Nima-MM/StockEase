@@ -179,15 +179,13 @@
                   <i class="pi pi-chevron-down"></i>
                 </div>
                 <ul class="list-none p-0 m-0 overflow-hidden">
-                  <li>
-                    <a
-                      v-ripple
-                      class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
-                    >
+                  <!-- <li>
+                    <a v-ripple
+                      class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple">
                       <i class="pi pi-folder mr-2"></i>
                       <span class="font-medium">Projekte</span>
                     </a>
-                  </li>
+                  </li> -->
                   <li>
                     <a
                       v-ripple
@@ -205,6 +203,54 @@
                       <i class="pi pi-cog mr-2"></i>
                       <span class="font-medium">Einstellungen</span>
                     </a>
+                  </li>
+                  <li>
+                    <a
+                      v-ripple
+                      v-styleclass="{
+                        selector: '@next',
+                        enterFromClass: 'hidden',
+                        enterActiveClass: 'animate-slidedown',
+                        leaveToClass: 'hidden',
+                        leaveActiveClass: 'animate-slideup',
+                      }"
+                      class="cursor-pointer rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
+                    >
+                      <router-link :to="{ name: 'EntitiesRoute' }" class="flex items-center p-4">
+                        <i class="pi pi-info-circle mr-2"></i>
+                        <span class="font-medium">Hilfe</span>
+                        <i class="pi pi-chevron-down ml-auto"></i>
+                      </router-link>
+                    </a>
+                    <ul class="list-none py-0 pl-4 pr-0 m-0 hidden overflow-y-hidden transition-all duration-[400ms] ease-in-out">
+                      <li>
+                        <a
+                          v-ripple
+                          class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
+                        >
+                          <i class="pi pi-question-circle mr-2"></i>
+                          <span class="font-medium">FAQ</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          v-ripple
+                          class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
+                        >
+                          <i class="pi pi-book mr-2"></i>
+                          <span class="font-medium">Bedienungsanleitung</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          v-ripple
+                          class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
+                        >
+                          <i class="pi pi-address-book mr-2"></i>
+                          <span class="font-medium">Kontakt</span>
+                        </a>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </li>
