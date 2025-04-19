@@ -1,4 +1,4 @@
-import { defineComponent, provide } from 'vue';
+import { defineComponent, provide, reactive } from 'vue';
 
 import ProductService from './product/product.service';
 import CategoryService from './category/category.service';
