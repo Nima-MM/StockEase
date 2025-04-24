@@ -20,13 +20,17 @@ export default defineComponent({
     // const loginService = inject<LoginService>('loginService')!;
 
     const doLogin = async () => {
-      const data = { username: username.value, password: password.value, rememberMe: rememberMe.value };
+      sessionStorage.removeItem('jhi-authenticationToken');
+      localStorage.removeItem('jhi-authenticationToken');
+      const credentials = { username: username.value, password: password.value, rememberMe: rememberMe.value };
       try {
-        console.log('login', data);
-        const result = await axios.post('api/authenticate', data);
+        const result = await axios.post('api/authenticate', credentials);
         const bearerToken = result.headers.authorization;
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
           const jwt = bearerToken.slice(7, bearerToken.length);
+          if (!jwt) {
+            previousState();
+          }
           if (rememberMe.value) {
             localStorage.setItem('jhi-authenticationToken', jwt);
             sessionStorage.removeItem('jhi-authenticationToken');

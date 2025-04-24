@@ -35,15 +35,15 @@ const app = createApp({
       computed(() => store.account?.langKey ?? navigator.language ?? 'de'),
     );
 
-    router.beforeResolve(async (to, from, next) => {
+    router.beforeResolve((to, from, next) => {
       // Make sure login modal is closed
       // loginService.hideLogin();
 
       if (!store.authenticated) {
-        await accountService.update();
+        accountService.update();
       }
       if (Array.isArray(to.meta?.authorities) && to.meta.authorities.length > 0) {
-        const value = await accountService.hasAnyAuthorityAndCheckAuth(to.meta.authorities);
+        const value = accountService.hasAnyAuthorityAndCheckAuth(to.meta.authorities);
         if (!value) {
           if (from.path !== '/forbidden') {
             next({ path: '/forbidden' });

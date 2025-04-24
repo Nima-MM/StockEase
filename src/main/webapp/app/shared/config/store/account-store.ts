@@ -36,6 +36,9 @@ export const useAccountStore = defineStore('main', {
       this.userIdentity = null;
       this.authenticated = false;
       this.logon = null;
+
+      localStorage.removeItem('jhi-authenticationToken');
+      sessionStorage.removeItem('jhi-authenticationToken');
     },
     setProfilesLoaded() {
       this.profilesLoaded = true;
