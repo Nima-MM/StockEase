@@ -51,6 +51,7 @@ export const useProductsStore = defineStore('products', () => {
       isFetching.value = false;
     }
   };
+
   const newEntity = async (entity: IProduct) => {
     isFetching.value = true;
     try {

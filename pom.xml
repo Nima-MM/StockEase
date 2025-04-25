@@ -648,7 +648,7 @@
               </platforms>
             </from>
             <to>
-              <image>stockmanagement:latest</image>
+              <image>stockease:latest</image>
             </to>
             <container>
               <entrypoint>

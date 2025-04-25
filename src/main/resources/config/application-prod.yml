@@ -33,7 +33,7 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://postgresql:5432/StockManagement
+    url: jdbc:postgresql://postgresql:5432/stockease
     username: StockManagement
     password: password
     hikari:
