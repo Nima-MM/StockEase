@@ -1,6 +1,6 @@
 <template>
   <!-- ACCOUNT LAYOUT -->
-  <AccountLayout v-if="!authenticated" />
+  <AuthLayout v-if="!authenticated" />
   <!-- CORE LAYOUT -->
   <MainLayout v-else />
 </template>

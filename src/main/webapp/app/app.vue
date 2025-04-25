@@ -1,5 +1,5 @@
 <template>
-  <div class="card h-svh flex justify-center justify-self-center" :theme="theme">
+  <div class="" :theme="theme">
     <Suspense>
       <!-- Async Default -->
       <template #default>
