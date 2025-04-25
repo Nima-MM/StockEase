@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center">
-    <Form class="flex flex-col gap-4 w-full">
+    <Form class="flex flex-col gap-4 max-w-7xl w-full">
       <div class="flex flex-col gap-4">
         <FormField v-slot="$field" as="section" name="username" initialValue="" class="flex flex-col gap-2">
           <InputText v-model="username" type="text" placeholder="Benutzername" />
@@ -15,14 +15,14 @@
       </div>
       <div class="flex flex-row justify-between">
         <FormField v-slot="$field" asChild name="rememberMe" initialValue="true">
-          <section class="flex justify-center items-center gap-2 text-primary">
+          <section class="flex justify-center items-center gap-2 text-primary text-xs">
             <Checkbox v-model="rememberMe" inputId="rememberMe" binary />
             <label for="rememberMe">Automatische Anmeldung</label>
             <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
           </section>
         </FormField>
 
-        <p class="flex items-center">
+        <p class="flex items-center text-xs">
           <b-link :to="'/account/reset/request'" class="alert-link" data-cy="forgetYourPasswordSelector"
             >Sie haben Ihr Passwort vergessen?</b-link
           >
