@@ -1,23 +1,19 @@
 import { defineComponent, provide, inject, type ComputedRef, ref } from 'vue';
-import MainLayout from './core/layout/main-layout.vue';
-import AccountLayout from './core/layout/account-layout.vue';
 import Ribbon from '@/core/ribbon/ribbon.vue';
 import { useTheme } from '@/shared/composables/theme';
-import JhiFooter from '@/core/jhi-footer/jhi-footer.vue';
 import { useAlertService } from '@/shared/alert/alert.service';
 // imports
 import '@/shared/config/dayjs';
+import AuthGateway from '@/account/auth-gateway.vue';
+import FallbackLoader from './core/layout/fallback-loader.vue';
 // primevue imports
-
-// import Button from 'primevue/button';
 
 export default defineComponent({
   name: 'App',
   components: {
     ribbon: Ribbon,
-    'account-layout': AccountLayout,
-    'main-layout': MainLayout,
-    'jhi-footer': JhiFooter,
+    AuthGateway,
+    FallbackLoader,
   },
   setup() {
     provide('alertService', useAlertService());
