@@ -1,12 +1,11 @@
-import { defineComponent, provide, inject, type ComputedRef } from 'vue';
+import { defineComponent, inject, type ComputedRef } from 'vue';
 import MainLayout from '@/core/layout/main-layout.vue';
 import AuthLayout from '@/core/layout/auth-layout.vue';
 import { useTheme } from '@/shared/composables/theme';
-import { useAlertService } from '@/shared/alert/alert.service';
-import type AccountService from './account.service';
+import type AccountService from '../../account/account.service';
 
 export default defineComponent({
-  name: 'AuthGateway',
+  name: 'Layouts',
   components: {
     AuthLayout,
     MainLayout,
@@ -16,7 +15,6 @@ export default defineComponent({
 
     const authenticated = inject<ComputedRef<boolean>>('authenticated');
     await accountService.update();
-    provide('alertService', useAlertService());
     const { theme } = useTheme();
     // methods
 

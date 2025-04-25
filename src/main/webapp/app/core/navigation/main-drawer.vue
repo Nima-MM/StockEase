@@ -6,7 +6,7 @@
           <div class="flex items-center justify-between px-6 pt-4 shrink-0">
             <span class="inline-flex items-center gap-2">
               <Avatar icon="pi pi-user" class="" size="large" />
-              <span class="font-semibold text-2xl text-primary">Filial-Leitung</span>
+              <span class="font-semibold text-2xl --p-primary-0">Filial-Leitung</span>
             </span>
             <span>
               <Button type="button" @click="closeCallback" icon="pi pi-times" rounded outlined></Button>

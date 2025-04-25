@@ -1,5 +1,6 @@
 import { createRouter as createVueRouter, createWebHistory } from 'vue-router';
 
+// const Dashboard = () => import('@/core/dashboard/dashboard.vue');
 const Home = () => import('@/core/home/home.vue');
 const Error = () => import('@/core/error/error.vue');
 import account from '@/router/account';

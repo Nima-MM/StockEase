@@ -8,8 +8,9 @@
       <!-- <p class="lead">Dies ist Ihre Hauptseite</p> -->
       <!-- <login-form v-if="!authenticated"></login-form> -->
       <div>
-        <div class="alert alert-success" v-if="authenticated">
+        <div class="alert alert-success flex-col justify-items-center" v-if="authenticated">
           <h1 v-if="username">Sie sind als Benutzer "{{ username }}" angemeldet.</h1>
+          <router-link :to="{ name: 'ProductRoute' }"><Button>Zum Lager</Button></router-link>
         </div>
 
         <div class="alert alert-warning" v-if="!authenticated">

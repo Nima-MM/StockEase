@@ -3,7 +3,7 @@
     <Suspense>
       <!-- Async Default -->
       <template #default>
-        <AuthGateway />
+        <Layouts />
       </template>
 
       <template #fallback>
