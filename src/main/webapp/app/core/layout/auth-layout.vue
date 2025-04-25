@@ -1,19 +1,18 @@
 <template>
   <div class="min-h-screen flex items-center justify-center">
-    <!-- äusserer Card-Wrapper -->
-    <div class="flex items-stretch max-w-3xl shadow-lg rounded-lg overflow-hidden">
-      <!-- linke Spalte -->
-      <div class="flex flex-col gap-6 px-8 flex-1">
+    <!-- Card-Wrapper -->
+    <div class="flex items-stretch max-w-7xl shadow-lg rounded-lg">
+      <!-- left col -->
+      <div class="flex flex-col gap-6 px-8 min-w-xs lg:w-2xl">
         <h1 class="text-2xl font-semibold">Mein Lager</h1>
 
-        <!-- Formular bekommt volle Höhe des Eltern-Blocks, aber nicht mehr -->
         <login-form class="max-w-full"></login-form>
-        <img src="../../../content/images/jhipster_family_member_0.svg" alt="Warehouse Image" class="h-full w-full object-cover" />
+        <img src="../../../content/images/jhipster_family_member_0.svg" alt="Warehouse Image" class="max-w-md" />
       </div>
 
-      <!-- rechte Spalte (Bild) -->
-      <div class="w-100 flex-shrink-0">
-        <img src="../../../content/images/warehouse2.png" alt="Warehouse Image" class="h-full w-full object-cover" />
+      <!-- right col (img) -->
+      <div class="max-w-2xl hidden lg:flex items-center justify-center bg-primary rounded-r-lg">
+        <img src="../../../content/images/warehouse2.png" alt="Warehouse Image" />
       </div>
     </div>
   </div>
