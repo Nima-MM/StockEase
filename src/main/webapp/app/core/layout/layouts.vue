@@ -4,4 +4,4 @@
   <!-- CORE LAYOUT -->
   <MainLayout v-else />
 </template>
-<script lang="ts" src="./auth-gateway.component.ts"></script>
+<script lang="ts" src="./layouts.component.ts"></script>

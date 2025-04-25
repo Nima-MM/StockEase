@@ -4,15 +4,15 @@ import { useTheme } from '@/shared/composables/theme';
 import { useAlertService } from '@/shared/alert/alert.service';
 // imports
 import '@/shared/config/dayjs';
-import AuthGateway from '@/account/auth-gateway.vue';
-import FallbackLoader from './core/layout/fallback-loader.vue';
+import FallbackLoader from '@/core/loader/fallback-loader.vue';
+import Layouts from './core/layout/layouts.vue';
 // primevue imports
 
 export default defineComponent({
   name: 'App',
   components: {
     ribbon: Ribbon,
-    AuthGateway,
+    Layouts,
     FallbackLoader,
   },
   setup() {

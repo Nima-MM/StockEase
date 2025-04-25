@@ -9,12 +9,6 @@ import { useRouter } from 'vue-router';
 export default defineComponent({
   name: 'MainDrawer',
   setup() {
-    const items = ref([
-      {
-        label: 'Dashboard',
-        icon: 'pi pi-home',
-      },
-    ]);
     const visible = ref<boolean>(true);
     const rail = ref<boolean>(false);
     const drawer = ref<boolean>(true);
@@ -37,6 +31,6 @@ export default defineComponent({
         router.push('/');
       }
     };
-    return { items, visible, logout, toggleDrawerState, toggleRailState, drawer, rail, nameColor, navColor };
+    return { visible, logout, toggleDrawerState, toggleRailState, drawer, rail, nameColor, navColor };
   },
 });

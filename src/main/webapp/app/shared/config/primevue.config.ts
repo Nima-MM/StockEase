@@ -53,8 +53,7 @@ export function initPrimeVue(vue: App): void {
       ripple: true,
       options: {
         prefix: 'p',
-        darkModeSelector: 'system',
-        cssLayer: false,
+        darkModeSelector: true,
       },
     },
   });

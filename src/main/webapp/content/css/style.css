@@ -4,7 +4,7 @@
 
 /* Primary and Surface Palettes */
 :root {
-  --p-primary-0: #ffffff;
+  --p-primary-0: #daaa9c;
   --p-primary-50: #ecfdf5;
   --p-primary-100: #d1fae5;
   --p-primary-200: #a7f3d0;
@@ -34,7 +34,7 @@
 /* Light */
 :root {
   --p-primary-color: var(--p-primary-500);
-  --p-primary-contrast-color: var(--p-surface-0);
+  --p-primary-contrast-color: var(--p-surface-950);
   --p-primary-hover-color: var(--p-primary-600);
   --p-primary-active-color: var(--p-primary-700);
   --p-content-border-color: var(--p-surface-200);
