@@ -2,6 +2,9 @@
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
 
+@import 'tailwindcss-primeui';
+@import 'tailwindcss/utilities';
+
 /* Primary and Surface Palettes */
 :root {
   --p-primary-0: #daaa9c;
