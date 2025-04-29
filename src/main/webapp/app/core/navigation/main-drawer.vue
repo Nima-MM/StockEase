@@ -6,7 +6,7 @@
           <div class="flex items-center justify-between px-6 pt-4 shrink-0">
             <span class="inline-flex items-center gap-2">
               <Avatar icon="pi pi-user" class="" size="large" />
-              <span class="font-semibold text-2xl --p-primary-0">Filial-Leitung</span>
+              <span class="font-semibold text-2xl">Filial-Leitung</span>
             </span>
             <span>
               <Button type="button" @click="closeCallback" icon="pi pi-times" rounded outlined></Button>
@@ -35,7 +35,7 @@
                     <router-link :to="{ name: 'HomeRoute' }">
                       <a
                         v-ripple
-                        class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
+                        class="flex items-center cursor-pointer p-4 rounded text-surface-700 dark:text-surface-0 hover:bg-surface-100 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
                       >
                         <i class="pi pi-home mr-2"></i>
                         <span class="font-medium">Dashboard</span>
