@@ -34,6 +34,7 @@ import {
   TabPanel,
   TabPanels,
   Tag,
+  Toast,
   ToggleSwitch,
   Toolbar,
 } from 'primevue';
@@ -130,6 +131,7 @@ export function initPrimeVue(vue: App): void {
   vue.component('TabPanel', TabPanel);
   vue.component('TabPanels', TabPanels);
   vue.component('Tag', Tag);
+  vue.component('Toast', Toast);
   vue.component('ToggleSwitch', ToggleSwitch);
   vue.component('Toolbar', Toolbar);
   /* import from @primevue/forms */

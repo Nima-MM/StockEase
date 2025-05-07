@@ -1,29 +1,52 @@
-import { type ComputedRef, defineComponent, inject } from 'vue';
+import { type ComputedRef, defineComponent, ref, inject, computed, onMounted } from 'vue';
 import LoginForm from '@/account/login-form/login-form.vue';
 import type LoginService from '@/account/login.service';
-import { Button } from 'primevue';
+import { useToast } from 'primevue/usetoast';
+import { useStore } from '@/store';
 
 export default defineComponent({
   name: 'Home',
   components: {
     'login-form': LoginForm,
-    Button,
   },
   setup() {
     const loginService = inject<LoginService>('loginService');
     const authenticated = inject<ComputedRef<boolean>>('authenticated');
     const username = inject<ComputedRef<string>>('currentUsername');
+    const store = useStore();
+    const toast = useToast();
+    const visible = ref(true);
 
+    toast.add({ severity: 'success', summary: 'Can you send me the report?', group: 'bc' });
+    const onReply = () => {
+      toast.removeGroup('bc');
+      visible.value = false;
+    };
+
+    const onClose = () => {
+      visible.value = false;
+    };
     const openLogin = () => {
       if (loginService) {
         loginService.openLogin();
       }
     };
 
+    onMounted(() => {
+      if (store.authenticated) {
+        setTimeout(() => {
+          toast.add({ severity: 'success', summary: `Sie sind als ${username?.value} angemeldet`, group: 'bc' });
+          visible.value = true;
+        }, 500);
+      }
+    });
     return {
       authenticated,
       username,
       openLogin,
+      onReply,
+      onClose,
+      visible,
     };
   },
 });

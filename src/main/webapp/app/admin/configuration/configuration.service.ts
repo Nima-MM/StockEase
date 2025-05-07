@@ -50,9 +50,9 @@ export default class ConfigurationService {
         // If the key is not bootstrap, it will be the ApplicationContext Id
         // For default app, it is baseName
         // For microservice, it is baseName-1
-        if (!key.startsWith('bootstrap')) {
-          return res.contexts[key].beans;
-        }
+        // if (!key.startsWith('bootstrap')) {
+        return res.contexts[key].beans;
+        // }
       }
     }
     // by default, use the default ApplicationContext Id

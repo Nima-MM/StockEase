@@ -100,7 +100,7 @@
  * Main entry point for the Vue application.
  * 
  * This file sets up the Vue application with necessary configurations, plugins, and services.
- * It initializes Vue, Pinia, BootstrapVue, FontAwesome, and Axios interceptors.
+ * It initializes Vue, Pinia, FontAwesome, and Axios interceptors.
  * It also configures Vue compatibility mode and provides global services and components.
  * 
  * @file /media/nimadesk/Ausbildung/Code/stock-manager-jh/src/main/webapp/app/main.ts
@@ -112,7 +112,6 @@
  * @requires ./app.vue
  * @requires ./router
  * @requires ./shared/config/config
- * @requires ./shared/config/config-bootstrap-vue
  * @requires ./shared/jhi-item-count.vue
  * @requires ./shared/sort/jhi-sort-indicator.vue
  * @requires ./account/login.service
@@ -122,7 +121,6 @@
  * @requires ../content/scss/global.scss
  * @requires ../content/scss/vendor.scss
  * 
- * @function initBootstrapVue - Initializes BootstrapVue with Vue.
  * @function initFortAwesome - Initializes FontAwesome with the Vue application.
  * @function setupAxiosInterceptors - Sets up Axios interceptors for handling HTTP requests and responses.
  * 
@@ -175,7 +173,6 @@ import { createPinia, storeToRefs } from 'pinia';
 import App from './app.vue';
 import router from './router';
 import { initFortAwesome } from './shared/config/config';
-import { initBootstrapVue } from './shared/config/config-bootstrap-vue';
 import JhiItemCountComponent from './shared/jhi-item-count.vue';
 import JhiSortIndicatorComponent from './shared/sort/jhi-sort-indicator.vue';
 import LoginService from './account/login.service';
@@ -190,7 +187,6 @@ const pinia = createPinia();
 
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
-initBootstrapVue(Vue);
 
 Vue.configureCompat({
   MODE: 2,

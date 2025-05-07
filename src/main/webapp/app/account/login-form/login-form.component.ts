@@ -30,6 +30,7 @@ export default defineComponent({
           const jwt = bearerToken.slice(7, bearerToken.length);
           if (!jwt) {
             previousState();
+            console.log('NONO');
           }
           if (rememberMe.value) {
             localStorage.setItem('jhi-authenticationToken', jwt);
@@ -48,6 +49,9 @@ export default defineComponent({
         }
       } catch (_error) {
         authenticationError.value = true;
+      }
+      if (authenticationError.value) {
+        console.log('error');
       }
     };
 

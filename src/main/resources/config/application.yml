@@ -109,10 +109,6 @@ spring:
         #- tls
   jmx:
     enabled: false
-  data:
-    jpa:
-      repositories:
-        bootstrap-mode: deferred
   jpa:
     open-in-view: false
     properties:
