@@ -47,7 +47,7 @@ export default class ProductService {
   public create(entity: IProduct): Promise<IProduct> {
     return new Promise<IProduct>((resolve, reject) => {
       axios
-        .post(`${baseApiUrl}/add`, entity)
+        .post(`${baseApiUrl}`, entity)
         .then(res => {
           resolve(res.data);
         })
@@ -60,9 +60,8 @@ export default class ProductService {
   public update(entity: IProduct): Promise<IProduct> {
     console.log('ProductService.update', entity);
     return new Promise<IProduct>((resolve, reject) => {
-      // .put(`${baseApiUrl}/update/${entity.id}`, entity)
       axios
-        .put(`${baseApiUrl}/update`, entity)
+        .put(`${baseApiUrl}`, entity)
         .then(res => {
           resolve(res.data);
         })
@@ -77,7 +76,7 @@ export default class ProductService {
     console.log('ProductService.partialUpdate', entity);
     return new Promise<IProduct>((resolve, reject) => {
       axios
-        .patch(`${baseApiUrl}/update/patch`, entity)
+        .patch(`${baseApiUrl}`, entity)
         .then(res => {
           resolve(res.data);
         })
@@ -104,7 +103,6 @@ export default class ProductService {
   //! Reduce stock of a product
   public decreaseStock(id: number | undefined, amount: number | undefined): Promise<IProduct> {
     return new Promise<IProduct>(async (resolve, reject) => {
-      console.log('ProductService.decreaseStock.id', id, 'ProductService.decreaseStock.amount', amount);
       axios
         .put(`${baseApiUrl}/${id}/buy?amount=${amount}`)
         .then(res => {
