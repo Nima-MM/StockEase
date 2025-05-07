@@ -87,19 +87,19 @@ public class ProductResource {
         return productService.buyProduct(id, amount).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "updates a product with new data")
     public Product updateProduct(@RequestBody final Product product) throws Exception {
         return productService.updateProduct(product);
     }
 
-    @PatchMapping(value = "/update/patch", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "updates a product with new data")
     public Product patchProduct(@RequestBody final Product product) throws Exception {
         return productService.patchProduct(product);
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "adds a product with new data")
     public Product addProduct(@RequestBody final Product product) throws Exception {
         if (product.getId() != null) {
