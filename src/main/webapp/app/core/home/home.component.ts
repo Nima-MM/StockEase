@@ -15,18 +15,14 @@ export default defineComponent({
     const username = inject<ComputedRef<string>>('currentUsername');
     const store = useStore();
     const toast = useToast();
-    const visible = ref(true);
+    const visible = ref<boolean>(true);
 
     toast.add({ severity: 'success', summary: 'Can you send me the report?', group: 'bc' });
-    const onReply = () => {
-      toast.removeGroup('bc');
-      visible.value = false;
-    };
 
-    const onClose = () => {
+    const onClose = (): void => {
       visible.value = false;
     };
-    const openLogin = () => {
+    const openLogin = (): void => {
       if (loginService) {
         loginService.openLogin();
       }
@@ -44,7 +40,6 @@ export default defineComponent({
       authenticated,
       username,
       openLogin,
-      onReply,
       onClose,
       visible,
     };

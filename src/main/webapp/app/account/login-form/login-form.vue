@@ -1,5 +1,6 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex flex-col justify-center">
+    <Message v-if="authenticationError" severity="error" icon="pi pi-times-circle" class="mb-2"> Authentifikation Fehlgeschlagen!</Message>
     <Form class="flex flex-col gap-4 max-w-7xl w-full">
       <div class="flex flex-col gap-4">
         <FormField v-slot="$field" as="section" name="username" initialValue="" class="flex flex-col gap-2">

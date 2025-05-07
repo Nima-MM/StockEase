@@ -40,9 +40,7 @@ export default defineComponent({
             localStorage.removeItem('jhi-authenticationToken');
           }
         }
-
         authenticationError.value = false;
-        // loginService.hideLogin();
         await accountService.retrieveAccount();
         if (route.path === '/forbidden') {
           previousState();
