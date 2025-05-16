@@ -3,10 +3,10 @@ import { useProductsStore } from './product.store';
 import { useToast } from 'primevue/usetoast';
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 import type { IProduct } from '@/shared/model/product.model';
-import DecreaseDialog from './product-dialogs/decrease-dialog.vue';
-import RefillDialog from './product-dialogs/refill-dialog.vue';
-import DeleteDialog from './product-dialogs/delete-dialog.vue';
-import EditDialog from './product-dialogs/edit-dialog.vue';
+import DecreaseDialog from './dialogs/decrease.vue';
+import RefillDialog from './dialogs/refill.vue';
+import DeleteDialog from './dialogs/delete.vue';
+import EditDialog from './dialogs/edit.vue';
 import { useCategoryStore } from '../category/category.store';
 import { useBrandStore } from '../brand/brand.store';
 import { useColorStore } from '../color/color.store';
@@ -35,9 +35,6 @@ export default defineComponent({
     const expandedRows = ref();
     const filters = ref();
 
-    const addProduct = async () => {
-      // const product = {}
-    };
     const toast = useToast();
     const onRowExpand = (event: any) => {
       toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
@@ -102,7 +99,6 @@ export default defineComponent({
       products,
       columnKeys,
       isFetching,
-      addProduct,
     };
   },
 });

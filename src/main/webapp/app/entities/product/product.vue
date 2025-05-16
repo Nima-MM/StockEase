@@ -31,7 +31,6 @@
                 <i class="pi pi-search" />
               </InputIcon>
               <InputText v-model="filters['global'].value" placeholder="Suche im Lager nach..." />
-              <!-- <InputText placeholder="Keyword Search" /> -->
             </IconField>
             <Button text icon="pi pi-plus" label="Alle ausklappen" @click="expandAll" />
             <Button text icon="pi pi-minus" label="Alle kollabieren" @click="collapseAll" />
@@ -81,6 +80,17 @@
             type="button"
             icon="pi pi-eye"
             label="Details"
+            v-tooltip.bottom="{
+              value: 'In Arbeit... siehe FAQ',
+              pt: {
+                arrow: {
+                  style: {
+                    borderBottomColor: 'var(--p-primary-color)',
+                  },
+                },
+                text: '!bg-primary !text-primary-contrast !font-medium',
+              },
+            }"
             class="p-button-outlined"
             severity="contrast"
             @click="collapseAll"

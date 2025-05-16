@@ -9,7 +9,7 @@ import { useCategoryStore } from './category/category.store';
 import { useBrandStore } from './brand/brand.store';
 import { useColorStore } from './color/color.store';
 import Product from './product/product.vue';
-import NewProductDialog from './product/product-dialogs/new-product-dialog.vue';
+import NewProductDialog from './product/dialogs/new-product.vue';
 
 export default defineComponent({
   name: 'Entities',

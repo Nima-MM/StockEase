@@ -3,17 +3,17 @@
     <Button
       variant="text"
       type="button"
-      icon="pi pi-trash"
-      label="Löschen"
+      icon="pi pi-minus"
+      label="Bestand verringern"
       class="p-button-outlined"
-      severity="danger"
+      severity="warn"
       @click="visible = true"
     />
 
     <Dialog v-model:visible="visible" modal pt:root:class="!border-0 " pt:mask:class="backdrop-blur-sm">
       <template #header style="background-image: radial-gradient(circle at left top, red, red, #e64a19)">
         <header>
-          <span class="font-bold text-xl text-red-600">PRODUKT LÖSCHEN</span>
+          <span class="font-bold text-xl text-red-600">BESTAND REDUZIEREN</span>
         </header>
         <!--  <svg width="35" height="40" viewBox="0 0 35 40" fill="none"
           xmlns="http://www.w3.org/2000/svg" class="block mx-auto">
@@ -31,7 +31,7 @@
         <div class="inline-flex flex-col gap-2">
           <p>
             <span class="text-primary-100 font-bold">Kategorie: {{ product?.category?.name }} - Farbe: {{ product?.color?.name }}</span
-            ><br /><br />
+            ><br />
             EAN: <span style="font-weight: bold">{{ product?.ean }}</span
             ><br />
             Marke: <span style="font-weight: bold">{{ product?.brand?.name }}</span
@@ -43,10 +43,13 @@
           </p>
         </div>
         <div class="inline-flex flex-col gap-2">
-          <label for="amount" class="!text-red-400 font-bold">Aus dem Sortiment des Lagers löschen?</label>
-          <!-- <InputNumber v-model="amount" id="amount"
+          <label for="amount" class="!text-red-400 font-semibold">Um wie viel reduzieren?</label>
+          <InputNumber
+            v-model="amount"
+            id="amount"
             class="!bg-white/0 !border-0 !text-primary-50 w-80"
-            inputClass="focus:!border-[var(--p-primary-50)] !border-[var(--p-red-500)] focus:!outline-none !border-1 !text-primary-50" /> -->
+            inputClass="focus:!border-[var(--p-primary-50)] !border-[var(--p-red-500)] focus:!outline-none !border-1 !text-primary-50"
+          />
         </div>
         <div class="flex items-center gap-4">
           <Button
@@ -56,8 +59,8 @@
             class="!p-4 w-full !text-surface-0 !border !border-white/50 hover:!bg-white/25"
           ></Button>
           <Button
-            label="Löschen"
-            @click="confirmDeletion"
+            label="Reduzieren"
+            @click="confirmReduction"
             text
             class="!p-4 w-full !text-red-400 !border !border-white/50 hover:!bg-white/25"
           ></Button>
@@ -67,64 +70,4 @@
     </Dialog>
   </div>
 </template>
-<script lang="ts" src="./delete-dialog.component.ts"></script>
-
-<!--
- <template>
-  <dialog-template header-height="100px" header-background-color="#D32F2F" header-icon="mdi-delete" header-title="PRODUKT LÖSCHEN">
-    Activator Slot --
-    <template #activator="{ open }">
-      <v-icon @click="open" v-tooltip="'Produkt aus dem Inventar Löschen'" class="icon" color="#D32F2F">mdi-delete</v-icon>
-    </template>
-    <!-- Optionaler Header-Slot --
-    <template #header></template>
-    <!-- Default Text-Slot --
-    <template #text>
-      <p>
-        {{ product?.category?.name }} - {{ product?.color?.name }}<br /><br />
-        EAN: <span style="font-weight: bold">{{ product?.ean }}</span
-        ><br />
-        Produktname: <span style="font-weight: bold">{{ product?.name }}</span
-        ><br />
-        Marke: <span style="font-weight: bold">{{ product?.brand?.name }}</span
-        ><br />
-        Bestand: <span style="font-weight: bold">{{ product?.stock }}</span
-        ><br />
-        <br />
-        <span style="color: #e64a19; font-size: large; font-weight: bold">Aus dem Sortiment löschen?</span>
-      </p>
-    </template>
-    <!-- Mehrere Action-Slots mit einzigartigen Namen --
-    <template #actions="{ close }">
-      <v-btn @click="close">Abbrechen</v-btn>
-      <v-spacer></v-spacer>
-      <v-btn color="red" @click="() => confirmDeletion(close)"
-        ><v-icon color="red" @click="() => confirmDeletion(close)" size="medium">mdi-trash-can-outline</v-icon><span>Löschen</span></v-btn
-      >
-    </template>
-  </dialog-template>
-</template>
-
-<script lang="ts" src="./delete-dialog.component.ts"></script>
-
-<style scoped>
-.dialog-logo {
-  align-self: center;
-}
-
-.dialog-title {
-  align-self: center;
-}
-
-.icon {
-  border-style: solid;
-  border-left: 10px;
-  border: 5px;
-  border-color: rgb(200, 9, 22);
-}
-
-.inputField1 {
-  margin-right: 10px;
-}
-</style>
--->
+<script lang="ts" src="./decrease.component.ts"></script>

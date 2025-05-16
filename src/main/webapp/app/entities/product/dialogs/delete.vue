@@ -3,17 +3,17 @@
     <Button
       variant="text"
       type="button"
-      icon="pi pi-minus"
-      label="Bestand verringern"
+      icon="pi pi-trash"
+      label="Löschen"
       class="p-button-outlined"
-      severity="warn"
+      severity="danger"
       @click="visible = true"
     />
 
     <Dialog v-model:visible="visible" modal pt:root:class="!border-0 " pt:mask:class="backdrop-blur-sm">
       <template #header style="background-image: radial-gradient(circle at left top, red, red, #e64a19)">
         <header>
-          <span class="font-bold text-xl text-red-600">BESTAND REDUZIEREN</span>
+          <span class="font-bold text-xl text-red-600">PRODUKT LÖSCHEN</span>
         </header>
         <!--  <svg width="35" height="40" viewBox="0 0 35 40" fill="none"
           xmlns="http://www.w3.org/2000/svg" class="block mx-auto">
@@ -31,7 +31,7 @@
         <div class="inline-flex flex-col gap-2">
           <p>
             <span class="text-primary-100 font-bold">Kategorie: {{ product?.category?.name }} - Farbe: {{ product?.color?.name }}</span
-            ><br />
+            ><br /><br />
             EAN: <span style="font-weight: bold">{{ product?.ean }}</span
             ><br />
             Marke: <span style="font-weight: bold">{{ product?.brand?.name }}</span
@@ -43,13 +43,10 @@
           </p>
         </div>
         <div class="inline-flex flex-col gap-2">
-          <label for="amount" class="!text-red-400 font-semibold">Um wie viel reduzieren?</label>
-          <InputNumber
-            v-model="amount"
-            id="amount"
+          <label for="amount" class="!text-red-400 font-bold">Aus dem Sortiment des Lagers löschen?</label>
+          <!-- <InputNumber v-model="amount" id="amount"
             class="!bg-white/0 !border-0 !text-primary-50 w-80"
-            inputClass="focus:!border-[var(--p-primary-50)] !border-[var(--p-red-500)] focus:!outline-none !border-1 !text-primary-50"
-          />
+            inputClass="focus:!border-[var(--p-primary-50)] !border-[var(--p-red-500)] focus:!outline-none !border-1 !text-primary-50" /> -->
         </div>
         <div class="flex items-center gap-4">
           <Button
@@ -59,8 +56,8 @@
             class="!p-4 w-full !text-surface-0 !border !border-white/50 hover:!bg-white/25"
           ></Button>
           <Button
-            label="Reduzieren"
-            @click="confirmReduction"
+            label="Löschen"
+            @click="confirmDeletion"
             text
             class="!p-4 w-full !text-red-400 !border !border-white/50 hover:!bg-white/25"
           ></Button>
@@ -70,4 +67,4 @@
     </Dialog>
   </div>
 </template>
-<script lang="ts" src="./decrease-dialog.component.ts"></script>
+<script lang="ts" src="./delete.component.ts"></script>

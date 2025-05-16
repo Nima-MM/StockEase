@@ -37,6 +37,7 @@ import {
   Toast,
   ToggleSwitch,
   Toolbar,
+  Tooltip,
 } from 'primevue';
 import { Form, FormField } from '@primevue/forms';
 import ToastService from 'primevue/toastservice';
@@ -103,6 +104,7 @@ export function initPrimeVue(vue: App): void {
   // directives
   vue.directive('styleclass', StyleClass);
   vue.directive('ripple', Ripple);
+  vue.directive('tooltip', Tooltip);
 
   // components
   /* import from primevue */

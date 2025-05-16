@@ -6,8 +6,6 @@ import { Authority } from '@/shared/security/authority';
 const Entities = () => import('@/entities/entities.vue');
 
 const Product = () => import('@/entities/product/product.vue');
-const ProductUpdate = () => import('@/entities/product/product-dialogs/product-update.vue');
-const ProductDetails = () => import('@/entities/product/product-dialogs/product-details.vue');
 
 const Category = () => import('@/entities/category/category.vue');
 const CategoryUpdate = () => import('@/entities/category/category-update.vue');
@@ -21,8 +19,6 @@ const Color = () => import('@/entities/color/color.vue');
 const ColorUpdate = () => import('@/entities/color/color-update.vue');
 const ColorDetails = () => import('@/entities/color/color-details.vue');
 
-// jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
-
 export default {
   path: '/warehouses',
   name: 'EntitiesRoute',
@@ -33,24 +29,6 @@ export default {
       path: '/warehouses/storage',
       name: 'ProductRoute',
       component: Product,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'product/new',
-      name: 'ProductCreate',
-      component: ProductUpdate,
-      meta: { authorities: [Authority.ADMIN] },
-    },
-    {
-      path: 'product/:productId/edit',
-      name: 'ProductEditRoute',
-      component: ProductUpdate,
-      meta: { authorities: [Authority.ADMIN] },
-    },
-    {
-      path: 'product/:productId/view',
-      name: 'ProductViewRoute',
-      component: ProductDetails,
       meta: { authorities: [Authority.USER] },
     },
     {

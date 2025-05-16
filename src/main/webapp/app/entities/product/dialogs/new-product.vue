@@ -3,8 +3,8 @@
     <Button
       variant="text"
       type="button"
-      icon="pi pi-pencil"
-      label="Bearbeiten"
+      icon="pi pi-plus"
+      label="Neues Produkt"
       class="p-button-outlined"
       severity="info"
       @click="visible = true"
@@ -14,7 +14,7 @@
       <template #container>
         <header class="p-4 bg-gradient-to-r from-blue-500 to-blue-700">
           <span class="pi pi-pencil p-4"></span>
-          <span class="font-bold text-xl dark:text-primary-50">BEARBEITEN</span>
+          <span class="font-bold text-xl dark:text-primary-50">NEUES PRODUKT</span>
         </header>
 
         <!-- content -->
@@ -22,7 +22,7 @@
           <FloatLabel variant="on">
             <label for="on_ean" class="!text-primary-50 !z-1">EAN</label>
             <InputText
-              v-model="productToUpdate.ean"
+              v-model="product.ean"
               id="on_ean"
               class="focus:!border-[var(--p-blue-500)] !border-[var(--p-primary-50)] focus:!outline-none !border-1 !text-blue-400"
               fluid
@@ -34,7 +34,7 @@
               <FloatLabel variant="on" class="">
                 <label for="on_name" class="!text-primary-50 !z-1">Produktname</label>
                 <InputText
-                  v-model="productToUpdate.name"
+                  v-model="product.name"
                   id="on_name"
                   class="!w-full focus:!border-[var(--p-blue-500)] !border-[var(--p-primary-50)] focus:!outline-none !border-1 !text-blue-400"
                 />
@@ -44,7 +44,7 @@
               <FloatLabel variant="on">
                 <label for="on_stock" class="!text-primary-50 !z-1">Bestand</label>
                 <InputNumber
-                  v-model="productToUpdate.stock"
+                  v-model="product.stock"
                   inputId="on_stock"
                   suffix=" Stück"
                   inputClass="focus:!border-[var(--p-blue-500)] !border-[var(--p-primary-50)] focus:!outline-none !border-1 !text-blue-400"
@@ -59,7 +59,7 @@
               <FloatLabel variant="on" class="">
                 <label for="on_brand" class="!text-primary-50 !z-1">Marke</label>
                 <Select
-                  v-model="productToUpdate.brand.name"
+                  v-model="product.brand.name"
                   inputId="on_brand"
                   :options="brandNames"
                   @update:model-value="updateBrand"
@@ -71,7 +71,7 @@
               <FloatLabel variant="on" class="">
                 <label for="on_color" class="!text-primary-50 !z-1">Farbe</label>
                 <Select
-                  v-model="productToUpdate.color.name"
+                  v-model="product.color.name"
                   inputId="on_color"
                   :options="colorNames"
                   @update:model-value="updateColor"
@@ -83,7 +83,7 @@
               <FloatLabel variant="on" class="">
                 <label for="on_category" class="!text-primary-50 !z-1">Kategorie</label>
                 <Select
-                  v-model="productToUpdate.category.name"
+                  v-model="product.category.name"
                   inputId="on_category"
                   :options="categoryNames"
                   @update:model-value="updateCategory"
@@ -102,8 +102,8 @@
               class="!p-4 w-full !text-surface-0 !border !border-white/50 hover:!bg-white/25"
             ></Button>
             <Button
-              label="Speichern"
-              @click="confirmEdit"
+              label="Erstellen"
+              @click="confirmNewProduct"
               text
               class="!p-4 w-full !text-blue-400 !border !border-white/50 hover:!bg-white/25"
             ></Button>
@@ -113,4 +113,4 @@
     </Dialog>
   </div>
 </template>
-<script lang="ts" src="./edit-dialog.component.ts"></script>
+<script lang="ts" src="./new-product.component"></script>

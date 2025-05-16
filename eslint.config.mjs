@@ -1,11 +1,9 @@
 // @ts-check
-
 import globals from 'globals';
+import js from '@eslint/js';
 import prettier from 'eslint-plugin-prettier/recommended';
 import tseslint from 'typescript-eslint';
-import js from '@eslint/js';
-import vue from 'eslint-plugin-vue';
-// jhipster-needle-eslint-add-import - JHipster will add additional import here
+import pluginVue from 'eslint-plugin-vue';
 
 export default tseslint.config(
   {
@@ -27,9 +25,8 @@ export default tseslint.config(
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
-  ...vue.configs['flat/recommended'],
+  ...pluginVue.configs['flat/recommended'],
   {
-    files: ['**/*.vue'],
     languageOptions: {
       parserOptions: { parser: '@typescript-eslint/parser' },
       globals: { ...globals.browser },
@@ -62,6 +59,5 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-function': 'off',
     },
   },
-  // jhipster-needle-eslint-add-config - JHipster will add additional config here
   prettier,
 );
